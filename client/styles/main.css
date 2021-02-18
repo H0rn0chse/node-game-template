@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    width: 100vw;
+    height: 70vh;
+}
+
+#game {
+    background-color: pink;
+    align-items: center;
+    justify-content: center;
+}
+
+#gameArea {
+    width: 520px;
+    height: 520px;
+    position: relative;
+    background-color: lightcyan;
+}
+
+#lobby {
+    background-color: lightgreen;
+    padding: 5em;
+}
+
+#cursor {
+    background-color: lime;
+    z-index: 2;
+}
+
+.cursor {
+    position: absolute;
+    background-color: black;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+}
