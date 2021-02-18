@@ -6,9 +6,15 @@ const handler = new Map();
 let idCount = 1;
 
 function parseArrayBuffer (data) {
-    const buffer = new Uint8Array(data);
-    const string = String.fromCharCode.apply(null, buffer);
-    return JSON.parse(string);
+    let oResult = {};
+    try {
+        const buffer = new Uint8Array(data);
+        const string = String.fromCharCode.apply(null, buffer);
+        oResult = JSON.parse(string);
+    } catch (err) {
+        console.log(err);
+    }
+    return oResult;
 }
 
 function handleMessage (ws, ab) {
@@ -39,7 +45,7 @@ function send (topic, channel, data) {
 }
 
 function startSocketServer () {
-    app.ws("/", {
+    app.ws("/ws", {
         open: ws => {
             ws.send(JSON.stringify({
                 channel: "playerId",
@@ -49,7 +55,10 @@ function startSocketServer () {
             }))
         },
         message: handleMessage,
-    }).listen(port, () => {});
+    })
+    .listen(port, () => {
+        console.log(`Server running on ws://localhost:${port}`);
+    });
 }
 
 module.exports = {
