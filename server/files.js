@@ -2,11 +2,13 @@ const path = require("path");
 const connect = require("connect");
 const serveStatic = require("serve-static");
 
+const port = process.env.PORT || 80;
+
 function startFileServer () {
     const filePath = path.join(__dirname, "../client");
     connect()
         .use(serveStatic(filePath))
-        .listen(80, () => {
+        .listen(port, () => {
             console.log("Server running on http://localhost");
         });
 }
