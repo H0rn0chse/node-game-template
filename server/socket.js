@@ -45,7 +45,7 @@ function send (topic, channel, data) {
 }
 
 function startSocketServer () {
-    app.ws("/ws", {
+    app.ws("/*", {
         open: ws => {
             ws.send(JSON.stringify({
                 channel: "playerId",
