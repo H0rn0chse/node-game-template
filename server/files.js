@@ -9,7 +9,7 @@ function startFileServer () {
     connect()
         .use(serveStatic(filePath))
         .listen(port, () => {
-            console.log("Server running on http://localhost");
+            console.log(`Server running on http://localhost:${port}`);
         });
 }
 

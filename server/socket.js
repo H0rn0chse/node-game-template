@@ -1,6 +1,7 @@
 const uws = require("../libs/uWebSockets.js");
 
 const app = uws.App();
+const port = process.env.PORT || 3000;
 const handler = new Map();
 let idCount = 1;
 
@@ -48,7 +49,7 @@ function startSocketServer () {
             }))
         },
         message: handleMessage,
-    }).listen(3000, () => {});
+    }).listen(port, () => {});
 }
 
 module.exports = {
