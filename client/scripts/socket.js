@@ -24,9 +24,9 @@ function start () {
     addEventListener("playerId", (data) => {
         playerId = data.id;
     });
-    const protocol = location.host === "localhost" ? "ws" : "wss";
+    const host = location.origin.replace(/^http/, "ws")
     const port = location.host === "localhost" ? ":3000" : "";
-    ws = new WebSocket(`${protocol}:${globalThis.location.host}${port}`);
+    ws = new WebSocket(`${host}${port}/ws`);
     ws.onmessage = handleMessage;
     ws.onopen = deferred.resolve;
     return ready();
