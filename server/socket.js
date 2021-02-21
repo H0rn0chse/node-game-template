@@ -45,7 +45,10 @@ function send (topic, channel, data) {
 }
 
 function startSocketServer () {
-    app.ws("/*", {
+    app.missingServerName((hostname) => {
+        console.log("Hello! We are missing server name <" + hostname + ">");
+        app.addServerName("localhost", {});
+    }).ws("/*", {
         open: ws => {
             ws.send(JSON.stringify({
                 channel: "playerId",
@@ -56,8 +59,12 @@ function startSocketServer () {
         },
         message: handleMessage,
     })
-    .listen(port, () => {
-        console.log(`Server running on ws://localhost:${port}`);
+    .listen(port, (token) => {
+        if (token) {
+            console.log(`Listening to port ${port}`);
+        } else {
+            console.log(`Failed to listen to port ${port}`);
+        }
     });
 }
 
