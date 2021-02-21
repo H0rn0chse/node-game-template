@@ -45,11 +45,14 @@ function send (topic, channel, data) {
 }
 
 function startSocketServer () {
-    app.missingServerName((hostname) => {
+    app
+    .missingServerName((hostname) => {
         console.log("Hello! We are missing server name <" + hostname + ">");
         app.addServerName("localhost", {});
-    }).ws("/*", {
+    })
+    .ws("/*", {
         open: ws => {
+            console.log('WebSocket opens');
             ws.send(JSON.stringify({
                 channel: "playerId",
                 data: {
@@ -57,7 +60,43 @@ function startSocketServer () {
                 }
             }))
         },
+        upgrade: (res, req, context) => {
+            console.log('An Http connection wants to become WebSocket, URL: ' + req.getUrl() + '!');
+
+            /* This immediately calls open handler, you must not use res after this call */
+            res.upgrade({
+                url: req.getUrl()
+              },
+              /* Spell these correctly */
+              req.getHeader('sec-websocket-key'),
+              req.getHeader('sec-websocket-protocol'),
+              req.getHeader('sec-websocket-extensions'),
+              context);
+
+          },
         message: handleMessage,
+        close: (ws, code, message) => {
+            console.log('WebSocket closed');
+        }
+    })
+    .get('/*', (res, req) => {
+
+        res.write('<h2>Hello, your headers are:</h2><ul>');
+
+        req.forEach((k, v) => {
+            res.write('<li>');
+            res.write(k);
+            res.write(' = ');
+            res.write(v);
+            res.write('</li>');
+        });
+
+        res.end('</ul>');
+
+    })
+    .any('/*', (res, req) => {
+        console.log("unhandled request sent")
+        res.end('Nothing to see here!');
     })
     .listen(port, (token) => {
         if (token) {
