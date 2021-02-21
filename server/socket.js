@@ -2,6 +2,7 @@ const uws = require("../libs/uWebSockets.js");
 
 const app = uws.App();
 const port = process.env.PORT || 3000;
+const host =  process.env.PORT ? "0.0.0.0" : "localhost";
 const handler = new Map();
 let idCount = 1;
 
@@ -80,7 +81,7 @@ function startSocketServer () {
         }
     })
     .get('/*', (res, req) => {
-
+        res.write("<html><body>")
         res.write('<h2>Hello, your headers are:</h2><ul>');
 
         req.forEach((k, v) => {
@@ -91,14 +92,14 @@ function startSocketServer () {
             res.write('</li>');
         });
 
-        res.end('</ul>');
+        res.end("</ul></body></html>")
 
     })
     .any('/*', (res, req) => {
         console.log("unhandled request sent")
         res.end('Nothing to see here!');
     })
-    .listen(port, (token) => {
+    .listen(host, port, (token) => {
         if (token) {
             console.log(`Listening to port ${port}`);
         } else {
