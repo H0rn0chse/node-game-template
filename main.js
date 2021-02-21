@@ -4,6 +4,6 @@ const { startLobby } = require("./server/lobby.js");
 const { startGame } = require("./server/game.js");
 
 startSocketServer();
-//startFileServer();
+startFileServer();
 startLobby();
 startGame();
