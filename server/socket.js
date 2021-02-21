@@ -1,7 +1,9 @@
+const path = require("path");
+
 const uws = require("../libs/uWebSockets.js");
 
 const app = uws.App();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 const host =  process.env.PORT ? "0.0.0.0" : "localhost";
 const handler = new Map();
 let idCount = 1;
@@ -46,8 +48,9 @@ function send (topic, channel, data) {
 }
 
 function startSocketServer () {
-    app
-    .ws("/ws", {
+    const filePath = path.join(__dirname, "../client");
+    console.log(`serving on ${filePath}`)
+    app.ws("/ws", {
         open: ws => {
             console.log('WebSocket opens');
             ws.send(JSON.stringify({
@@ -62,7 +65,7 @@ function startSocketServer () {
             console.log('WebSocket closed');
         }
     })
-    /*.get("/*", (res, req) => {
+    .get("/*", (res, req) => {
         res.write("<html><body>")
         res.write("<h2>Hello, your headers are:</h2><ul>");
 
@@ -75,13 +78,12 @@ function startSocketServer () {
         });
 
         res.end("</ul></body></html>")
-
-    })*/
+    })
     .listen(host, port, (token) => {
         if (token) {
-            console.log(`Listening to ${host}:${port}`);
+            console.log(`Listening to http://${host}:${port}`);
         } else {
-            console.log(`Failed to listen to ${host}:${port}`);
+            console.log(`Failed to listen to http://${host}:${port}`);
         }
     });
 }
