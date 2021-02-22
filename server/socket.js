@@ -2,7 +2,7 @@ const path = require("path");
 const { App } = require('@sifrr/server');
 
 const app = new App();
-const port = process.env.PORT || 80;
+const port = parseInt(process.env.PORT, 10) || 80;
 const host =  process.env.PORT ? "0.0.0.0" : "localhost";
 const publicPath = path.join(__dirname, "../client");
 
