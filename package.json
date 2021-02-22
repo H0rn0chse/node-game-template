@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/H0rn0chse/node-game-template#readme",
   "dependencies": {
-    "@sifrr/server": "0.0.9"
+    "@sifrr/server": "0.0.9",
+    "graphql": "^14.5.3",
+    "uWebSockets.js": "uNetworking/uWebSockets.js"
   },
   "devDependencies": {
     "eslint": "^7.20.0",
