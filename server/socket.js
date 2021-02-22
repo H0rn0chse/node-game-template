@@ -1,11 +1,12 @@
 const path = require("path");
+const { App } = require('@sifrr/server');
 
-const uws = require("../libs/uWebSockets.js");
-
-const app = uws.App();
+const app = new App();
 const port = process.env.PORT || 80;
 const host =  process.env.PORT ? "0.0.0.0" : "localhost";
-const handler = new Map();
+const publicPath = path.join(__dirname, "../client");
+
+const messageHandler = new Map();
 let idCount = 1;
 
 function parseArrayBuffer (data) {
@@ -24,7 +25,7 @@ function handleMessage (ws, ab) {
     const message = parseArrayBuffer(ab);
 
     if (message.channel) {
-        const handlerList = handler.get(message.channel) || [];
+        const handlerList = messageHandler.get(message.channel) || [];
         handlerList.forEach((callback) => {
             callback(ws, message.data);
         });
@@ -32,11 +33,11 @@ function handleMessage (ws, ab) {
 }
 
 function registerMessageHandler (channel, callback) {
-    const handlerList = handler.get(channel);
+    const handlerList = messageHandler.get(channel);
     if (Array.isArray(handlerList)) {
         handlerList.push(callback);
     } else {
-        handler.set(channel, [callback]);
+        messageHandler.set(channel, [callback]);
     }
 }
 
@@ -47,9 +48,7 @@ function send (topic, channel, data) {
     }));
 }
 
-function startSocketServer () {
-    const filePath = path.join(__dirname, "../client");
-    console.log(`serving on ${filePath}`)
+function startServer () {
     app.ws("/ws", {
         open: ws => {
             console.log('WebSocket opens');
@@ -65,20 +64,8 @@ function startSocketServer () {
             console.log('WebSocket closed');
         }
     })
-    .get("/*", (res, req) => {
-        res.write("<html><body>")
-        res.write("<h2>Hello, your headers are:</h2><ul>");
-
-        req.forEach((k, v) => {
-            res.write("<li>");
-            res.write(k);
-            res.write(" = ");
-            res.write(v);
-            res.write("</li>");
-        });
-
-        res.end("</ul></body></html>")
-    })
+    .file("/", path.join(publicPath, "index.html"), { lastModified : false })
+    .folder("/", publicPath, { lastModified : false })
     .listen(host, port, (token) => {
         if (token) {
             console.log(`Listening to http://${host}:${port}`);
@@ -89,7 +76,7 @@ function startSocketServer () {
 }
 
 module.exports = {
-    startSocketServer,
+    startServer,
     registerMessageHandler,
     send,
 };

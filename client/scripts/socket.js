@@ -25,8 +25,7 @@ function start () {
         playerId = data.id;
     });
     const host = location.origin.replace(/^http/, "ws")
-    const port = location.host === "localhost" ? ":3000" : "";
-    ws = new WebSocket(`${host}${port}/ws`);
+    ws = new WebSocket(`${host}/ws`);
     ws.onmessage = handleMessage;
     ws.onopen = deferred.resolve;
     return ready();
