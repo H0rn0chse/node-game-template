@@ -13,6 +13,7 @@ class _GameManager {
         const lobbyName = PlayerManager.getProperty(playerId, "game");
         const lobbyData = LobbyManager.getLobbyData(lobbyName);
         lobbyData.player[playerId].pos = data.pos;
+        data.id = ws.id;
         publish(lobbyName, "gamePosition", data);
     }
 
