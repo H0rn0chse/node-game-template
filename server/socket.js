@@ -70,6 +70,9 @@ function startServer () {
     })
     .file("/", indexHtml, { lastModified : false })
     .folder("/", publicPath, { lastModified : false })
+    .get("/*", (res, req) => {
+        res.writeStatus("404 Not Found").end("");
+    })
     .listen(host, port, (token) => {
         if (token) {
             console.log(`Listening to http://${host}:${port}`);
