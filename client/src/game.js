@@ -34,22 +34,35 @@ function handleKeydown (evt) {
     cursor.style.top = `${currentPos.y}px`;
     cursor.style.left = `${currentPos.x}px`;
 
-    send("gamePosition", { name: lobbyName, playerId: getId() , pos: currentPos});
+    send("gamePosition", { pos: currentPos});
 }
 
 function handleGamePosition (data) {
-    if (data.playerId !== getId()) {
-        let cursor = document.querySelector(`.cursor[data-id="${data.playerId}"]`);
+    if (data.id !== getId()) {
+        let cursor = document.querySelector(`.cursor[data-id="${data.id}"]`);
         if (!cursor) {
             const gameArea = document.querySelector("#gameArea");
             cursor = document.createElement("div");
             cursor.classList.add("cursor");
-            cursor.setAttribute("data-id", data.playerId);
+            cursor.setAttribute("data-id", data.id);
             gameArea.appendChild(cursor);
         }
         cursor.style.top = `${data.pos.y}px`;
         cursor.style.left = `${data.pos.x}px`;
     }
+}
+
+function handleLeave (data) {
+    let cursor = document.querySelector(`.cursor[data-id="${data.id}"]`);
+    if (cursor) {
+        cursor.remove();
+    }
+}
+
+function handleInit (lobbyData) {
+    lobbyData.forEach(playerData => {
+        handleGamePosition(playerData);
+    });
 }
 
 function joinGame (name) {
@@ -63,7 +76,9 @@ function joinGame (name) {
     });
 
     addEventListener("gamePosition", handleGamePosition);
-    send("gamePosition", { name: lobbyName, playerId: getId() , pos: currentPos});
+    addEventListener("gameLeave", handleLeave);
+    addEventListener("gameInit", handleInit);
+    send("gamePosition", { pos: currentPos });
 }
 
 export { joinGame };

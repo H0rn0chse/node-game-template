@@ -1,6 +1,7 @@
 import path from "path";
 import { App } from "@sifrr/server";
 import { __root } from "./globals.js";
+import { PlayerManager } from "./PlayerManager.js";
 
 const app = new App();
 const port = parseInt(process.env.PORT, 10) || 80;
@@ -11,7 +12,6 @@ const publicPath = path.join(__root, "/client");
 const indexHtml = path.join(publicPath, !local ? "dist/index.html" : "index-local.html");
 
 const messageHandler = new Map();
-let idCount = 1;
 
 function parseArrayBuffer (data) {
     let oResult = {};
@@ -26,12 +26,15 @@ function parseArrayBuffer (data) {
 }
 
 function handleMessage (ws, ab) {
-    const message = parseArrayBuffer(ab);
+    let message = ab;
+    if (ab instanceof ArrayBuffer) {
+        message = parseArrayBuffer(ab);
+    }
 
     if (message.channel) {
         const handlerList = messageHandler.get(message.channel) || [];
         handlerList.forEach((callback) => {
-            callback(ws, message.data);
+            callback(ws, message.data, ws.id);
         });
     }
 }
@@ -45,8 +48,15 @@ function registerMessageHandler (channel, callback) {
     }
 }
 
-function send (topic, channel, data) {
+function publish (topic, channel, data) {
     app.publish(topic, JSON.stringify({
+        channel,
+        data
+    }));
+}
+
+function send (ws, channel, data) {
+    ws.send(JSON.stringify({
         channel,
         data
     }));
@@ -56,15 +66,18 @@ function startServer () {
     app.ws("/ws", {
         open: ws => {
             console.log("WebSocket opens");
-            ws.send(JSON.stringify({
-                channel: "playerId",
-                data: {
-                    id: idCount++
-                }
-            }))
+            ws.id = PlayerManager.addPlayer();
+            send(ws, "playerId", {
+                id: ws.id
+            });
         },
         message: handleMessage,
         close: (ws, code, message) => {
+            handleMessage(ws, {
+                channel: "close",
+                data: {}
+            });
+            PlayerManager.removePlayer(ws.id);
             console.log("WebSocket closed");
         }
     })
@@ -85,5 +98,6 @@ function startServer () {
 export {
     startServer,
     registerMessageHandler,
-    send,
+    publish,
+    send
 };

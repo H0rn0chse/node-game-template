@@ -38,7 +38,7 @@ function handleInitialLobby (data) {
     if (Array.isArray(data)) {
 
         data.forEach((entry) => {
-            addLobby(entry);
+            addLobby({ name: entry });
         });
     }
     removeEventListener("lobbyList", handleInitialLobby);

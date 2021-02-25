@@ -1,7 +1,7 @@
 import { startServer } from "./server/socket.js";
-import { startLobby } from "./server/lobby.js";
-import { startGame } from "./server/game.js";
+import { LobbyManager } from "./server/LobbyManager.js";
+import { GameManager } from "./server/GameManager.js";
 
 startServer();
-startLobby();
-startGame();
+LobbyManager.init()
+GameManager.init();
