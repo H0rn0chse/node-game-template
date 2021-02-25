@@ -1,4 +1,6 @@
-class Deferred {
+"use strict";
+
+export class Deferred {
     constructor () {
         this.isFulfilled = false;
         this.isPending = true;
@@ -23,5 +25,3 @@ class Deferred {
         });
     }
 }
-
-export { Deferred as default};

@@ -1,7 +1,14 @@
+@import "fonts.css";
+
 body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: 'OlivesFont', Fallback, sans-serif;
+    font-weight: bold;
+    font-size: 20pt;
+    background-image:  url(../assets/gras.png);
+    background-repeat: repeat;
 }
 
 .flexRow {
@@ -17,7 +24,7 @@ body {
 
 .content {
     width: 100vw;
-    height: 70vh;
+    height: 60vh;
 }
 
 #game {

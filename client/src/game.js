@@ -1,5 +1,7 @@
 import { getId, send, addEventListener } from "./socket.js";
 
+"use strict";
+
 const currentPos = {
     x: 0,
     y: 0

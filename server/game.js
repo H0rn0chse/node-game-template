@@ -1,4 +1,4 @@
-const { registerMessageHandler, send } = require("./socket.js");
+import { registerMessageHandler, send } from "./socket.js";
 
 function startGame () {
     registerMessageHandler("joinGame", (ws, data) => {
@@ -11,6 +11,6 @@ function startGame () {
     });
 }
 
-module.exports = {
+export {
     startGame,
 };

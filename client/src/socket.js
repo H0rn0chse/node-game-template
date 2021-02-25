@@ -1,4 +1,6 @@
-import Deferred from "./Deferred.js";
+import { Deferred } from "./Deferred.js";
+
+"use strict";
 
 let ws = null;
 const deferred = new Deferred();

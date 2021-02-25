@@ -1,6 +1,8 @@
 import { joinGame } from "./game.js";
 import { addEventListener, removeEventListener, send } from "./socket.js";
 
+"use strict";
+
 function joinLobby (name) {
     stopLobby();
     joinGame(name)

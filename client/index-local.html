@@ -5,9 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Template</title>
-    <!--The following files are generated-->
-    <link rel="stylesheet" href="./dist/bundle.min.css">
-    <script type="module" src="./dist/bundle.min.js"></script>
+    <!--The following tags need to be kept in sync with the wqebpack entry file-->
+    <link rel="stylesheet" href="./styles/main.css">
+    <script type="module">
+        import { start } from "./src/socket.js";
+        import { startLobby } from "./src/lobby.js";
+
+        "use strict";
+
+        document.querySelector("#lobby").style.display = "";
+        document.querySelector("#game").style.display = "none";
+        start().then(() => {
+            startLobby();
+        });
+    </script>
 </head>
 <body>
     <p>This is a Node.js Game Template</p>

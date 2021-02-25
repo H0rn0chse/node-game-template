@@ -1,4 +1,4 @@
-const { registerMessageHandler, send } = require("./socket.js");
+import { registerMessageHandler, send } from "./socket.js";
 
 const activeLobbies = [];
 
@@ -23,6 +23,6 @@ function startLobby () {
     });
 }
 
-module.exports = {
+export {
     startLobby,
 };
