@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -16,7 +17,15 @@ module.exports = {
 
   plugins: [
     new MiniCssExtractPlugin({
-        filename: "bundle.min.css"
+      filename: "bundle.min.css"
+    }),
+    new HtmlWebpackPlugin({
+      template: "client/index-template.html",
+      favicon: "client/assets/favicon.png",
+      minify: {
+        collapseWhitespace: false
+      },
+      publicPath: "./dist"
     })
   ],
 
@@ -57,7 +66,7 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              outputPath: 'images'
+              outputPath: "images"
             }
           }
         ]
@@ -68,7 +77,7 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              outputPath: 'fonts'
+              outputPath: "fonts"
             }
           }
         ]

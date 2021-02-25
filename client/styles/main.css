@@ -1,4 +1,6 @@
+@import "colors.css";
 @import "fonts.css";
+@import "logoff.css";
 
 body {
     margin: 0;
@@ -28,7 +30,7 @@ body {
 }
 
 #game {
-    background-color: pink;
+    background-color: var(--game-bg);
     align-items: center;
     justify-content: center;
 }
@@ -37,22 +39,22 @@ body {
     width: 520px;
     height: 520px;
     position: relative;
-    background-color: lightcyan;
+    background-color: var(--game-area-bg);
 }
 
 #lobby {
-    background-color: lightgreen;
+    background-color: var(--lobby-bg);
     padding: 5em;
 }
 
 #cursor {
-    background-color: lime;
+    background-color: var(--game-cursor-self);
     z-index: 2;
 }
 
 .cursor {
     position: absolute;
-    background-color: black;
+    background-color: var(--game-cursor);
     border-radius: 100%;
     width: 30px;
     height: 30px;

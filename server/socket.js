@@ -8,7 +8,7 @@ const host =  process.env.PORT ? "0.0.0.0" : "localhost";
 
 const local = !!process.env.npm_config_debug;
 const publicPath = path.join(__root, "/client");
-const indexHtml = path.join(publicPath, !local ? "index.html" : "index-local.html");
+const indexHtml = path.join(publicPath, !local ? "dist/index.html" : "index-local.html");
 
 const messageHandler = new Map();
 let idCount = 1;

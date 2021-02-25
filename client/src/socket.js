@@ -1,4 +1,5 @@
 import { Deferred } from "./Deferred.js";
+import { logoff } from "./logoff.js";
 
 "use strict";
 
@@ -30,6 +31,8 @@ function start () {
     ws = new WebSocket(`${host}/ws`);
     ws.onmessage = handleMessage;
     ws.onopen = deferred.resolve;
+    ws.onclose = logoff;
+    ws.onerror = logoff;
     return ready();
 }
 

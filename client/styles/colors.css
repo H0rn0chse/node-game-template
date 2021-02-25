@@ -1,0 +1,10 @@
+:root {
+    --lobby-bg: #90ee90; /*lightgreen*/;
+
+    --game-bg: #ffc0cb; /* pink */
+    --game-area-bg: #e0ffff; /*lightcyan*/;
+    --game-cursor: #00ff00; /* lime */
+    --game-cursor-self: #000000; /* black */
+
+    --logoff-bg: #dddddd;
+}
