@@ -4,9 +4,9 @@ import { publish, registerMessageHandler, send } from "./socket.js";
 
 class _GameManager {
     init () {
-        registerMessageHandler("joinGame", this.onJoinGame.bind(this));
-        registerMessageHandler("gamePosition", this.onGamePosition.bind(this));
-        registerMessageHandler("close", this.onClose.bind(this));
+        registerMessageHandler("joinGame", this.onJoinGame, this);
+        registerMessageHandler("gamePosition", this.onGamePosition, this);
+        registerMessageHandler("close", this.onClose, this);
     }
 
     onGamePosition (ws, data, playerId) {

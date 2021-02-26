@@ -1,12 +1,12 @@
 import "../styles/main.css";
 
-import { start } from "./socket.js";
-import { startLobby } from "./lobby.js";
+import { openSocket } from "./socket.js";
+import { LobbyManager } from "./LobbyManager.js";
 
 "use strict";
 
-document.querySelector("#lobby").style.display = "";
 document.querySelector("#game").style.display = "none";
-start().then(() => {
-    startLobby();
+openSocket().then(() => {
+    LobbyManager.init();
+    LobbyManager.startListen();
 });

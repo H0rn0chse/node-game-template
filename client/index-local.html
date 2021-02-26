@@ -9,15 +9,15 @@
     <link rel="icon" href="./assets/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./styles/main.css">
     <script type="module">
-        import { start } from "./src/socket.js";
-        import { startLobby } from "./src/lobby.js";
+        import { openSocket } from "./src/socket.js";
+        import { LobbyManager } from "./src/LobbyManager.js";
 
         "use strict";
 
-        document.querySelector("#lobby").style.display = "";
         document.querySelector("#game").style.display = "none";
-        start().then(() => {
-            startLobby();
+        openSocket().then(() => {
+            LobbyManager.init();
+            LobbyManager.startListen();
         });
     </script>
 </head>

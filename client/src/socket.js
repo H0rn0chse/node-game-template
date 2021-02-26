@@ -12,18 +12,18 @@ function handleMessage (evt) {
     const message = JSON.parse(evt.data);
 
     if (message.channel) {
-        const handlerList = handler.get(message.channel) || [];
-        handlerList.forEach((callback) => {
-            callback(message.data);
+        const handlerList = handler.get(message.channel) || new Map();
+        handlerList.forEach((scope, callback) => {
+            callback.call(scope, message.data);
         });
     }
 }
 
-function ready () {
+export function ready () {
     return deferred.promise;
 }
 
-function start () {
+export function openSocket () {
     addEventListener("playerId", (data) => {
         playerId = data.id;
     });
@@ -36,41 +36,29 @@ function start () {
     return ready();
 }
 
-function addEventListener (channel, callback) {
-    const handlerList = handler.get(channel);
-    if (Array.isArray(handlerList)) {
-        if (handlerList.indexOf(callback) === -1) {
-            handlerList.push(callback);
-        }
-    } else {
-        handler.set(channel, [callback]);
+export function addEventListener (channel, callback, scope) {
+    let handlerMap = handler.get(channel);
+    if (handlerMap === undefined) {
+        handlerMap = new Map()
+        handler.set(channel, handlerMap);
+    }
+    handlerMap.set(callback, scope);
+}
+
+export function removeEventListener (channel, callback) {
+    const handlerMap = handler.get(channel);
+    if (handlerMap !== undefined) {
+        handlerMap.delete(callback);
     }
 }
 
-function removeEventListener (channel, callback) {
-    const handlerList = handler.get(channel);
-    if (Array.isArray(handlerList) && handlerList.indexOf(callback) > -1) {
-        const index = handlerList.indexOf(callback);
-        handlerList.splice(index, 1);
-    }
-}
-
-function send (channel, data) {
+export function send (channel, data) {
     ws.send(JSON.stringify({
         channel,
         data,
     }));
 }
 
-function getId () {
+export function getId () {
     return playerId;
 }
-
-export {
-    start,
-    ready,
-    addEventListener,
-    removeEventListener,
-    send,
-    getId
-};

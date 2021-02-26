@@ -6,11 +6,11 @@ class _LobbyManager {
     }
 
     init () {
-        registerMessageHandler("subscribeLobby", this.onSubscribeLobby.bind(this));
+        registerMessageHandler("subscribeLobby", this.onSubscribeLobby, this);
 
-        registerMessageHandler("createLobby", this.onCreateLobby.bind(this));
+        registerMessageHandler("createLobby", this.onCreateLobby, this);
 
-        registerMessageHandler("joinGame", this.onJoinGame.bind(this));
+        registerMessageHandler("joinGame", this.onJoinGame, this);
     }
 
     onSubscribeLobby (ws, data, playerId) {

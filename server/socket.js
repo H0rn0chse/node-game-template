@@ -32,37 +32,37 @@ function handleMessage (ws, ab) {
     }
 
     if (message.channel) {
-        const handlerList = messageHandler.get(message.channel) || [];
-        handlerList.forEach((callback) => {
-            callback(ws, message.data, ws.id);
+        const handlerMap = messageHandler.get(message.channel) || new Map();
+        handlerMap.forEach((scope, callback) => {
+            callback.call(scope, ws, message.data, ws.id);
         });
     }
 }
 
-function registerMessageHandler (channel, callback) {
-    const handlerList = messageHandler.get(channel);
-    if (Array.isArray(handlerList)) {
-        handlerList.push(callback);
-    } else {
-        messageHandler.set(channel, [callback]);
+export function registerMessageHandler (channel, callback, scope) {
+    let handlerMap = messageHandler.get(channel);
+    if (handlerMap === undefined) {
+        handlerMap = new Map()
+        messageHandler.set(channel, handlerMap);
     }
+    handlerMap.set(callback, scope);
 }
 
-function publish (topic, channel, data) {
+export function publish (topic, channel, data) {
     app.publish(topic, JSON.stringify({
         channel,
         data
     }));
 }
 
-function send (ws, channel, data) {
+export function send (ws, channel, data) {
     ws.send(JSON.stringify({
         channel,
         data
     }));
 }
 
-function startServer () {
+export function startServer () {
     app.ws("/ws", {
         open: ws => {
             console.log("WebSocket opens");
@@ -94,10 +94,3 @@ function startServer () {
         }
     });
 }
-
-export {
-    startServer,
-    registerMessageHandler,
-    publish,
-    send
-};
