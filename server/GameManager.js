@@ -6,7 +6,8 @@ class _GameManager {
     init () {
         registerMessageHandler("joinGame", this.onJoinGame, this);
         registerMessageHandler("gamePosition", this.onGamePosition, this);
-        registerMessageHandler("close", this.onClose, this);
+        registerMessageHandler("gameLeave", this.onGameLeave, this);
+        registerMessageHandler("close", this.onGameLeave, this);
     }
 
     onGamePosition (ws, data, playerId) {
@@ -23,7 +24,7 @@ class _GameManager {
         PlayerManager.setProperty(playerId, "game", lobbyName)
         const lobbyData = LobbyManager.getLobbyData(lobbyName);
 
-        if (lobbyData.player === undefined) {
+        if (!lobbyData.player) {
             lobbyData.player = {};
         }
         lobbyData.player[playerId] = {
@@ -37,7 +38,7 @@ class _GameManager {
         send(ws, "gameInit", Object.values(lobbyData.player));
     }
 
-    onClose (ws, data, playerId) {
+    onGameLeave (ws, data, playerId) {
         const lobbyName = PlayerManager.getProperty(playerId, "game");
         if (lobbyName) {
             const lobbyData = LobbyManager.getLobbyData(lobbyName);

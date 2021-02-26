@@ -1,7 +1,7 @@
+import { LobbyManager } from "./LobbyManager.js";
 import { getId, send, addEventListener, removeEventListener } from "./socket.js";
 
 class _GameManager {
-
     constructor () {
         this.currentPos = {
             x: 0,
@@ -11,16 +11,30 @@ class _GameManager {
         this.lobbyName = "";
         this.ingame = false;
 
+        this.game = document.querySelector("#game");
+        this.gameArea = document.querySelector("#gameArea");
+        this.cursor = document.querySelector("#cursor");
+
+        this.game.style.display = "none";
+
         document.addEventListener("keydown", (evt) => {
             if (this.ingame) {
                 this.handleKeydown(evt);
             }
         });
+
+        const backButton = document.querySelector("#back")
+        backButton.addEventListener("click", (evt) => {
+            if (this.ingame) {
+                this.leave();
+                LobbyManager.joinLobby();
+            }
+        });
     }
 
     resetGame () {
-        const gameArea = document.querySelector("#gameArea");
-        const cursorList = gameArea.querySelectorAll(".cursor:not(#cursor)");
+        this.game.style.display = "none";
+        const cursorList = this.gameArea.querySelectorAll(".cursor:not(#cursor)");
         cursorList.forEach((cursor) => {
             cursor.remove();
         });
@@ -28,12 +42,14 @@ class _GameManager {
             x: 0,
             y: 0
         };
+        this.cursor.style.top = `${this.currentPos.y}px`;
+        this.cursor.style.left = `${this.currentPos.x}px`;
     }
 
     join (name) {
         this.lobbyName = name;
         this.ingame = true;
-        document.querySelector("#game").style.display = "";
+        this.game.style.display = "";
 
         send("joinGame", { name: name });
 
@@ -49,6 +65,7 @@ class _GameManager {
         removeEventListener("gamePosition", this.onGamePosition);
         removeEventListener("gameLeave", this.onGameLeave);
         removeEventListener("gameInit", this.onGameInit);
+        send("gameLeave", {});
     }
 
     handleKeydown (evt) {
@@ -72,9 +89,8 @@ class _GameManager {
         this.currentPos.x += delta.x * 5;
         this.currentPos.y += delta.y * 5;
 
-        const cursor = document.querySelector("#cursor");
-        cursor.style.top = `${this.currentPos.y}px`;
-        cursor.style.left = `${this.currentPos.x}px`;
+        this.cursor.style.top = `${this.currentPos.y}px`;
+        this.cursor.style.left = `${this.currentPos.x}px`;
 
         send("gamePosition", { pos: this.currentPos});
     }
@@ -83,11 +99,10 @@ class _GameManager {
         if (data.id !== getId()) {
             let cursor = document.querySelector(`.cursor[data-id="${data.id}"]`);
             if (!cursor) {
-                const gameArea = document.querySelector("#gameArea");
                 cursor = document.createElement("div");
                 cursor.classList.add("cursor");
                 cursor.setAttribute("data-id", data.id);
-                gameArea.appendChild(cursor);
+                this.gameArea.appendChild(cursor);
             }
             cursor.style.top = `${data.pos.y}px`;
             cursor.style.left = `${data.pos.x}px`;

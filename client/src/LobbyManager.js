@@ -2,8 +2,11 @@ import { GameManager } from "./GameManager.js";
 import { addEventListener, removeEventListener, send } from "./socket.js";
 
 class _LobbyManager {
-    init () {
-        document.querySelector("#lobby").style.display = "";
+    constructor () {
+        this.lobby = document.querySelector("#lobby");
+        this.lobbyList = document.querySelector("#lobbyList");
+        this.lobbyName = document.querySelector("#lobbyName");
+
         const createButton = document.querySelector("#createLobby");
         createButton.addEventListener("click", (evt) => {
             this.createLobby();
@@ -11,26 +14,29 @@ class _LobbyManager {
     }
 
     createLobby () {
-        const input = document.querySelector("#lobbyName");
-        if (input && input.value) {
-            send("createLobby", { name: input.value });
-            this.joinLobby(input.value)
+        if (this.lobbyName.value) {
+            send("createLobby", { name: this.lobbyName.value });
+            this.joinGame(this.lobbyName.value)
         }
     }
 
-    joinLobby (name) {
+    joinGame (name) {
         this.stopListen();
         GameManager.join(name)
-        document.querySelector("#lobby").style.display = "none";
+        this.lobby.style.display = "none";
+    }
+
+    joinLobby () {
+        this.startListen();
+        this.lobby.style.display = "";
     }
 
     resetLobbyList () {
-        document.querySelector("#lobbyList").innerHTML = "";
-        document.querySelector("#lobbyName").value = "";
+        this.lobbyList.innerHTML = "";
+        this.lobbyName.value = "";
     }
 
     onLobbyAdded (lobby) {
-        const lobbyList = document.querySelector("#lobbyList");
         const row = document.createElement("div");
         row.classList.add("flexRow");
         row.setAttribute("data-name", lobby.name);
@@ -41,15 +47,14 @@ class _LobbyManager {
 
         const button = document.createElement("button")
         button.innerText = "Join Lobby";
-        button.onclick = this.joinLobby.bind(this, lobby.name);
+        button.onclick = this.joinGame.bind(this, lobby.name);
         row.appendChild(button);
 
-        lobbyList.appendChild(row);
+        this.lobbyList.appendChild(row);
     }
 
     onLobbyRemoved (lobby) {
-        const lobbyList = document.querySelector("#lobbyList");
-        const row = lobbyList.querySelector(`div[data-name=${lobby.name}]`);
+        const row = this.lobbyList.querySelector(`div[data-name=${lobby.name}]`);
         if (row) {
             row.remove();
         }

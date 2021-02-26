@@ -5,8 +5,6 @@ import { LobbyManager } from "./LobbyManager.js";
 
 "use strict";
 
-document.querySelector("#game").style.display = "none";
 openSocket().then(() => {
-    LobbyManager.init();
-    LobbyManager.startListen();
+    LobbyManager.joinLobby();
 });
