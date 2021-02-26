@@ -1,0 +1,17 @@
+#lobby {
+    background-color: var(--lobby-bg);
+    padding: 5em;
+}
+
+#cursor {
+    background-color: var(--game-cursor-self);
+    z-index: 2;
+}
+
+.cursor {
+    position: absolute;
+    background-color: var(--game-cursor);
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+}

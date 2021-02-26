@@ -1,5 +1,10 @@
 @import "colors.css";
 @import "fonts.css";
+
+/*areas*/
+@import "header.css";
+@import "lobby.css";
+@import "game.css";
 @import "logoff.css";
 
 body {
@@ -24,38 +29,20 @@ body {
     flex-direction: column;
 }
 
-.content {
+#content {
     width: 100vw;
-    height: 60vh;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 5em auto;
+    grid-template-areas:
+    "header"
+    "mainContent";
 }
 
-#game {
-    background-color: var(--game-bg);
-    align-items: center;
-    justify-content: center;
+.header {
+    grid-area: header;
 }
 
-#gameArea {
-    width: 520px;
-    height: 520px;
-    position: relative;
-    background-color: var(--game-area-bg);
-}
-
-#lobby {
-    background-color: var(--lobby-bg);
-    padding: 5em;
-}
-
-#cursor {
-    background-color: var(--game-cursor-self);
-    z-index: 2;
-}
-
-.cursor {
-    position: absolute;
-    background-color: var(--game-cursor);
-    border-radius: 100%;
-    width: 30px;
-    height: 30px;
+.mainContent {
+    grid-area: mainContent;
 }

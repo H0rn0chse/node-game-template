@@ -1,0 +1,20 @@
+#game {
+    background-color: var(--game-bg);
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#gameArea {
+    width: 520px;
+    height: 520px;
+    position: relative;
+    background-color: var(--game-area-bg);
+}
+
+#back {
+    position: absolute;
+    top: 0;
+    left: 1em;
+    cursor: pointer;
+}
