@@ -1,4 +1,5 @@
 import { DatabaseManager } from "./DatabaseManager.js";
+import { PlayerManager } from "./PlayerManager.js";
 import { publish, registerMessageHandler, send } from "./socket.js";
 
 class _HighscoreManager {
@@ -42,9 +43,9 @@ class _HighscoreManager {
         });
     }
 
-    insertAndSort (entry) {
+    insertAndSort (entry, name) {
         // ensure all fields are set correctly
-        entry.name = entry.name || "unknown";
+        entry.name = name || "unknown";
         entry.points = entry.points || 0;
         entry.date = entry.date || Date.now();
 
@@ -53,7 +54,9 @@ class _HighscoreManager {
         this.current.forEach((entry, index) => {
             entry.placement = index + 1;
         });
-        return this.current.indexOf(entry) < 10;
+        const shouldUpdate = this.current.indexOf(entry) < 10;
+        this.current.splice(9, 1);
+        return shouldUpdate;
     }
 
     onSubscribeHighscore (ws, data, playerId) {
@@ -66,7 +69,8 @@ class _HighscoreManager {
     }
 
     onGamePoints (ws, data, playerId) {
-        if (this.insertAndSort(data)) {
+        const playerName = PlayerManager.getProperty(playerId, "name");
+        if (this.insertAndSort(data, playerName)) {
             DatabaseManager.updateHighscore(this.current).then(async () => {
                 this.current = this.ensureLength(await DatabaseManager.getHighscores());
                 publish("highscore", "highscoreUpdate", this.current);

@@ -4,6 +4,8 @@ import { addEventListener, removeEventListener, send } from "./socket.js";
 class _HighscoreManager {
     constructor () {
         this.list = document.querySelector("#highscoreList");
+        this.userName = document.querySelector("#userName input");
+        this.userNameSave = document.querySelector("#userName button");
 
         this.entries = [];
         for (let i = 0; i < 10; i++) {
@@ -11,6 +13,10 @@ class _HighscoreManager {
             this.list.appendChild(entry.container);
             this.entries.push(entry);
         }
+
+        this.userNameSave.addEventListener("click", (evt) => {
+            send("userNameUpdate", { name: this.userName.value });
+        });
     }
 
     onHighscoreUpdate (list) {

@@ -39,6 +39,10 @@
     width: 10em;
 }
 
+#highscore {
+    position: relative;
+}
+
 .highscoreEntry {
     margin: 0em;
     position: relative;
@@ -54,3 +58,12 @@
     margin-right: 1.5em;
 }
 
+#userName {
+    position: absolute;
+    top: 1em;
+    right: 2em;
+}
+
+#userName > * {
+    margin-left: 0.5em;
+}
