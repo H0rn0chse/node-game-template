@@ -5,7 +5,6 @@ class _HighscoreManager {
     constructor () {
         this.list = document.querySelector("#highscoreList");
         this.userName = document.querySelector("#userName input");
-        this.userNameSave = document.querySelector("#userName button");
 
         this.entries = [];
         for (let i = 0; i < 10; i++) {
@@ -14,7 +13,7 @@ class _HighscoreManager {
             this.entries.push(entry);
         }
 
-        this.userNameSave.addEventListener("click", (evt) => {
+        this.userName.addEventListener("focusout", (evt) => {
             send("userNameUpdate", { name: this.userName.value });
         });
     }

@@ -130,6 +130,14 @@ class _GameManager {
                 cursor = document.createElement("div");
                 cursor.classList.add("cursor");
                 cursor.setAttribute("data-id", data.id);
+
+                const name = document.createElement("div");
+                name.classList.add("cursorName", "flexColumn");
+                const inner = document.createElement("div");
+                inner.innerText = data.name;
+                name.appendChild(inner);
+                cursor.appendChild(name);
+
                 this.gameArea.appendChild(cursor);
             }
             cursor.style.top = `${data.pos.y}px`;

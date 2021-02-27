@@ -32,6 +32,13 @@
     height: 30px;
 }
 
+.cursorName {
+    position: relative;
+    top: -1.2em;
+    align-items: center;
+    font-size: 18pt;
+}
+
 #gameStats {
     position: absolute;
     top: 0;

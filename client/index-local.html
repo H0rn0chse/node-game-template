@@ -40,14 +40,17 @@
                 <div id="userName" class="flexRow">
                     <div>Your Name:</div>
                     <label><input type="text" value="unknown" maxlength="20"></label>
-                    <button>Save</button>
                 </div>
             </div>
         </div>
         <div id="game" class="mainContent flexColumn" style="display: none;">
             <h2 id="back">&lt; Back</h2>
             <div id="gameArea">
-                <div id="cursor" class="cursor"></div>
+                <div id="cursor" class="cursor">
+                    <div class="cursorName flexColumn">
+                        <div>You</div>
+                    </div>
+                </div>
                 <div id="gameStats" class="flexColumn">
                     <h1>Points</h1>
                     <h3 id="gamePoints">0</h3>

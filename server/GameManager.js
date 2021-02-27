@@ -29,6 +29,7 @@ class _GameManager {
         }
         lobbyData.player[playerId] = {
             id: playerId,
+            name: PlayerManager.getProperty(playerId, "name") || "unknown",
             pos: {
                 x: 0,
                 y: 0,
