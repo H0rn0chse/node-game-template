@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { LobbyManager } from "./LobbyManager.js";
 import { getId, send, addEventListener, removeEventListener } from "./socket.js";
 
@@ -5,7 +6,7 @@ class _GameManager {
     constructor () {
         this.currentPos = {
             x: 0,
-            y: 0
+            y: 0,
         };
 
         this.lobbyName = "";
@@ -23,7 +24,7 @@ class _GameManager {
             }
         });
 
-        const backButton = document.querySelector("#back")
+        const backButton = document.querySelector("#back");
         backButton.addEventListener("click", (evt) => {
             if (this.ingame) {
                 this.leave();
@@ -40,7 +41,7 @@ class _GameManager {
         });
         this.currentPos = {
             x: 0,
-            y: 0
+            y: 0,
         };
         this.cursor.style.top = `${this.currentPos.y}px`;
         this.cursor.style.left = `${this.currentPos.x}px`;
@@ -51,7 +52,7 @@ class _GameManager {
         this.ingame = true;
         this.game.style.display = "";
 
-        send("joinGame", { name: name });
+        send("joinGame", { name });
 
         addEventListener("gamePosition", this.onGamePosition, this);
         addEventListener("gameLeave", this.onGameLeave, this);
@@ -71,19 +72,19 @@ class _GameManager {
     handleKeydown (evt) {
         const delta = {
             x: 0,
-            y: 0
+            y: 0,
         };
 
         if (evt.key === "ArrowLeft") {
-            delta.x = -1
+            delta.x = -1;
         } else if (evt.key === "ArrowRight") {
-            delta.x = 1
+            delta.x = 1;
         }
 
         if (evt.key === "ArrowDown") {
-            delta.y = 1
+            delta.y = 1;
         } else if (evt.key === "ArrowUp") {
-            delta.y = -1
+            delta.y = -1;
         }
 
         this.currentPos.x += delta.x * 5;
@@ -92,7 +93,7 @@ class _GameManager {
         this.cursor.style.top = `${this.currentPos.y}px`;
         this.cursor.style.left = `${this.currentPos.x}px`;
 
-        send("gamePosition", { pos: this.currentPos});
+        send("gamePosition", { pos: this.currentPos });
     }
 
     onGamePosition (data) {
@@ -110,17 +111,17 @@ class _GameManager {
     }
 
     onGameLeave (data) {
-        let cursor = document.querySelector(`.cursor[data-id="${data.id}"]`);
+        const cursor = document.querySelector(`.cursor[data-id="${data.id}"]`);
         if (cursor) {
             cursor.remove();
         }
     }
 
     onGameInit (lobbyData) {
-        lobbyData.forEach(playerData => {
+        lobbyData.forEach((playerData) => {
             this.onGamePosition(playerData);
         });
     }
 }
 
-export  const GameManager = new _GameManager();
+export const GameManager = new _GameManager();

@@ -5,7 +5,7 @@ import { PlayerManager } from "./PlayerManager.js";
 
 const app = new App();
 const port = parseInt(process.env.PORT, 10) || 80;
-const host =  process.env.PORT ? "0.0.0.0" : "localhost";
+const host = process.env.PORT ? "0.0.0.0" : "localhost";
 
 const local = !!process.env.npm_config_debug;
 const publicPath = path.join(__root, "/client");
@@ -20,7 +20,7 @@ function parseArrayBuffer (data) {
         const string = String.fromCharCode.apply(null, buffer);
         oResult = JSON.parse(string);
     } catch (err) {
-        console.log(err);
+        globalThis.console.log(err);
     }
     return oResult;
 }
@@ -42,7 +42,7 @@ function handleMessage (ws, ab) {
 export function registerMessageHandler (channel, callback, scope) {
     let handlerMap = messageHandler.get(channel);
     if (handlerMap === undefined) {
-        handlerMap = new Map()
+        handlerMap = new Map();
         messageHandler.set(channel, handlerMap);
     }
     handlerMap.set(callback, scope);
@@ -51,46 +51,47 @@ export function registerMessageHandler (channel, callback, scope) {
 export function publish (topic, channel, data) {
     app.publish(topic, JSON.stringify({
         channel,
-        data
+        data,
     }));
 }
 
 export function send (ws, channel, data) {
     ws.send(JSON.stringify({
         channel,
-        data
+        data,
     }));
 }
 
 export function startServer () {
     app.ws("/ws", {
-        open: ws => {
-            console.log("WebSocket opens");
+        idleTimeout: 55,
+        open: (ws) => {
+            globalThis.console.log("WebSocket opens");
             ws.id = PlayerManager.addPlayer();
             send(ws, "playerId", {
-                id: ws.id
+                id: ws.id,
             });
         },
         message: handleMessage,
         close: (ws, code, message) => {
             handleMessage(ws, {
                 channel: "close",
-                data: {}
+                data: {},
             });
             PlayerManager.removePlayer(ws.id);
-            console.log("WebSocket closed");
-        }
+            globalThis.console.log("WebSocket closed");
+        },
     })
-    .file("/", indexHtml, { lastModified : false })
-    .folder("/", publicPath, { lastModified : false })
-    .get("/*", (res, req) => {
-        res.writeStatus("404 Not Found").end("");
-    })
-    .listen(host, port, (token) => {
-        if (token) {
-            console.log(`Listening to http://${host}:${port}`);
-        } else {
-            console.log(`Failed to listen to http://${host}:${port}`);
-        }
-    });
+        .file("/", indexHtml, { lastModified: false })
+        .folder("/", publicPath, { lastModified: false })
+        .get("/*", (res, req) => {
+            res.writeStatus("404 Not Found").end("");
+        })
+        .listen(host, port, (token) => {
+            if (token) {
+                globalThis.console.log(`Listening to http://${host}:${port}`);
+            } else {
+                globalThis.console.log(`Failed to listen to http://${host}:${port}`);
+            }
+        });
 }

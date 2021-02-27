@@ -15,6 +15,15 @@ module.exports = {
         indent: ["error", 4, { SwitchCase: 1 }],
         quotes: ["error", "double"],
         "space-before-function-paren": ["error", "always"],
-        allowEmptyReject: true,
+        allowEmptyReject: "off",
+        "import/extensions": "off",
+        "import/prefer-default-export": "off",
+        "no-unused-vars": "warn",
+        "object-curly-newline": ["error", {
+            ImportDeclaration: "never",
+        }],
+        "class-methods-use-this": "off",
+        "prefer-promise-reject-errors": "warn",
+        "no-param-reassign": ["error", { props: false }],
     },
 };

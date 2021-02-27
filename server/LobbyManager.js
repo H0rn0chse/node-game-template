@@ -19,14 +19,14 @@ class _LobbyManager {
     }
 
     onCreateLobby (ws, data, playerId) {
-        const name = data.name
+        const { name } = data;
         if (!this.lobbies.has(name)) {
-            const data = {
-                name: name
+            const lobbyData = {
+                name,
             };
 
-            this.lobbies.set(name, data);
-            publish("lobby", "lobbyAdded", data);
+            this.lobbies.set(name, lobbyData);
+            publish("lobby", "lobbyAdded", lobbyData);
         }
     }
 
@@ -41,7 +41,7 @@ class _LobbyManager {
     removeLobby (name) {
         this.lobbies.delete(name);
         publish("lobby", "lobbyRemoved", {
-            name: name
+            name,
         });
     }
 }

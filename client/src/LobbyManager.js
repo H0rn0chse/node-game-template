@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { GameManager } from "./GameManager.js";
 import { addEventListener, removeEventListener, send } from "./socket.js";
 
@@ -16,13 +17,14 @@ class _LobbyManager {
     createLobby () {
         if (this.lobbyName.value) {
             send("createLobby", { name: this.lobbyName.value });
-            this.joinGame(this.lobbyName.value)
+            this.joinGame(this.lobbyName.value);
         }
     }
 
     joinGame (name) {
         this.stopListen();
-        GameManager.join(name)
+        GameManager.join(name);
+
         this.lobby.style.display = "none";
     }
 
@@ -41,11 +43,11 @@ class _LobbyManager {
         row.classList.add("flexRow");
         row.setAttribute("data-name", lobby.name);
 
-        const name = document.createElement("div")
+        const name = document.createElement("div");
         name.innerText = lobby.name;
         row.appendChild(name);
 
-        const button = document.createElement("button")
+        const button = document.createElement("button");
         button.innerText = "Join Lobby";
         button.onclick = this.joinGame.bind(this, lobby.name);
         row.appendChild(button);
@@ -83,4 +85,4 @@ class _LobbyManager {
     }
 }
 
-export  const LobbyManager = new _LobbyManager();
+export const LobbyManager = new _LobbyManager();

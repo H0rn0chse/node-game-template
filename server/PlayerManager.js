@@ -1,12 +1,13 @@
 class _PlayerManager {
     constructor () {
         this.player = new Map();
-        this.count = 1;
+        this.count = 0;
     }
 
     addPlayer () {
+        this.count += 1;
         const data = {
-            id: this.count++
+            id: this.count,
         };
         this.player.set(data.id, data);
         return data.id;
@@ -19,14 +20,12 @@ class _PlayerManager {
 
     setProperty (id, key, value) {
         const data = this.player.get(id);
-        data[key] = value
-        this.player.set(id, data);
+        data[key] = value;
     }
 
     removeProperty (id, key) {
         const data = this.player.get(id);
         delete data[key];
-        this.player.set(id, data);
     }
 
     removePlayer (id) {

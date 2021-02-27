@@ -1,5 +1,3 @@
-"use strict";
-
 export class Deferred {
     constructor () {
         this.isFulfilled = false;

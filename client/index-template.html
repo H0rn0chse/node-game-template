@@ -8,24 +8,29 @@
     <!--Insert dependencies here-->
 </head>
 <body>
-    <p>This is a Node.js Game Template</p>
-    <div id="lobby" class="content flexColumn">
-        <div id="lobbyList" class="flexColumn">
+    <div id="content">
+        <div id="header" class="header">
+            <h1>This is a Node.Js Game Template</h1>
+        </div>
+        <div id="lobby" class="mainContent flexColumn">
+            <div id="lobbyList" class="flexColumn">
 
+            </div>
+            <div class="flexRow">
+                <input id="lobbyName" type="text" placeholder="Lobbyname">
+                <button id="createLobby">Create</button>
+            </div>
         </div>
-        <div class="flexRow">
-            <input id="lobbyName" type="text" placeholder="Lobbyname">
-            <button id="createLobby">Create</button>
-        </div>
-    </div>
-    <div id="game" class="content flexColumn">
-        <div id="gameArea">
-            <div id="cursor" class="cursor"></div>
+        <div id="game" class="mainContent flexColumn">
+            <h2 id="back">&lt; Back</h2>
+            <div id="gameArea">
+                <div id="cursor" class="cursor"></div>
+            </div>
         </div>
     </div>
     <div id="logoff" class="flexColumn">
         <div class="flexRow">
-            Your connection was closed due to inactivity<br>
+            Your connection was closed due to Inactivity<br>
             Please reload the page
         </div>
     </div>

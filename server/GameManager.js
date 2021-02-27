@@ -21,7 +21,7 @@ class _GameManager {
     onJoinGame (ws, data, playerId) {
         const lobbyName = data.name;
         ws.subscribe(lobbyName);
-        PlayerManager.setProperty(playerId, "game", lobbyName)
+        PlayerManager.setProperty(playerId, "game", lobbyName);
         const lobbyData = LobbyManager.getLobbyData(lobbyName);
 
         if (!lobbyData.player) {
@@ -30,9 +30,9 @@ class _GameManager {
         lobbyData.player[playerId] = {
             id: playerId,
             pos: {
-                x:0,
-                y:0
-            }
+                x: 0,
+                y: 0,
+            },
         };
 
         send(ws, "gameInit", Object.values(lobbyData.player));
@@ -40,12 +40,17 @@ class _GameManager {
 
     onGameLeave (ws, data, playerId) {
         const lobbyName = PlayerManager.getProperty(playerId, "game");
+
         if (lobbyName) {
+            PlayerManager.removeProperty(playerId, "game");
+
             const lobbyData = LobbyManager.getLobbyData(lobbyName);
             delete lobbyData.player[playerId];
+
             if (Object.keys(lobbyData.player).length === 0) {
                 LobbyManager.removeLobby(lobbyName);
             }
+
             publish(lobbyName, "gameLeave", { id: playerId });
         }
     }
