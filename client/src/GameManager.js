@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-cycle
 import { LobbyManager } from "./LobbyManager.js";
 import { getId, send, addEventListener, removeEventListener } from "./socket.js";
+import { Timer } from "./Timer.js";
 
 class _GameManager {
     constructor () {
@@ -9,12 +10,15 @@ class _GameManager {
             y: 0,
         };
 
+        this.currentPoints = 0;
+
         this.lobbyName = "";
         this.ingame = false;
 
         this.game = document.querySelector("#game");
         this.gameArea = document.querySelector("#gameArea");
         this.cursor = document.querySelector("#cursor");
+        this.points = document.querySelector("#gamePoints");
 
         this.game.style.display = "none";
 
@@ -31,6 +35,8 @@ class _GameManager {
                 LobbyManager.joinLobby();
             }
         });
+
+        this.pointTimer = new Timer(1, this.setPoints.bind(this));
     }
 
     resetGame () {
@@ -45,6 +51,10 @@ class _GameManager {
         };
         this.cursor.style.top = `${this.currentPos.y}px`;
         this.cursor.style.left = `${this.currentPos.x}px`;
+
+        this.pointTimer.clear();
+        this.currentPoints = 0;
+        this.points.innerText = "0";
     }
 
     join (name) {
@@ -58,15 +68,24 @@ class _GameManager {
         addEventListener("gameLeave", this.onGameLeave, this);
         addEventListener("gameInit", this.onGameInit, this);
         send("gamePosition", { pos: this.currentPos });
+
+        this.pointTimer.start();
     }
 
     leave () {
+        send("gamePoints", { points: this.currentPoints });
         this.ingame = false;
         this.resetGame();
         removeEventListener("gamePosition", this.onGamePosition);
         removeEventListener("gameLeave", this.onGameLeave);
         removeEventListener("gameInit", this.onGameInit);
         send("gameLeave", {});
+    }
+
+    setPoints () {
+        this.currentPoints += 1;
+        this.points.innerText = this.currentPoints;
+        this.pointTimer.start();
     }
 
     handleKeydown (evt) {
@@ -87,8 +106,16 @@ class _GameManager {
             delta.y = -1;
         }
 
-        this.currentPos.x += delta.x * 5;
-        this.currentPos.y += delta.y * 5;
+        const tempX = this.currentPos.x + delta.x * 5;
+        const tempY = this.currentPos.y + delta.y * 5;
+
+        // check boundaries
+        if (tempX < 0 || tempY < 0 || tempX > (520 - 30) || tempY > (520 - 30)) {
+            return;
+        }
+
+        this.currentPos.x = tempX;
+        this.currentPos.y = tempY;
 
         this.cursor.style.top = `${this.currentPos.y}px`;
         this.cursor.style.left = `${this.currentPos.x}px`;

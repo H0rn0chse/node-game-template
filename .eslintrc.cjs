@@ -25,5 +25,8 @@ module.exports = {
         "class-methods-use-this": "off",
         "prefer-promise-reject-errors": "warn",
         "no-param-reassign": ["error", { props: false }],
+        "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
+        "no-shadow": "warn",
+        "max-len": "off",
     },
 };

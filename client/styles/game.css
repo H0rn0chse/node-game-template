@@ -18,3 +18,27 @@
     left: 1em;
     cursor: pointer;
 }
+
+#cursor {
+    background-color: var(--game-cursor-self);
+    z-index: 2;
+}
+
+.cursor {
+    position: absolute;
+    background-color: var(--game-cursor);
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+}
+
+#gameStats {
+    position: absolute;
+    top: 0;
+    right: -5em;
+}
+
+#gameStats h1, #gameStats h2, #gameStats h3 {
+    padding: 0;
+    margin: 0;
+}

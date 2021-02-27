@@ -1,5 +1,6 @@
 @import "colors.css";
 @import "fonts.css";
+@import "scrollbar.css";
 
 /*areas*/
 @import "header.css";
@@ -45,4 +46,18 @@ body {
 
 .mainContent {
     grid-area: mainContent;
+}
+
+/*
+    Picnic.css overrides
+*/
+
+button {
+    padding: 0.1em 0.5em;
+}
+
+input {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    height: 1.8em;
 }

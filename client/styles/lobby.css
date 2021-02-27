@@ -1,17 +1,56 @@
 #lobby {
     background-color: var(--lobby-bg);
-    padding: 5em;
+    height: 100%;
 }
 
-#cursor {
-    background-color: var(--game-cursor-self);
-    z-index: 2;
+#lobby > div {
+    width: 50%;
+    height: 100%;
+    padding: 2em;
 }
 
-.cursor {
+#lobbyList {
+    height: 60vh;
+}
+
+#lobbyList > div {
+    border: solid var(--lobby-border);
+    border-radius: 1em;
+    padding: 0.2em;
+    margin: 0.1em 7em;
+    margin-left: 2em;
+    justify-content: space-between;
+}
+
+#lobbyList > div > *{
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+#createLobbyRow {
+    justify-content: center;
+}
+
+#createLobbyRow > * {
+    margin: 1em;
+}
+
+#lobbyName {
+    width: 10em;
+}
+
+.highscoreEntry {
+    margin: 0em;
+    position: relative;
+}
+
+.highscorePoints {
     position: absolute;
-    background-color: var(--game-cursor);
-    border-radius: 100%;
-    width: 30px;
-    height: 30px;
+    right: 5em;
 }
+
+.highscorePlacement {
+    padding: 0;
+    margin-right: 1.5em;
+}
+

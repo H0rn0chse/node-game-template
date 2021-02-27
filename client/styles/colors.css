@@ -1,7 +1,13 @@
 :root {
-    --lobby-bg: #90ee90; /*lightgreen*/;
+    --common-transparent: rgba(255,255,255,0);
 
-    --game-bg: #ffc0cb; /* pink */
+    --scroll-track: #F5F5F5;
+    --scroll-thumb: #555;
+
+    --lobby-bg: #90ee90; /*lightgreen*/;
+    --lobby-border: #137C13;
+
+    --game-bg: #78A1BB;
     --game-area-bg: #e0ffff; /*lightcyan*/;
     --game-cursor: #00ff00; /* lime */
     --game-cursor-self: #000000; /* black */
