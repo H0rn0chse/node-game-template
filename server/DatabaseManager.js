@@ -17,11 +17,12 @@ class _DatabaseManager {
     connect () {
         mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
             .then(() => {
-                console.log("connected");
+                globalThis.console.log("Database connected");
                 this.loadModel();
                 this.deferred.resolve();
             })
             .catch(() => {
+                globalThis.console.log("Error: Database was not able to connect!");
                 this.deferred.reject();
             });
     }
