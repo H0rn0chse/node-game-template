@@ -26,17 +26,17 @@
             <h1>This is a Node.Js Game Template</h1>
         </div>
         <div id="lobby" class="mainContent flexRow">
-            <div class="flexColumn">
-                <h2>Running Games</h2>
-                <div id="lobbyList" class="flexColumn scrollContainer"></div>
-                <div id="createLobbyRow" class="flexRow">
+            <div class="lobbyColumn">
+                <h2 class="lobbyHeader">Running Games</h2>
+                <div id="lobbyList" class="flexColumn lobbyContent scrollContainer"></div>
+                <div id="createLobbyRow" class="flexRow lobbyFooter">
                     Create your own Game <input id="lobbyName" type="text" placeholder="Name" maxlength="32">
                     <button id="createLobby">Create</button>
                 </div>
             </div>
-            <div id="highscore">
-                <h2>Highscores</h2>
-                <div id="highscoreList" class="flexColumn"></div>
+            <div id="highscore" class="lobbyColumn">
+                <h2 class="lobbyHeader">Highscores</h2>
+                <div id="highscoreList" class="flexColumn lobbyContent scrollContainer"></div>
                 <div id="userName" class="flexRow">
                     <div>Your Name:</div>
                     <label><input type="text" value="unknown" maxlength="20"></label>

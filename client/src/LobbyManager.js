@@ -41,7 +41,7 @@ class _LobbyManager {
 
     onLobbyAdded (lobby) {
         const row = document.createElement("div");
-        row.classList.add("flexRow");
+        row.classList.add("flexRow", "lobbyRow");
         row.setAttribute("data-name", lobby.name);
 
         const name = document.createElement("div");

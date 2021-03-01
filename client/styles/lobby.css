@@ -3,26 +3,46 @@
     height: 100%;
 }
 
-#lobby > div {
+.lobbyColumn {
     width: 50%;
-    height: 100%;
-    padding: 2em;
+    min-width: 15em;
+    height: calc(100vh - 5em);
+
+    display: grid;
+    grid-template-rows: 3em auto 3em;
+    grid-template-areas:
+    "lobbyHeader"
+    "lobbyContent"
+    "lobbyFooter";
+    padding-left: 2em;
+    padding-right: 2em;
 }
 
-#lobbyList {
-    height: 60vh;
+.lobbyHeader {
+    grid-area: lobbyHeader;
 }
 
-#lobbyList > div {
+.lobbyContent {
+    grid-area: lobbyContent;
+    padding-left: 0.5em;
+}
+
+.lobbyFooter {
+    grid-area: lobbyFooter;
+}
+
+/*================= lobby column ======================*/
+
+.lobbyRow {
     border: solid var(--lobby-border);
     border-radius: 1em;
     padding: 0.2em;
-    margin: 0.1em 7em;
-    margin-left: 2em;
+    margin: 0.1em 6em;
+    margin-left: 0;
     justify-content: space-between;
 }
 
-#lobbyList > div > *{
+.lobbyRow > *{
     margin-left: 0.5em;
     margin-right: 0.5em;
 }
@@ -38,6 +58,8 @@
 #lobbyName {
     width: 10em;
 }
+
+/*================= highscore column ======================*/
 
 #highscore {
     position: relative;
