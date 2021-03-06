@@ -12,7 +12,7 @@
         "uri": "https://github.com/DefinitelyTyped/DefinitelyTyped"
     },
     {
-        "name": "@types/node@14",
+        "name": "@types/node",
         "uri": "https://github.com/DefinitelyTyped/DefinitelyTyped"
     },
     {
@@ -88,7 +88,7 @@
         "uri": "https://github.com/gulpjs/glob-parent"
     },
     {
-        "name": "graphql@",
+        "name": "graphql",
         "uri": "https://github.com/graphql/graphql-js"
     },
     {
@@ -144,7 +144,7 @@
         "uri": "https://github.com/vkarpov15/mongoose-legacy-pluralize"
     },
     {
-        "name": "mongoose@5",
+        "name": "mongoose",
         "uri": "https://github.com/Automattic/mongoose"
     },
     {
@@ -180,7 +180,7 @@
         "uri": "https://github.com/calvinmetcalf/process-nextick-args"
     },
     {
-        "name": "query-string@",
+        "name": "query-string",
         "uri": "https://github.com/sindresorhus/query-string"
     },
     {
