@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Template</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic@6.5.4/picnic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <!--The following tags need to be kept in sync with the wqebpack entry file-->
     <link rel="icon" href="./assets/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./styles/main.css">
@@ -18,6 +19,12 @@
         openSocket().then(() => {
             LobbyManager.joinLobby();
         });
+
+        const acknowledgements = document.querySelector("#acknowledgements");
+        acknowledgements.innerHTML = globalThis.feather.icons.award.toSvg({ color: "#e2b007" });
+        acknowledgements.addEventListener("click", (evt) => {
+            window.open("./acknowledgements/third-party-licenses.html", "_blank");
+        }, { passive: true });
     </script>
 </head>
 <body>
@@ -70,5 +77,6 @@
         data-target="_blank"
         src="https://unpkg.com/github-corners@latest/dist/embed.min.js">
     </script>
+    <div id="acknowledgements" title="Acknowledgements"></div>
 </body>
 </html>

@@ -1,0 +1,262 @@
+[
+    {
+        "name": "@sifrr/server",
+        "uri": "https://github.com/sifrr/sifrr"
+    },
+    {
+        "name": "@types/bson",
+        "uri": "https://github.com/DefinitelyTyped/DefinitelyTyped"
+    },
+    {
+        "name": "@types/mongodb",
+        "uri": "https://github.com/DefinitelyTyped/DefinitelyTyped"
+    },
+    {
+        "name": "@types/node@14",
+        "uri": "https://github.com/DefinitelyTyped/DefinitelyTyped"
+    },
+    {
+        "name": "anymatch",
+        "uri": "https://github.com/micromatch/anymatch"
+    },
+    {
+        "name": "binary-extensions",
+        "uri": "https://github.com/sindresorhus/binary-extensions"
+    },
+    {
+        "name": "bl",
+        "uri": "https://github.com/rvagg/bl"
+    },
+    {
+        "name": "bluebird",
+        "uri": "https://github.com/petkaantonov/bluebird"
+    },
+    {
+        "name": "braces",
+        "uri": "https://github.com/micromatch/braces"
+    },
+    {
+        "name": "bson",
+        "uri": "https://github.com/mongodb/js-bson"
+    },
+    {
+        "name": "busboy",
+        "uri": "http://github.com/mscdex/busboy"
+    },
+    {
+        "name": "chokidar",
+        "uri": "https://github.com/paulmillr/chokidar"
+    },
+    {
+        "name": "core-util-is",
+        "uri": "https://github.com/isaacs/core-util-is"
+    },
+    {
+        "name": "debug",
+        "uri": "https://github.com/visionmedia/debug"
+    },
+    {
+        "name": "decode-uri-component",
+        "uri": "https://github.com/SamVerschueren/decode-uri-component"
+    },
+    {
+        "name": "denque",
+        "uri": "https://github.com/invertase/denque"
+    },
+    {
+        "name": "dicer",
+        "uri": "http://github.com/mscdex/dicer"
+    },
+    {
+        "name": "dotenv",
+        "uri": "https://github.com/motdotla/dotenv"
+    },
+    {
+        "name": "fill-range",
+        "uri": "https://github.com/jonschlinkert/fill-range"
+    },
+    {
+        "name": "filter-obj",
+        "uri": "https://github.com/sindresorhus/filter-obj"
+    },
+    {
+        "name": "github-corners",
+        "uri": "https://github.com/remarkablemark/github-corners"
+    },
+    {
+        "name": "glob-parent",
+        "uri": "https://github.com/gulpjs/glob-parent"
+    },
+    {
+        "name": "graphql@",
+        "uri": "https://github.com/graphql/graphql-js"
+    },
+    {
+        "name": "inherits",
+        "uri": "https://github.com/isaacs/inherits"
+    },
+    {
+        "name": "is-binary-path",
+        "uri": "https://github.com/sindresorhus/is-binary-path"
+    },
+    {
+        "name": "is-extglob",
+        "uri": "https://github.com/jonschlinkert/is-extglob"
+    },
+    {
+        "name": "is-glob",
+        "uri": "https://github.com/micromatch/is-glob"
+    },
+    {
+        "name": "is-number",
+        "uri": "https://github.com/jonschlinkert/is-number"
+    },
+    {
+        "name": "isarray",
+        "uri": "https://github.com/juliangruber/isarray"
+    },
+    {
+        "name": "iterall",
+        "uri": "https://github.com/leebyron/iterall"
+    },
+    {
+        "name": "kareem",
+        "uri": "https://github.com/vkarpov15/kareem"
+    },
+    {
+        "name": "memory-pager",
+        "uri": "https://github.com/mafintosh/memory-pager"
+    },
+    {
+        "name": "minimist",
+        "uri": "https://github.com/substack/minimist"
+    },
+    {
+        "name": "mkdirp",
+        "uri": "https://github.com/substack/node-mkdirp"
+    },
+    {
+        "name": "mongodb",
+        "uri": "https://github.com/mongodb/node-mongodb-native"
+    },
+    {
+        "name": "mongoose-legacy-pluralize",
+        "uri": "https://github.com/vkarpov15/mongoose-legacy-pluralize"
+    },
+    {
+        "name": "mongoose@5",
+        "uri": "https://github.com/Automattic/mongoose"
+    },
+    {
+        "name": "mpath",
+        "uri": "https://github.com/aheckmann/mpath"
+    },
+    {
+        "name": "mquery",
+        "uri": "https://github.com/aheckmann/mquery"
+    },
+    {
+        "name": "ms",
+        "uri": "https://github.com/zeit/ms"
+    },
+    {
+        "name": "ms",
+        "uri": "https://github.com/zeit/ms"
+    },
+    {
+        "name": "normalize-path",
+        "uri": "https://github.com/jonschlinkert/normalize-path"
+    },
+    {
+        "name": "picnic",
+        "uri": "https://github.com/picnicss/picnic"
+    },
+    {
+        "name": "picomatch",
+        "uri": "https://github.com/micromatch/picomatch"
+    },
+    {
+        "name": "process-nextick-args",
+        "uri": "https://github.com/calvinmetcalf/process-nextick-args"
+    },
+    {
+        "name": "query-string@",
+        "uri": "https://github.com/sindresorhus/query-string"
+    },
+    {
+        "name": "readable-stream",
+        "uri": "https://github.com/nodejs/readable-stream"
+    },
+    {
+        "name": "readdirp",
+        "uri": "https://github.com/paulmillr/readdirp"
+    },
+    {
+        "name": "regexp-clone",
+        "uri": "https://github.com/aheckmann/regexp-clone"
+    },
+    {
+        "name": "require_optional",
+        "uri": "https://github.com/christkv/require_optional"
+    },
+    {
+        "name": "resolve-from",
+        "uri": "https://github.com/sindresorhus/resolve-from"
+    },
+    {
+        "name": "safe-buffer",
+        "uri": "https://github.com/feross/safe-buffer"
+    },
+    {
+        "name": "safe-buffer",
+        "uri": "https://github.com/feross/safe-buffer"
+    },
+    {
+        "name": "saslprep",
+        "uri": "https://github.com/reklatsmasters/saslprep"
+    },
+    {
+        "name": "semver",
+        "uri": "https://github.com/npm/node-semver"
+    },
+    {
+        "name": "sift",
+        "uri": "https://github.com/crcn/sift.js"
+    },
+    {
+        "name": "sliced",
+        "uri": "https://github.com/aheckmann/sliced"
+    },
+    {
+        "name": "sparse-bitfield",
+        "uri": "https://github.com/mafintosh/sparse-bitfield"
+    },
+    {
+        "name": "split-on-first",
+        "uri": "https://github.com/sindresorhus/split-on-first"
+    },
+    {
+        "name": "streamsearch",
+        "uri": "http://github.com/mscdex/streamsearch"
+    },
+    {
+        "name": "strict-uri-encode",
+        "uri": "https://github.com/kevva/strict-uri-encode"
+    },
+    {
+        "name": "string_decoder",
+        "uri": "https://github.com/nodejs/string_decoder"
+    },
+    {
+        "name": "to-regex-range",
+        "uri": "https://github.com/micromatch/to-regex-range"
+    },
+    {
+        "name": "uWebSockets.js",
+        "uri": "https://github.com/uNetworking/uWebSockets.js"
+    },
+    {
+        "name": "util-deprecate",
+        "uri": "https://github.com/TooTallNate/util-deprecate"
+    }
+]
