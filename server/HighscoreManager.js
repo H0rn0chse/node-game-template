@@ -1,6 +1,6 @@
 import { DatabaseManager } from "./DatabaseManager.js";
 import { PlayerManager } from "./PlayerManager.js";
-import { publish, registerMessageHandler, send } from "./socket.js";
+import { publish, registerMessageHandler, send, subscribe, unsubscribe } from "./socket.js";
 
 class _HighscoreManager {
     init () {
@@ -60,12 +60,12 @@ class _HighscoreManager {
     }
 
     onSubscribeHighscore (ws, data, playerId) {
-        ws.subscribe("highscore");
+        subscribe(ws, "highscore");
         send(ws, "highscoreUpdate", this.current);
     }
 
     onUnsubscribeHighscore (ws, data, playerId) {
-        ws.unsubscribe("highscore");
+        unsubscribe(ws, "highscore");
     }
 
     onGamePoints (ws, data, playerId) {

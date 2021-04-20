@@ -6,8 +6,9 @@ import { HighscoreManager } from "./server/HighscoreManager.js";
 import { PlayerManager } from "./server/PlayerManager.js";
 
 startServer();
+PlayerManager.init();
+
 DatabaseManager.connect();
 LobbyManager.init();
 GameManager.init();
-PlayerManager.init();
 HighscoreManager.init();

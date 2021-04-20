@@ -1,4 +1,4 @@
-import { registerMessageHandler, send, publish } from "./socket.js";
+import { registerMessageHandler, send, publish, subscribe, unsubscribe } from "./socket.js";
 
 class _LobbyManager {
     constructor () {
@@ -13,7 +13,7 @@ class _LobbyManager {
 
     onSubscribeLobby (ws, data, playerId) {
         send(ws, "lobbyList", Array.from(this.lobbies.keys()));
-        ws.subscribe("lobby");
+        subscribe(ws, "lobby");
     }
 
     onCreateLobby (ws, data, playerId) {
@@ -29,7 +29,7 @@ class _LobbyManager {
     }
 
     onJoinGame (ws, data, playerId) {
-        ws.unsubscribe("lobby");
+        unsubscribe(ws, "lobby");
     }
 
     getLobbyData (name) {

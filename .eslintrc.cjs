@@ -13,7 +13,7 @@ module.exports = {
     },
     rules: {
         indent: ["error", 4, { SwitchCase: 1 }],
-        quotes: ["error", "double"],
+        quotes: ["warn", "double"],
         "space-before-function-paren": ["error", "always"],
         allowEmptyReject: "off",
         "import/extensions": "off",
@@ -28,5 +28,13 @@ module.exports = {
         "no-plusplus": ["error", { allowForLoopAfterthoughts: true }],
         "no-shadow": "warn",
         "max-len": "off",
+        "linebreak-style": "off",
+        "no-useless-constructor": "off",
+        "no-underscore-dangle": "off",
+        "consistent-return": "off",
+        "prefer-arrow-callback": "off",
+        "prefer-destructuring": "warn",
+        "import/no-cycle": "warn",
+        "comma-dangle": "warn",
     },
 };

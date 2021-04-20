@@ -1,6 +1,6 @@
 import { LobbyManager } from "./LobbyManager.js";
 import { PlayerManager } from "./PlayerManager.js";
-import { publish, registerMessageHandler, send } from "./socket.js";
+import { publish, registerMessageHandler, send, subscribe } from "./socket.js";
 
 class _GameManager {
     init () {
@@ -20,7 +20,7 @@ class _GameManager {
 
     onJoinGame (ws, data, playerId) {
         const lobbyName = data.name;
-        ws.subscribe(lobbyName);
+        subscribe(ws, lobbyName);
         PlayerManager.setProperty(playerId, "game", lobbyName);
         const lobbyData = LobbyManager.getLobbyData(lobbyName);
 
