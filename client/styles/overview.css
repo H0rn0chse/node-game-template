@@ -1,0 +1,86 @@
+#overview {
+    background-color: var(--overview-bg);
+    height: 100%;
+}
+
+.overviewColumn {
+    width: 50%;
+    min-width: 15em;
+    height: calc(100vh - 5em);
+
+    display: grid;
+    grid-template-rows: 3em auto 3em;
+    grid-template-areas:
+    "overviewHeader"
+    "overviewContent"
+    "overviewFooter";
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.overviewHeader {
+    grid-area: overviewHeader;
+}
+
+.overviewContent {
+    grid-area: overviewContent;
+    padding-left: 0.5em;
+}
+
+.overviewFooter {
+    grid-area: overviewFooter;
+}
+
+/*================= highscore column ======================*/
+
+#highscore {
+    position: relative;
+}
+
+.highscoreEntry {
+    margin: 0em;
+    position: relative;
+}
+
+.highscorePoints {
+    position: absolute;
+    right: 5em;
+}
+
+.highscorePlacement {
+    padding: 0;
+    margin-right: 1.5em;
+}
+
+/*================= overview column ======================*/
+
+.overviewRow {
+    border: solid var(--overview-border);
+    border-radius: 1em;
+    padding: 0.2em;
+    margin: 0.1em 6em;
+    margin-left: 0;
+    justify-content: space-between;
+}
+
+.overviewRow > *{
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
+
+#createOverviewRow {
+    justify-content: center;
+}
+
+#createOverviewRow > * {
+    margin: 1em;
+}
+
+#overviewName {
+    width: 10em;
+}
+
+#overviewUsername {
+    width: 10em;
+    margin-left: 4em;
+}

@@ -4,8 +4,10 @@
     --scroll-track: #F5F5F5;
     --scroll-thumb: #555;
 
+    --overview-bg: #90ee90; /*lightgreen*/;
+    --overview-border: #137C13;
+
     --lobby-bg: #90ee90; /*lightgreen*/;
-    --lobby-border: #137C13;
 
     --game-bg: #78A1BB;
     --game-area-bg: #e0ffff; /*lightcyan*/;

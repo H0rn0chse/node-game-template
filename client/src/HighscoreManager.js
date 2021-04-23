@@ -4,7 +4,6 @@ import { addEventListener, removeEventListener, send } from "./socket.js";
 class _HighscoreManager {
     constructor () {
         this.list = document.querySelector("#highscoreList");
-        this.userName = document.querySelector("#userName input");
 
         this.entries = [];
         for (let i = 0; i < 10; i++) {
@@ -13,9 +12,7 @@ class _HighscoreManager {
             this.entries.push(entry);
         }
 
-        this.userName.addEventListener("focusout", (evt) => {
-            send("userNameUpdate", { name: this.userName.value });
-        });
+        this.listening = false;
     }
 
     onHighscoreUpdate (list) {
@@ -29,12 +26,15 @@ class _HighscoreManager {
     stopListen () {
         removeEventListener("highscoreUpdate", this.onHighscoreUpdate);
         send("unsubscribeHighscore");
+        this.listening = false;
     }
 
     startListen () {
         addEventListener("highscoreUpdate", this.onHighscoreUpdate, this);
         send("subscribeHighscore");
+        this.listening = true;
     }
 }
 
 export const HighscoreManager = new _HighscoreManager();
+globalThis.HighscoreManager = HighscoreManager;

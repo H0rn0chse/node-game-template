@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="./styles/main.css">
     <script type="module">
         import { openSocket } from "./src/socket.js";
-        import { LobbyManager } from "./src/LobbyManager.js";
+        import { ViewManager } from "./src/ViewManager.js";
 
         "use strict";
 
         openSocket().then(() => {
-            LobbyManager.joinLobby();
+            ViewManager.showOverview();
         });
 
         const acknowledgements = document.querySelector("#acknowledgements");
@@ -32,26 +32,32 @@
         <div id="header" class="header">
             <h1>This is a Node.Js Game Template</h1>
         </div>
-        <div id="lobby" class="mainContent flexRow">
-            <div class="lobbyColumn">
-                <h2 class="lobbyHeader">Running Games</h2>
-                <div id="lobbyList" class="flexColumn lobbyContent scrollContainer"></div>
-                <div id="createLobbyRow" class="flexRow lobbyFooter">
-                    Create your own Game <input id="lobbyName" type="text" placeholder="Name" maxlength="32">
-                    <button id="createLobby">Create</button>
+        <div id="overview" class="mainContent flexRow">
+            <div class="overviewColumn">
+                <div class="flexRow">
+                    <h2 class="overviewHeader">Open Lobbies</h2>
+                    <input id="overviewUsername" type="text" placeholder="Username">
+                </div>
+                <div id="overviewList" class="flexColumn overviewContent scrollContainer"></div>
+                <div id="createOverviewRow" class="flexRow overviewFooter">
+                    Create your own Game <input id="overviewName" type="text" placeholder="Name" maxlength="32">
+                    <button id="createOverview">Create</button>
                 </div>
             </div>
-            <div id="highscore" class="lobbyColumn">
-                <h2 class="lobbyHeader">Highscores</h2>
-                <div id="highscoreList" class="flexColumn lobbyContent scrollContainer"></div>
-                <div id="userName" class="flexRow">
-                    <div>Your Name:</div>
-                    <label><input type="text" value="unknown" maxlength="20"></label>
-                </div>
+            <div id="highscore" class="overviewColumn flexColumn">
+                <h2 class="overviewHeader">Highscores</h2>
+                <div id="highscoreList" class="flexColumn overviewContent scrollContainer"></div>
             </div>
         </div>
+        <div id="lobby" class="mainContent" style="display: none;">
+            <div class="flexRow">
+                <h2 id="lobbyName">Lobby Title</h2>
+                <input id="lobbyUsername" type="text" placeholder="Username">
+            </div>
+            <button id="lobbyStart">start Game</button>
+            <div id="lobbyList"></div>
+        </div>
         <div id="game" class="mainContent flexColumn" style="display: none;">
-            <h2 id="back">&lt; Back</h2>
             <div id="gameArea">
                 <div id="cursor" class="cursor">
                     <div class="cursorName flexColumn">

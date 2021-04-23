@@ -1,10 +1,10 @@
 import "../styles/main.css";
 
 import { openSocket } from "./socket.js";
-import { LobbyManager } from "./LobbyManager.js";
+import { ViewManager } from "./ViewManager.js";
 
 openSocket().then(() => {
-    LobbyManager.joinLobby();
+    ViewManager.showOverview();
 });
 
 const acknowledgements = document.querySelector("#acknowledgements");

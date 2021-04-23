@@ -37,7 +37,9 @@ class _PlayerManager {
 
     removeProperty (id, key) {
         const data = this.player.get(id);
-        delete data[key];
+        if (data) {
+            delete data[key];
+        }
     }
 
     removePlayer (id) {

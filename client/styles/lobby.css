@@ -1,45 +1,15 @@
 #lobby {
     background-color: var(--lobby-bg);
     height: 100%;
-}
-
-.lobbyColumn {
-    width: 50%;
-    min-width: 15em;
-    height: calc(100vh - 5em);
-
-    display: grid;
-    grid-template-rows: 3em auto 3em;
-    grid-template-areas:
-    "lobbyHeader"
-    "lobbyContent"
-    "lobbyFooter";
     padding-left: 2em;
     padding-right: 2em;
 }
 
-.lobbyHeader {
-    grid-area: lobbyHeader;
-}
-
-.lobbyContent {
-    grid-area: lobbyContent;
-    padding-left: 0.5em;
-}
-
-.lobbyFooter {
-    grid-area: lobbyFooter;
-}
-
-/*================= lobby column ======================*/
-
 .lobbyRow {
-    border: solid var(--lobby-border);
-    border-radius: 1em;
     padding: 0.2em;
     margin: 0.1em 6em;
     margin-left: 0;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .lobbyRow > *{
@@ -47,45 +17,7 @@
     margin-right: 0.5em;
 }
 
-#createLobbyRow {
-    justify-content: center;
-}
-
-#createLobbyRow > * {
-    margin: 1em;
-}
-
-#lobbyName {
+#lobbyUsername {
     width: 10em;
-}
-
-/*================= highscore column ======================*/
-
-#highscore {
-    position: relative;
-}
-
-.highscoreEntry {
-    margin: 0em;
-    position: relative;
-}
-
-.highscorePoints {
-    position: absolute;
-    right: 5em;
-}
-
-.highscorePlacement {
-    padding: 0;
-    margin-right: 1.5em;
-}
-
-#userName {
-    position: absolute;
-    top: 1em;
-    right: 2em;
-}
-
-#userName > * {
-    margin-left: 0.5em;
+    margin-left: 4em;
 }

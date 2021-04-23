@@ -4,6 +4,7 @@
 
 /*areas*/
 @import "header.css";
+@import "overview.css";
 @import "lobby.css";
 @import "game.css";
 @import "logoff.css";

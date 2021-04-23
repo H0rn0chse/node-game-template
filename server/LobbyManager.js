@@ -1,35 +1,31 @@
-import { registerMessageHandler, send, publish, subscribe, unsubscribe } from "./socket.js";
-
 class _LobbyManager {
     constructor () {
         this.lobbies = new Map();
     }
 
-    init () {
-        registerMessageHandler("subscribeLobby", this.onSubscribeLobby, this);
-        registerMessageHandler("createLobby", this.onCreateLobby, this);
-        registerMessageHandler("joinGame", this.onJoinGame, this);
-    }
-
-    onSubscribeLobby (ws, data, playerId) {
-        send(ws, "lobbyList", Array.from(this.lobbies.keys()));
-        subscribe(ws, "lobby");
-    }
-
-    onCreateLobby (ws, data, playerId) {
-        const { name } = data;
-        if (!this.lobbies.has(name)) {
-            const lobbyData = {
-                name,
-            };
-
-            this.lobbies.set(name, lobbyData);
-            publish("lobby", "lobbyAdded", lobbyData);
+    createLobby (name) {
+        if (this.lobbies.has(name)) {
+            return;
         }
+        const lobbyData = {
+            name,
+            running: false,
+            player: {},
+        };
+
+        this.lobbies.set(name, lobbyData);
+        return lobbyData;
     }
 
-    onJoinGame (ws, data, playerId) {
-        unsubscribe(ws, "lobby");
+    getLobbyNames () {
+        const result = [];
+        this.lobbies.forEach((lobbyData, lobbyName) => {
+            if (!lobbyData.running) {
+                result.push(lobbyName);
+            }
+        });
+
+        return result;
     }
 
     getLobbyData (name) {
@@ -38,9 +34,6 @@ class _LobbyManager {
 
     removeLobby (name) {
         this.lobbies.delete(name);
-        publish("lobby", "lobbyRemoved", {
-            name,
-        });
     }
 }
 
