@@ -22,10 +22,6 @@ class _OverviewManager {
 
         // initial state
         this.usernameInput.value = getName();
-        ready().then(() => {
-            this.startListen();
-            HighscoreManager.startListen();
-        });
     }
 
     show () {

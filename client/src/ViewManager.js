@@ -5,8 +5,9 @@ import { HighscoreManager } from "./HighscoreManager.js";
 
 class _ViewManager {
     constructor () {
+        // these intial states are handled in each manager
         this.hidden = {
-            OverviewManager: false,
+            OverviewManager: true,
             GameManager: true,
             LobbyManager: true,
         };

@@ -10,12 +10,7 @@ class _GameManager {
         this.container = document.querySelector("#game");
         this.points = document.querySelector("#gamePoints");
 
-        this.instance = new GameInstance(this.container, this);
-
-        // initial state
-        ready().then(() => {
-            addEventListener("joinGame", this.onJoinGame, this);
-        });
+        this.instance = null;
 
         this.gameHandler = [
             { channel: "playerRemoved", handler: this.onPlayerRemoved },
@@ -23,6 +18,11 @@ class _GameManager {
             { channel: "playerUpdate", handler: this.onPlayerUpdate },
 
         ];
+
+        // initial state
+        ready().then(() => {
+            addEventListener("joinGame", this.onJoinGame, this);
+        });
     }
 
     show () {
