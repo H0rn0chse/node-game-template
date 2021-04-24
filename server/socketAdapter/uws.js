@@ -59,7 +59,7 @@ export class Adapter extends AdapterBase {
     startServer () {
         try {
             this.app.ws("/ws", {
-                idleTimeout: 55,
+                idleTimeout: this.idleTimeout,
                 open: this.handleOpen.bind(this),
 
                 message: this.handleMessage.bind(this),

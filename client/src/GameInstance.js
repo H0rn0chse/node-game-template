@@ -1,4 +1,4 @@
-import { PlayerPuppet } from "./gameObjects/PlayerPuppet.js";
+import { PlayerPuppet } from "./domElements/PlayerPuppet.js";
 
 export class GameInstance {
     constructor (container, controller) {

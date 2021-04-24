@@ -8,6 +8,8 @@ export class AdapterBase {
         this.local = local;
         this.publicPath = publicPath;
 
+        this.idleTimeout = 55;
+
         this.messageHandler = new Map();
     }
 

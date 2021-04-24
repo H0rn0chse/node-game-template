@@ -1,4 +1,4 @@
-import { HighscoreEntry } from "./HighscoreEntry.js";
+import { HighscoreEntry } from "./domElements/HighscoreEntry.js";
 import { addEventListener, removeEventListener, send } from "./socket.js";
 
 class _HighscoreManager {
