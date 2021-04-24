@@ -1,15 +1,12 @@
-import path from "path";
-import { __root } from "../globals.js";
-
 import { PlayerManager } from "../PlayerManager.js";
 
 export class AdapterBase {
-    constructor () {
-        this.port = parseInt(process.env.PORT, 10) || 8080;
-        this.host = process.env.PORT ? "0.0.0.0" : "localhost";
+    constructor (port, host, local, publicPath) {
+        this.port = port;
+        this.host = host;
 
-        this.local = !!process.env.npm_config_debug;
-        this.publicPath = path.join(__root, "/client");
+        this.local = local;
+        this.publicPath = publicPath;
 
         this.messageHandler = new Map();
     }

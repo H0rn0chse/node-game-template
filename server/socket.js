@@ -1,6 +1,16 @@
+import path from "path";
+import { __root } from "./globals.js";
+
 import { Adapter } from "./socketAdapter/ws.js";
 
-const adapter = new Adapter();
+const port = parseInt(process.env.PORT, 10) || 8080;
+const host = process.env.PORT ? "0.0.0.0" : "localhost";
+const local = !!process.env.npm_config_debug;
+
+const publicPath = path.join(__root, "/client");
+const indexHtml = !this.local ? "/dist/index.html" : "index-local.html";
+
+const adapter = new Adapter(port, host, local, publicPath, indexHtml);
 
 export function registerMessageHandler (channel, callback, scope) {
     return adapter.registerMessageHandler(channel, callback, scope);

@@ -13,8 +13,8 @@ export class Timer {
         this.callback = callback;
         this.timer = null;
 
-        this.startTime = 0;
-        this.resetTime = 0;
+        this.startTime = Date.now();
+        this.resetTime = Date.now();
         this.wasReset = false;
     }
 

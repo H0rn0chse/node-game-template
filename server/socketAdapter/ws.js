@@ -6,10 +6,10 @@ import { AdapterBase } from "./AdapterBase.js";
 import { TopicManager } from "./TopicManager.js";
 
 export class Adapter extends AdapterBase {
-    constructor () {
-        super();
+    constructor (port, host, local, publicPath, indexHtml) {
+        super(port, host, local, publicPath);
 
-        this.indexHtml = !this.local ? "/dist/index.html" : "index-local.html";
+        this.indexHtml = indexHtml;
 
         this.app = express();
         this.httpServer = createServer(this.app);

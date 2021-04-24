@@ -4,11 +4,11 @@ import { App } from "@sifrr/server";
 import { AdapterBase } from "./AdapterBase.js";
 
 export class Adapter extends AdapterBase {
-    constructor () {
-        super();
+    constructor (port, host, local, publicPath, indexHtml) {
+        super(port, host, local, publicPath);
 
         this.app = new App();
-        this.indexHtml = path.join(this.publicPath, !this.local ? "dist/index.html" : "index-local.html");
+        this.indexHtml = path.join(this.publicPath, indexHtml);
     }
 
     parseMessage (data) {
