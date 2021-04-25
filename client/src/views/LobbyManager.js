@@ -92,9 +92,8 @@ class _LobbyManager {
 
     onJoinLobby (data) {
         this.title.innerText = data.name;
-        if (getId() !== data.host) {
-            this.startButton.disabled = true;
-        }
+        this.startButton.disabled = getId() !== data.host;
+
         Object.values(data.player).forEach((playerData) => {
             const isHost = playerData.id === data.host;
             this.onPlayerAdded(playerData, isHost);

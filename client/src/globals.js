@@ -1,7 +1,11 @@
 export const { Phaser } = globalThis;
 
+export const BLOCK_SIZE = 32;
+export const BLOCKS_X = 25;
+export const BLOCKS_Y = 16;
+
 export const SCENE_WIDTH = 800;
-export const SCENE_HEIGHT = 500;
+export const SCENE_HEIGHT = 512;
 
 export const PLAYER_SKINS = {
     bear: { id: "bear", name: "Bear" },
