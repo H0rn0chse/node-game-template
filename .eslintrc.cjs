@@ -36,5 +36,6 @@ module.exports = {
         "prefer-destructuring": "warn",
         "import/no-cycle": "warn",
         "comma-dangle": "warn",
+        "arrow-body-style": ["warn", "always"],
     },
 };

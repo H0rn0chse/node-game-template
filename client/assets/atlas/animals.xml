@@ -1,0 +1,32 @@
+<TextureAtlas imagePath="animals.png">
+	<SubTexture name="bear" x="184" y="162" width="154" height="132"/>
+	<SubTexture name="buffalo" x="0" y="487" width="183" height="152"/>
+	<SubTexture name="chick" x="615" y="304" width="129" height="128"/>
+	<SubTexture name="chicken" x="740" y="141" width="128" height="145"/>
+	<SubTexture name="cow" x="337" y="294" width="145" height="128"/>
+	<SubTexture name="crocodile" x="486" y="698" width="129" height="128"/>
+	<SubTexture name="dog" x="482" y="272" width="129" height="157"/>
+	<SubTexture name="duck" x="615" y="432" width="129" height="128"/>
+	<SubTexture name="elephant" x="0" y="333" width="183" height="154"/>
+	<SubTexture name="frog" x="478" y="0" width="130" height="144"/>
+	<SubTexture name="giraffe" x="183" y="333" width="154" height="162"/>
+	<SubTexture name="goat" x="0" y="162" width="184" height="171"/>
+	<SubTexture name="gorilla" x="611" y="176" width="129" height="128"/>
+	<SubTexture name="hippo" x="183" y="495" width="154" height="128"/>
+	<SubTexture name="horse" x="486" y="429" width="129" height="141"/>
+	<SubTexture name="monkey" x="174" y="639" width="174" height="128"/>
+	<SubTexture name="moose" x="0" y="0" width="269" height="162"/>
+	<SubTexture name="narwhal" x="348" y="550" width="138" height="155"/>
+	<SubTexture name="owl" x="743" y="560" width="128" height="128"/>
+	<SubTexture name="panda" x="0" y="639" width="174" height="128"/>
+	<SubTexture name="parrot" x="478" y="144" width="129" height="128"/>
+	<SubTexture name="penguin" x="338" y="128" width="140" height="128"/>
+	<SubTexture name="pig" x="337" y="422" width="144" height="128"/>
+	<SubTexture name="rabbit" x="608" y="0" width="129" height="176"/>
+	<SubTexture name="rhino" x="269" y="0" width="154" height="128"/>
+	<SubTexture name="sloth" x="486" y="570" width="129" height="128"/>
+	<SubTexture name="snake" x="615" y="698" width="128" height="142"/>
+	<SubTexture name="walrus" x="615" y="560" width="128" height="138"/>
+	<SubTexture name="whale" x="348" y="705" width="138" height="154"/>
+	<SubTexture name="zebra" x="737" y="0" width="128" height="141"/>
+</TextureAtlas>
