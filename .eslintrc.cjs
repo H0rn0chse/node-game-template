@@ -33,7 +33,7 @@ module.exports = {
         "no-underscore-dangle": "off",
         "consistent-return": "off",
         "prefer-arrow-callback": "off",
-        "prefer-destructuring": "warn",
+        "prefer-destructuring": ["warn", { object: true, array: false }],
         "import/no-cycle": "warn",
         "comma-dangle": "warn",
         "arrow-body-style": ["warn", "always"],

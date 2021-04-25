@@ -12,7 +12,11 @@ export class MainScene extends Phaser.Scene {
         this.load.atlasXML("animals", "assets/atlas/animals.png", "assets/atlas/animals.xml");
         this.load.image("background", "assets/background.png");
 
+        this.load.image("dummy", "/assets/tileset/dummy.png");
+        this.load.image("goal", "/assets/tileset/goal.png");
+
         this.load.image("cake", "/assets/tileset/cake.png");
+        this.load.image("spikes", "/assets/tileset/spikes.png");
         this.load.tilemapTiledJSON("level_0", "assets/tilemap/level_0.json");
     }
 
@@ -27,9 +31,19 @@ export class MainScene extends Phaser.Scene {
 
         const skinList = Object.values(PLAYER_SKINS);
         const skinIndex = Math.floor(Math.random() * skinList.length);
-        this.player = this.add.player(skinList[skinIndex].id, 100, 100);
+        this.player = this.add.player(skinList[skinIndex].id, TileMaps.spawnPoint.x, TileMaps.spawnPoint.y);
 
+        const goal = this.add.goal(TileMaps.endPoint.x, TileMaps.endPoint.y);
+
+        // ================== collision ==================
         this.physics.add.collider(this.player, TileMaps.terrain);
+        this.physics.add.collider(goal, TileMaps.terrain);
+        this.physics.add.overlap(this.player, TileMaps.spikes, (player, tile) => {
+            if (tile.collides) {
+                player.die();
+            }
+        });
+        this.physics.add.overlap(this.player, goal, goal.onPlayerOverlap);
     }
 
     update (time, delta) {

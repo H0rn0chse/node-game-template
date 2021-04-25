@@ -35,4 +35,8 @@ export class Player extends Phaser.Physics.Arcade.Image {
 
         GameManager.updatePlayer(pos);
     }
+
+    die () {
+        console.log("The player died");
+    }
 }
