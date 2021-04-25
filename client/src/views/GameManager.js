@@ -1,6 +1,7 @@
 import { GameInstance } from "../GameInstance.js";
 import { ViewManager } from "../ViewManager.js";
 import { getId, send, addEventListener, removeEventListener, ready } from "../socket.js";
+import { GameBus } from "../EventBus.js";
 
 class _GameManager {
     constructor () {
@@ -52,7 +53,7 @@ class _GameManager {
             return;
         }
 
-        this.instance.updatePlayer(data.id, data);
+        GameBus.emit("playerUpdated", data.id, data);
     }
 
     onJoinGame (data) {
@@ -65,12 +66,12 @@ class _GameManager {
                 return;
             }
 
-            this.instance.updatePlayer(playerData.id, playerData);
+            GameBus.emit("playerUpdated", playerData.id, playerData);
         });
     }
 
     onPlayerRemoved (data) {
-        this.instance.removePlayer(data.id);
+        GameBus.emit("playerRemoved", data.id);
     }
 
     onCloseGame (data) {

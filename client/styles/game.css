@@ -5,6 +5,10 @@
     position: relative;
 }
 
+#game > canvas {
+    position: relative;
+}
+
 #gameArea {
     width: 520px;
     height: 520px;
