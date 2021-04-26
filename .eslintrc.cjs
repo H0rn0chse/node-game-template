@@ -37,5 +37,6 @@ module.exports = {
         "import/no-cycle": "warn",
         "comma-dangle": "warn",
         "arrow-body-style": ["warn", "always"],
+        "no-warning-comments": "error",
     },
 };

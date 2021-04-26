@@ -1,10 +1,12 @@
 import { Phaser } from "../globals.js";
 
 export class Coin extends Phaser.Physics.Arcade.Sprite {
-    constructor (scene, x, y) {
-        const { world } = scene.physics;
+    constructor (scene, x, y, coinId) {
         super(scene, x, y, "coin", "coin_0");
 
+        this.coinId = coinId;
+
+        const { world } = scene.physics;
         world.enable([this], 1);
 
         scene.anims.create({
@@ -22,5 +24,15 @@ export class Coin extends Phaser.Physics.Arcade.Sprite {
         });
 
         this.anims.play("coinRotate");
+    }
+
+    hide () {
+        this.setVisible(false);
+        this.body.enable = false;
+    }
+
+    show () {
+        this.setVisible(true);
+        this.body.enable = true;
     }
 }

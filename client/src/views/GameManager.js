@@ -2,6 +2,8 @@ import { GameInstance } from "../GameInstance.js";
 import { ViewManager } from "../ViewManager.js";
 import { getId, send, addEventListener, removeEventListener, ready } from "../socket.js";
 import { GameBus } from "../EventBus.js";
+import { PhaseManager } from "../PhaseManager.js";
+import { PHASES } from "../globals.js";
 
 class _GameManager {
     constructor () {
@@ -11,14 +13,27 @@ class _GameManager {
         this.container = document.querySelector("#game");
         this.points = document.querySelector("#gamePoints");
 
+        // Results
+        this.results = document.querySelector("#gameResults");
+        this.resultsList = document.querySelector("#gameResultsList");
+        this.resultsNextButton = document.querySelector("#gameResultsNext");
+        this.results.style.display = "none";
+        this.resultsNextButton.addEventListener("click", (evt) => {
+            this.nextGame();
+        });
+
         this.instance = null;
 
         this.gameHandler = [
             { channel: "playerRemoved", handler: this.onPlayerRemoved },
             { channel: "closeGame", handler: this.onCloseGame },
             { channel: "playerUpdate", handler: this.onPlayerUpdate },
-
+            { channel: "resetRun", handler: this.onResetRun },
         ];
+
+        this.runEnded = true;
+        PhaseManager.listen(PHASES.Results, this.onResults.bind(this));
+        PhaseManager.listen(PHASES.PreRun, this.onPreRun.bind(this));
 
         // initial state
         ready().then(() => {
@@ -26,19 +41,16 @@ class _GameManager {
         });
     }
 
-    show () {
-        this.startListen();
-        this.container.style.display = "";
-        this.instance = new GameInstance(this.container, this);
-    }
+    // ========================================== Game logic & handler =============================================
 
-    hide () {
-        this.ingame = false;
-        this.stopListen();
-        this.container.style.display = "none";
-
-        this.instance.destroy();
-        this.instance = null;
+    endRun (status) {
+        if (!this.runEnded) {
+            const data = {
+                status,
+            };
+            send("runEnd", data);
+            this.runEnded = true;
+        }
     }
 
     updatePlayer (pos) {
@@ -47,6 +59,31 @@ class _GameManager {
         };
         send("playerUpdate", data);
     }
+
+    nextGame () {
+        send("setPhase", { phase: PHASES.PreRun });
+    }
+
+    collectCoin (coinId) {
+        console.log("collectingCoin", coinId);
+    }
+
+    // ========================================== Phase handler =============================================
+
+    onResults (data) {
+        this.resultsList.innerHTML = `<span>${JSON.stringify(data, null, 4)}</span>`;
+
+        this.results.style.display = "";
+
+        this.resultsNextButton.disabled = data.host !== getId();
+    }
+
+    onPreRun (data) {
+        this.results.style.display = "none";
+        this.instance.resetMainScene();
+    }
+
+    // ========================================== Websocket handler =============================================
 
     onPlayerUpdate (data) {
         if (data.id === getId()) {
@@ -77,6 +114,27 @@ class _GameManager {
     onCloseGame (data) {
         console.log("host left the game", data);
         ViewManager.showOverview();
+    }
+
+    onResetRun () {
+        this.runEnded = false;
+    }
+
+    // ========================================== Basic Manager Interface =============================================
+
+    show () {
+        this.startListen();
+        this.container.style.display = "";
+        this.instance = new GameInstance(this.container, this);
+    }
+
+    hide () {
+        this.ingame = false;
+        this.stopListen();
+        this.container.style.display = "none";
+
+        this.instance.destroy();
+        this.instance = null;
     }
 
     stopListen () {

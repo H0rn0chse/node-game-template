@@ -31,6 +31,10 @@ export class GameInstance {
         this.game = new Phaser.Game(config);
     }
 
+    resetMainScene () {
+        this.game.scene.getScenes()[0]?.resetScene();
+    }
+
     destroy () {
         this.game.destroy(true);
     }

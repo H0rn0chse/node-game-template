@@ -1,4 +1,5 @@
-import { Phaser } from "../globals.js";
+import { Phaser, PLAYER_STATUS } from "../globals.js";
+import { GameManager } from "../views/GameManager.js";
 
 export class Goal extends Phaser.Physics.Arcade.Image {
     constructor (scene, x, y) {
@@ -15,6 +16,6 @@ export class Goal extends Phaser.Physics.Arcade.Image {
     }
 
     onPlayerOverlap () {
-        console.log("game end");
+        GameManager.endRun(PLAYER_STATUS.Alive);
     }
 }

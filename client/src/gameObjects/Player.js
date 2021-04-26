@@ -1,5 +1,6 @@
 import { GameManager } from "../views/GameManager.js";
-import { Phaser } from "../globals.js";
+import { PhaseManager } from "../PhaseManager.js";
+import { Phaser, PHASES, PLAYER_STATUS } from "../globals.js";
 
 export class Player extends Phaser.Physics.Arcade.Image {
     constructor (scene, name, x, y) {
@@ -12,9 +13,25 @@ export class Player extends Phaser.Physics.Arcade.Image {
         this.setCollideWorldBounds(true);
 
         this.setScale(0.25);
+
+        this.isDead = false;
     }
 
     update (time, delta) {
+        const pos = {
+            x: this.x,
+            y: this.y,
+        };
+
+        GameManager.updatePlayer(pos);
+
+        if (this.isDead || !PhaseManager.isPhase(PHASES.Run) || GameManager.runEnded) {
+            if (!this.isDead) {
+                this.setVelocityX(0);
+            }
+            return;
+        }
+
         const cursor = this.scene.input.keyboard.createCursorKeys();
 
         if (cursor.left.isDown) {
@@ -28,16 +45,16 @@ export class Player extends Phaser.Physics.Arcade.Image {
         if (cursor.up.isDown && this.body.onFloor()) {
             this.body.setVelocityY(-500);
         }
-
-        const pos = {
-            x: this.x,
-            y: this.y,
-        };
-
-        GameManager.updatePlayer(pos);
     }
 
     die () {
-        console.log("The player died");
+        this.isDead = true;
+        GameManager.endRun(PLAYER_STATUS.Dead);
+    }
+
+    resetPlayer (point) {
+        this.isDead = false;
+        this.setVelocity(0);
+        this.setPosition(point.x, point.y);
     }
 }

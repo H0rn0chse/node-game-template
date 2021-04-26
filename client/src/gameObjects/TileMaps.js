@@ -31,6 +31,7 @@ export class _TileMaps {
 
         this.coins = this.map.getObjectLayer("Coins").objects.map((coin) => {
             return {
+                coinId: coin.id,
                 x: coin.x,
                 y: coin.y - 32,
             };

@@ -7,6 +7,25 @@ export const BLOCKS_Y = 16;
 export const SCENE_WIDTH = 800;
 export const SCENE_HEIGHT = 512;
 
+export const PLAYER_STATUS = {
+    Alive: "Alive",
+    Dead: "Dead",
+};
+
+export const PHASES = {
+    Initial: "Intial",
+    PreRun: "PreRun",
+    Run: "Run",
+    Results: "Results",
+};
+
+export const PHASE_TEXTS = {
+    Initial: "Intial Setup",
+    PreRun: "Countdown",
+    Run: "Run!",
+    Results: "Results",
+};
+
 export const PLAYER_SKINS = {
     bear: { id: "bear", name: "Bear" },
     buffalo: { id: "buffalo", name: "Buffalo" },

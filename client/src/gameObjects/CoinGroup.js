@@ -1,5 +1,7 @@
+import { GameBus } from "../EventBus.js";
 import { Phaser } from "../globals.js";
 import { Coin } from "./Coin.js";
+import { GameManager } from "../views/GameManager.js";
 
 export class CoinGroup extends Phaser.Physics.Arcade.StaticGroup {
     constructor (scene, coins = []) {
@@ -7,12 +9,35 @@ export class CoinGroup extends Phaser.Physics.Arcade.StaticGroup {
         super(world, scene);
 
         coins.forEach((coinData) => {
-            const coin = new Coin(scene, coinData.x, coinData.y);
+            const coin = new Coin(scene, coinData.x, coinData.y, coinData.coinId);
             this.add(coin, true);
+            coin.setVisible(true);
+        });
+
+        GameBus.on("hideCoin", this.onHideCoin, this);
+    }
+
+    collectCoin (player, coin) {
+        GameManager.collectCoin(coin.coinId);
+        coin.hide();
+    }
+
+    onHideCoin (data) {
+        const coin = this.getMatching("coinId", data.coinId)[0];
+        if (coin) {
+            coin.hide();
+        }
+    }
+
+    resetCoins () {
+        const hiddenCoins = this.getMatching("visible", false);
+        hiddenCoins.forEach((coin) => {
+            coin.show();
         });
     }
 
-    collectCoin () {
-        console.log("collected Coin");
+    destroy (...args) {
+        GameBus.off("hideCoin", this.onHideCoin, this);
+        super.destroy(...args);
     }
 }

@@ -33,7 +33,7 @@ export class MainScene extends Phaser.Scene {
         TileMaps.init(this, levelId);
         this.add.existing(new PuppetGroup(this));
 
-        const coinGroup = this.add.existing(new CoinGroup(this, TileMaps.coins));
+        this.coinGroup = this.add.existing(new CoinGroup(this, TileMaps.coins));
         const sawGroup = this.add.existing(new SawGroup(this, TileMaps.saws));
 
         const skinList = Object.values(PLAYER_SKINS);
@@ -42,7 +42,7 @@ export class MainScene extends Phaser.Scene {
 
         const goal = this.add.goal(TileMaps.endPoint.x, TileMaps.endPoint.y);
 
-        // ================== collision ==================
+        // ================== collision / overlap ==================
         this.physics.add.collider(this.player, TileMaps.terrain);
         this.physics.add.collider(goal, TileMaps.terrain);
         this.physics.add.overlap(this.player, TileMaps.spikes, (player, tile) => {
@@ -52,7 +52,12 @@ export class MainScene extends Phaser.Scene {
         });
         this.physics.add.overlap(this.player, goal, goal.onPlayerOverlap);
         this.physics.add.overlap(this.player, sawGroup, this.player.die);
-        this.physics.add.overlap(this.player, coinGroup, coinGroup.collectCoin.bind(this));
+        this.physics.add.overlap(this.player, this.coinGroup, this.coinGroup.collectCoin.bind(this));
+    }
+
+    resetScene () {
+        this.player.resetPlayer(TileMaps.spawnPoint);
+        this.coinGroup.resetCoins();
     }
 
     update (time, delta) {
