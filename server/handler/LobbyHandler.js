@@ -39,6 +39,19 @@ class _LobbyHandler {
             return;
         }
 
+        // check maximum
+        if (lobbyData.maxSize !== -1) {
+            const currentSize = Object.keys(lobbyData.player).length;
+            if (lobbyData.maxSize === currentSize) {
+                // lobby is full
+                return;
+            }
+            if (lobbyData.maxSize === currentSize + 1) {
+                // lobby is going to be full
+                OverviewHandler.onLobbyRemove(lobbyData);
+            }
+        }
+
         // save player to lobby
         const playerData = {
             id: playerId,
@@ -81,6 +94,10 @@ class _LobbyHandler {
 
         const topic = `lobby-${lobbyId}`;
         publish(topic, "playerRemoved", { id: data.id });
+
+        if (lobbyData.maxSize) {
+            OverviewHandler.onLobbyAdded(lobbyData);
+        }
     }
 
     onLeaveLobby (ws, data, playerId) {
@@ -107,6 +124,9 @@ class _LobbyHandler {
 
         if (lobbyData.host !== playerId) {
             publish(topic, "playerRemoved", { id: playerId });
+            if (lobbyData.maxSize) {
+                OverviewHandler.onLobbyAdded(lobbyData);
+            }
         } else {
             publish(topic, "closeLobby", { id: lobbyId });
             LobbyManager.removeLobby(lobbyId);

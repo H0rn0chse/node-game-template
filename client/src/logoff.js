@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { ping } from "./socket.js";
 import { Timer } from "./Timer.js";
 

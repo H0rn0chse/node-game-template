@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-cycle
 import { registerMessageHandler } from "./socket.js";
 
 class _PlayerManager {

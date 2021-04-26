@@ -9,6 +9,8 @@ class _LobbyManager {
         const lobbyData = {
             id: this.count,
             running: false,
+            // null for infinite
+            maxSize: null,
             player: {},
             run: {},
             items: {},
@@ -22,7 +24,10 @@ class _LobbyManager {
     getLobbyNames () {
         const result = [];
         this.lobbies.forEach((lobbyData, lobbyId) => {
-            if (!lobbyData.running) {
+            const lobbySize = Object.keys(lobbyData.player).length;
+            const isFull = lobbyData.maxSize && lobbyData.maxSize <= lobbySize;
+
+            if (!lobbyData.running && !isFull) {
                 const data = {
                     id: lobbyId,
                     name: lobbyData.name,

@@ -1,10 +1,11 @@
 import { addEventListener, removeEventListener, send, ready, getName, setName } from "../socket.js";
 import { HighscoreManager } from "../HighscoreManager.js";
+import { OverviewEntry } from "../domElements/OverviewEntry.js";
 
 class _OverviewManager {
     constructor () {
         this.container = document.querySelector("#overview");
-        this.list = document.querySelector("#overviewList");
+        this.listNode = document.querySelector("#overviewList");
         this.name = document.querySelector("#overviewName");
 
         const createButton = document.querySelector("#createOverview");
@@ -19,6 +20,8 @@ class _OverviewManager {
                 send("userNameUpdate", { name: this.usernameInput.value });
             }
         });
+
+        this.lobbyList = {};
 
         // initial state
         this.usernameInput.value = getName();
@@ -43,33 +46,36 @@ class _OverviewManager {
     }
 
     resetList () {
-        this.list.innerHTML = "";
+        this.listNode.innerHTML = "";
         this.name.value = "";
+        this.lobbyList = {};
+    }
+
+    joinLobby (lobbyId) {
+        send("joinLobby", { id: lobbyId });
     }
 
     onLobbyAdded (lobby) {
-        const row = document.createElement("div");
-        row.classList.add("flexRow", "overviewRow");
-        row.setAttribute("data-id", lobby.id);
+        const lobbyId = lobby.id;
 
-        const name = document.createElement("div");
-        name.innerText = lobby.name;
-        row.appendChild(name);
+        if (this.lobbyList[lobbyId]) {
+            return;
+        }
 
-        const button = document.createElement("button");
-        button.innerText = "Join Game";
-        button.addEventListener("click", (evt) => {
-            send("joinLobby", { id: lobby.id });
-        });
-        row.appendChild(button);
+        const entry = new OverviewEntry(lobbyId);
+        entry.update(lobby.name);
 
-        this.list.appendChild(row);
+        this.lobbyList[lobbyId] = entry;
+        this.listNode.appendChild(entry.row);
     }
 
     onLobbyRemoved (lobby) {
-        const row = this.list.querySelector(`div[data-id='${lobby.id}']`);
-        if (row) {
-            row.remove();
+        const lobbyId = lobby.id;
+
+        const entry = this.lobbyList[lobbyId];
+        if (entry) {
+            entry.row.remove();
+            delete this.lobbyList[lobbyId];
         }
     }
 
