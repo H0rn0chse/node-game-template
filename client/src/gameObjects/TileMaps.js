@@ -16,8 +16,32 @@ export class _TileMaps {
         this.spikes = this.map.createLayer("Spikes", this.spikeTileset, 0, 0);
         this.spikes.setCollisionByExclusion([-1], true);
 
-        this.spawnPoint = this.map.getObjectLayer("Start").objects[0];
-        this.endPoint = this.map.getObjectLayer("End").objects[0];
+        this.saws = this.map.getObjectLayer("Saws").objects.map((saw) => {
+            return {
+                start: {
+                    x: saw.x + 32,
+                    y: saw.y - 32,
+                },
+                end: {
+                    x: saw.width + saw.x - 32,
+                    y: saw.y - 32,
+                },
+            };
+        });
+
+        this.coins = this.map.getObjectLayer("Coins").objects.map((coin) => {
+            return {
+                x: coin.x,
+                y: coin.y - 32,
+            };
+        });
+
+        this.spawnPoint = this.map.getObjectLayer("Points").objects.find((point) => {
+            return point.name === "Start";
+        });
+        this.endPoint = this.map.getObjectLayer("Points").objects.find((point) => {
+            return point.name === "End";
+        });
     }
 }
 

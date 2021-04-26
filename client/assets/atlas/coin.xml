@@ -1,0 +1,8 @@
+<TextureAtlas imagePath="spritesheet.png">
+    <SubTexture name="coin_0" x="0" y="0" width="32" height="32"/>
+    <SubTexture name="coin_1" x="32" y="0" width="25" height="32"/>
+    <SubTexture name="coin_2" x="64" y="0" width="19" height="32"/>
+    <SubTexture name="coin_3" x="96" y="0" width="6" height="32"/>
+    <SubTexture name="coin_4" x="128" y="0" width="19" height="32"/>
+    <SubTexture name="coin_5" x="160" y="0" width="25" height="32"/>
+</TextureAtlas>

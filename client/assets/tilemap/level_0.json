@@ -4,20 +4,20 @@
  "layers":[
         {
          "draworder":"topdown",
-         "id":4,
-         "name":"End",
+         "id":6,
+         "name":"Saws",
          "objects":[
                 {
                  "gid":137,
                  "height":32,
-                 "id":3,
+                 "id":9,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":32,
-                 "x":720.454545454546,
-                 "y":52.9545454545455
+                 "width":159.75,
+                 "x":352,
+                 "y":224.25
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -27,20 +27,55 @@
         }, 
         {
          "draworder":"topdown",
-         "id":3,
-         "name":"Start",
+         "id":7,
+         "name":"Coins",
          "objects":[
                 {
                  "gid":137,
                  "height":32,
-                 "id":2,
+                 "id":10,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":32,
-                 "x":41.6666666666667,
-                 "y":306.916666666667
+                 "x":44,
+                 "y":84
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":5,
+         "name":"Points",
+         "objects":[
+                {
+                 "gid":137,
+                 "height":32,
+                 "id":7,
+                 "name":"End",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":720,
+                 "y":55
+                }, 
+                {
+                 "gid":137,
+                 "height":32,
+                 "id":8,
+                 "name":"Start",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":41,
+                 "y":334
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -76,8 +111,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":5,
- "nextobjectid":4,
+ "nextlayerid":8,
+ "nextobjectid":11,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.6.0",
@@ -100,7 +135,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {
@@ -126,7 +160,6 @@
                  "objectgroup":
                     {
                      "draworder":"index",
-                     "id":2,
                      "name":"",
                      "objects":[
                             {

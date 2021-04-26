@@ -1,4 +1,6 @@
+import { CoinGroup } from "../gameObjects/CoinGroup.js";
 import { PuppetGroup } from "../gameObjects/PuppetGroup.js";
+import { SawGroup } from "../gameObjects/SawGroup.js";
 import { TileMaps } from "../gameObjects/TileMaps.js";
 import { Phaser, PLAYER_SKINS, SCENE_HEIGHT, SCENE_WIDTH } from "../globals.js";
 
@@ -10,6 +12,8 @@ export class MainScene extends Phaser.Scene {
 
     preload () {
         this.load.atlasXML("animals", "assets/atlas/animals.png", "assets/atlas/animals.xml");
+        this.load.atlasXML("saw", "assets/atlas/saw.png", "assets/atlas/saw.xml");
+        this.load.atlasXML("coin", "assets/atlas/coin.png", "assets/atlas/coin.xml");
         this.load.image("background", "assets/background.png");
 
         this.load.image("dummy", "/assets/tileset/dummy.png");
@@ -29,6 +33,9 @@ export class MainScene extends Phaser.Scene {
         TileMaps.init(this, levelId);
         this.add.existing(new PuppetGroup(this));
 
+        const coinGroup = this.add.existing(new CoinGroup(this, TileMaps.coins));
+        const sawGroup = this.add.existing(new SawGroup(this, TileMaps.saws));
+
         const skinList = Object.values(PLAYER_SKINS);
         const skinIndex = Math.floor(Math.random() * skinList.length);
         this.player = this.add.player(skinList[skinIndex].id, TileMaps.spawnPoint.x, TileMaps.spawnPoint.y);
@@ -44,6 +51,8 @@ export class MainScene extends Phaser.Scene {
             }
         });
         this.physics.add.overlap(this.player, goal, goal.onPlayerOverlap);
+        this.physics.add.overlap(this.player, sawGroup, this.player.die);
+        this.physics.add.overlap(this.player, coinGroup, coinGroup.collectCoin.bind(this));
     }
 
     update (time, delta) {

@@ -1,0 +1,4 @@
+<TextureAtlas imagePath="saw.png">
+    <SubTexture name="saw_1" x="0" y="0" width="64" height="64"/>
+    <SubTexture name="saw_0" x="64" y="0" width="64" height="64"/>
+</TextureAtlas>

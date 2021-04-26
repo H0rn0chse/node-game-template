@@ -2,12 +2,13 @@ import { Phaser } from "../globals.js";
 
 export class Goal extends Phaser.Physics.Arcade.Image {
     constructor (scene, x, y) {
+        const { world } = scene.physics;
         super(scene, x, y, "goal");
 
         this.setScale(0.5);
         this.setOrigin(0, 1);
 
-        scene.physics.world.enable([this], 0);
+        world.enable([this], 0);
 
         this.setBounceY(2);
         this.setMaxVelocity(0, 100);
