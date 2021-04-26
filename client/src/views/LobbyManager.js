@@ -1,3 +1,4 @@
+import { LobbyEntry } from "../domElements/LobbyEntry.js";
 import { addEventListener, removeEventListener, ready, send, getId, getName, setName } from "../socket.js";
 import { ViewManager } from "../ViewManager.js";
 
@@ -5,11 +6,16 @@ class _LobbyManager {
     constructor () {
         this.container = document.querySelector("#lobby");
         this.title = document.querySelector("#lobbyName");
-        this.list = document.querySelector("#lobbyList");
+        this.listNode = document.querySelector("#lobbyList");
 
-        this.startButton = document.querySelector("#lobbyStart");
-        this.startButton.addEventListener("click", (evt) => {
+        this.startBtn = document.querySelector("#lobbyStart");
+        this.startBtn.addEventListener("click", (evt) => {
             this.startLobby();
+        });
+
+        const leaveBtn = document.querySelector("#lobbyLeave");
+        leaveBtn.addEventListener("click", (evt) => {
+            this.leaveLobby();
         });
 
         this.usernameInput = document.querySelector("#lobbyUsername");
@@ -20,8 +26,11 @@ class _LobbyManager {
             }
         });
 
-        // initial state
+        this.isHost = false;
         this.usernameInput.value = getName();
+        this.list = [];
+
+        // initial state
         ready().then(() => {
             addEventListener("joinLobby", this.onJoinLobby, this);
         });
@@ -43,46 +52,54 @@ class _LobbyManager {
         send("startLobby", {});
     }
 
+    kickPlayer (playerId) {
+        send("kickPlayer", { id: playerId });
+    }
+
+    leaveLobby () {
+        send("leaveLobby", {});
+        ViewManager.showOverview();
+    }
+
     resetLobby () {
         this.title.innerText = "";
-        this.list.innerHTML = "";
+        this.listNode.innerHTML = "";
     }
 
     onPlayerAdded (playerData, isHost = false) {
-        const row = document.createElement("div");
-        row.classList.add("flexRow", "lobbyRow");
-        row.setAttribute("data-id", playerData.id);
+        const playerId = playerData.id;
 
-        const name = document.createElement("div");
-        name.innerText = playerData.name;
-        row.appendChild(name);
+        const entry = new LobbyEntry(playerId, isHost, playerId === getId());
+        entry.update(playerData.name);
 
-        if (isHost) {
-            const hostText = document.createElement("div");
-            hostText.innerText = "Host";
-            row.appendChild(hostText);
-        }
-
-        if (playerData.id === getId()) {
-            const youText = document.createElement("div");
-            youText.innerText = "(You)";
-            row.appendChild(youText);
-        }
-
-        this.list.appendChild(row);
+        this.list.push(entry);
+        this.listNode.appendChild(entry.row);
     }
 
     onPlayerRemoved (playerData) {
-        const row = this.list.querySelector(`div[data-id="${playerData.id}"]`);
-        if (row) {
-            row.remove();
+        const playerId = playerData.id;
+
+        if (playerId === getId()) {
+            console.log("player got kicked");
+            ViewManager.showOverview();
+        }
+
+        const entryIndex = this.list.findIndex((entry) => {
+            return entry.id === playerId;
+        });
+        if (entryIndex > -1) {
+            const entry = this.list[entryIndex];
+            entry.row.remove();
+            this.list.splice(entryIndex, 1);
         }
     }
 
     onPlayerUpdated (playerData) {
-        const rowText = this.list.querySelector(`div[data-id="${playerData.id}"] > div`);
-        if (rowText) {
-            rowText.innerText = playerData.name;
+        const entry = this.list.find((entry) => {
+            return entry.id === playerData.id;
+        });
+        if (entry) {
+            entry.update(playerData.name);
         }
     }
 
@@ -91,8 +108,9 @@ class _LobbyManager {
     }
 
     onJoinLobby (data) {
+        this.isHost = getId() === data.host;
         this.title.innerText = data.name;
-        this.startButton.disabled = getId() !== data.host;
+        this.startBtn.disabled = !this.isHost;
 
         Object.values(data.player).forEach((playerData) => {
             const isHost = playerData.id === data.host;

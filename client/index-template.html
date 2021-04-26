@@ -33,13 +33,26 @@
                 <div id="highscoreList" class="flexColumn overviewContent scrollContainer"></div>
             </div>
         </div>
-        <div id="lobby" class="mainContent" style="display: none;">
-            <div class="flexRow">
-                <h2 id="lobbyName">Lobby Title</h2>
-                <input id="lobbyUsername" type="text" placeholder="Username">
+        <div id="lobby" class="mainContent flexRow" style="display: none;">
+            <div class="lobbyColumn">
+                <div class="flexRow">
+                    <h2 id="lobbyName">Lobby Title</h2>
+                    <input id="lobbyUsername" type="text" placeholder="Username">
+                </div>
+                <button id="lobbyStart">start Game</button>
+                <div id="lobbyList"></div>
+                <div id="lobbyFooter">
+                    <button id="lobbyLeave">Leave Lobby</button>
+                </div>
             </div>
-            <button id="lobbyStart">start Game</button>
-            <div id="lobbyList"></div>
+            <div id="lobbyDetails" class="lobbyColumn">
+                <div class="flexRow">
+                    <span>Avatar Select</span>
+                </div>
+                <div class="flexRow">
+                    <span>Level Select</span>
+                </div>
+            </div>
         </div>
         <div id="game" class="mainContent flexColumn" style="display: none;">
             <div class="flexRow">

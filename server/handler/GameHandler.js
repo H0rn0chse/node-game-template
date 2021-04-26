@@ -45,7 +45,7 @@ class _GameHandler {
         }
 
         // remove reference player/ lobby
-        PlayerManager.removeProperty("lobby");
+        PlayerManager.removeProperty(playerId, "lobby");
         delete lobby.data.player[playerId];
 
         // unsubscribe from lobby

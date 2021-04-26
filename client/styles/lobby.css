@@ -5,6 +5,13 @@
     padding-right: 2em;
 }
 
+.lobbyColumn {
+    width: 50%;
+    height: 100%;
+    justify-content: flex-start;
+    position: relative;
+}
+
 .lobbyRow {
     padding: 0.2em;
     margin: 0.1em 6em;
@@ -20,4 +27,24 @@
 #lobbyUsername {
     width: 10em;
     margin-left: 4em;
+}
+
+#lobbyFooter {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 1em;
+    width: 100%;
+    height: 4em;
+    background-color: var(--lobby-bg);
+}
+
+#lobbyDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+#lobbyDetails > .flexRow {
+    height: 50%;
+    align-items: center;
+    justify-content: center;
 }

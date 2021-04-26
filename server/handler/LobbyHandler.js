@@ -9,6 +9,8 @@ class _LobbyHandler {
         registerMessageHandler("createLobby", this.onCreateLobby, this);
         registerMessageHandler("joinLobby", this.onJoinLobby, this);
         registerMessageHandler("startLobby", this.onStartLobby, this);
+        // leave by kick
+        registerMessageHandler("kickPlayer", this.onKickPlayer, this);
         // leave by intention
         registerMessageHandler("leaveLobby", this.onLeaveLobby, this);
         // leave by disconnect
@@ -54,6 +56,33 @@ class _LobbyHandler {
         send(ws, "joinLobby", lobbyData);
     }
 
+    onKickPlayer (ws, data, playerId) {
+        const lobbyId = PlayerManager.getProperty(playerId, "lobby");
+        const lobbyData = LobbyManager.getLobbyData(lobbyId);
+
+        // lobby was already destroyed
+        if (!lobbyData) {
+            return;
+        }
+
+        // only handle open lobbies
+        if (lobbyData.running) {
+            return;
+        }
+
+        // only allow hosts to kick player
+        if (lobbyData.host !== playerId) {
+            return;
+        }
+
+        // remove reference player/ lobby
+        PlayerManager.removeProperty(data.id, "lobby");
+        delete lobbyData.player[data.id];
+
+        const topic = `lobby-${lobbyId}`;
+        publish(topic, "playerRemoved", { id: data.id });
+    }
+
     onLeaveLobby (ws, data, playerId) {
         const lobbyId = PlayerManager.getProperty(playerId, "lobby");
         const lobbyData = LobbyManager.getLobbyData(lobbyId);
@@ -69,7 +98,7 @@ class _LobbyHandler {
         }
 
         // remove reference player/ lobby
-        PlayerManager.removeProperty("lobby");
+        PlayerManager.removeProperty(playerId, "lobby");
         delete lobbyData.player[playerId];
 
         // unsubscribe from lobby
@@ -81,8 +110,8 @@ class _LobbyHandler {
         } else {
             publish(topic, "closeLobby", { id: lobbyId });
             LobbyManager.removeLobby(lobbyId);
+            OverviewHandler.onLobbyRemove(lobbyData);
         }
-        OverviewHandler.onLobbyRemove(lobbyData);
     }
 
     onStartLobby (ws, data, playerId) {
