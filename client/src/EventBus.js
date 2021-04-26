@@ -80,3 +80,5 @@ class EventBus {
 }
 
 export const GameBus = new EventBus("GameBus");
+
+export const PhaseBus = new EventBus("PhaseBus");

@@ -2,6 +2,7 @@ import { getId, send, addEventListener } from "./socket.js";
 import { GameManager } from "./views/GameManager.js";
 import { Timer } from "./Timer.js";
 import { PHASES, PHASE_TEXTS } from "./globals.js";
+import { PhaseBus } from "./EventBus.js";
 
 class _PhaseManager {
     constructor () {
@@ -21,23 +22,8 @@ class _PhaseManager {
         this.isHost = false;
         this.remainingSeconds = 0;
 
-        this.listener = {};
-        Object.keys(PHASES).forEach((key) => {
-            this.listener[key] = [];
-        });
-
-        this.listen(PHASES.PreRun, this.onPreRun.bind(this));
-        this.listen(PHASES.Run, this.onRun.bind(this));
-    }
-
-    listen (phase, handler) {
-        this.listener[phase].push(handler);
-    }
-
-    dispatch (phase, data) {
-        this.listener[phase].forEach((handler) => {
-            handler(data);
-        });
+        PhaseBus.on(PHASES.PreRun, this.onPreRun, this);
+        PhaseBus.on(PHASES.Run, this.onRun, this);
     }
 
     isPhase (phase) {
@@ -123,11 +109,10 @@ class _PhaseManager {
             return;
         }
 
-        // todo: Check if we need to wait for the scene / deferred
         this.currentPhase = data.phase;
         this.title.innerText = PHASE_TEXTS[this.currentPhase];
 
-        this.dispatch(data.phase, data);
+        PhaseBus.emit(data.phase, data);
     }
 
     onSetCountdown (data) {

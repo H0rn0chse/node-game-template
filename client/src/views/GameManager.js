@@ -1,8 +1,7 @@
 import { GameInstance } from "../GameInstance.js";
 import { ViewManager } from "../ViewManager.js";
 import { getId, send, addEventListener, removeEventListener, ready } from "../socket.js";
-import { GameBus } from "../EventBus.js";
-import { PhaseManager } from "../PhaseManager.js";
+import { GameBus, PhaseBus } from "../EventBus.js";
 import { PHASES } from "../globals.js";
 
 class _GameManager {
@@ -32,8 +31,8 @@ class _GameManager {
         ];
 
         this.runEnded = true;
-        PhaseManager.listen(PHASES.Results, this.onResults.bind(this));
-        PhaseManager.listen(PHASES.PreRun, this.onPreRun.bind(this));
+        PhaseBus.on(PHASES.Results, this.onResults, this);
+        PhaseBus.on(PHASES.PreRun, this.onPreRun, this);
 
         // initial state
         ready().then(() => {
