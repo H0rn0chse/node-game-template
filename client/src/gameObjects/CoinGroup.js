@@ -22,8 +22,8 @@ export class CoinGroup extends Phaser.Physics.Arcade.StaticGroup {
         coin.hide();
     }
 
-    onHideCoin (data) {
-        const coin = this.getMatching("coinId", data.coinId)[0];
+    onHideCoin (coinId) {
+        const coin = this.getMatching("coinId", coinId)[0];
         if (coin) {
             coin.hide();
         }

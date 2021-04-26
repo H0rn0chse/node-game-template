@@ -28,6 +28,7 @@ class _GameManager {
             { channel: "closeGame", handler: this.onCloseGame },
             { channel: "playerUpdate", handler: this.onPlayerUpdate },
             { channel: "resetRun", handler: this.onResetRun },
+            { channel: "hideCoin", handler: this.onHideCoin },
         ];
 
         this.runEnded = true;
@@ -64,7 +65,7 @@ class _GameManager {
     }
 
     collectCoin (coinId) {
-        console.log("collectingCoin", coinId);
+        send("collectCoin", { coinId });
     }
 
     // ========================================== Phase handler =============================================
@@ -117,6 +118,10 @@ class _GameManager {
 
     onResetRun () {
         this.runEnded = false;
+    }
+
+    onHideCoin (data) {
+        GameBus.emit("hideCoin", data.coinId);
     }
 
     // ========================================== Basic Manager Interface =============================================

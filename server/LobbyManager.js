@@ -11,6 +11,8 @@ class _LobbyManager {
             name,
             running: false,
             player: {},
+            run: {},
+            items: {},
         };
 
         this.lobbies.set(name, lobbyData);

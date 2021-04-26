@@ -22,6 +22,14 @@ class EventBus {
         }
     }
 
+    _getKey (searchKey) {
+        return Array.from(this.eventHandler.keys()).find((key) => {
+            return searchKey.eventName === key.eventName
+            && searchKey.callback === key.callback
+            && searchKey.scope === key.scope;
+        });
+    }
+
     once (eventName, callback, scope) {
         if (!this.has(eventName, callback, scope)) {
             const key = {
@@ -45,16 +53,17 @@ class EventBus {
             callback,
             scope,
         };
-        const value = this.eventHandler.get(key);
-        return !!value;
+        return !!this._getKey(key);
     }
 
     off (eventName, callback, scope) {
-        const key = {
+        const searchKey = {
             eventName,
             callback,
             scope,
         };
+
+        const key = this._getKey(searchKey);
         this.eventHandler.delete(key);
     }
 

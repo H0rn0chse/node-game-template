@@ -11,7 +11,13 @@ export class PuppetGroup extends Phaser.GameObjects.Group {
     }
 
     onPlayerUpdated (playerId, data) {
-        let puppet = this.getMatching("playerId", playerId)[0];
+        let puppet
+        try {
+            puppet = this.getMatching("playerId", playerId)[0];
+        } catch (err) {
+            debugger
+        }
+
 
         if (!puppet) {
             puppet = new Puppet(this.scene, "bear", playerId);
@@ -30,7 +36,8 @@ export class PuppetGroup extends Phaser.GameObjects.Group {
     }
 
     destroy (...args) {
-        GameBus.off("playerAdded", this.onPlayerAdded, this);
+        GameBus.off("playerUpdated", this.onPlayerUpdated, this);
+        GameBus.off("playerRemoved", this.onPlayerRemoved, this);
         super.destroy(...args);
     }
 }

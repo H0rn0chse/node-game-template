@@ -13,6 +13,7 @@ class _GameHandler {
         registerMessageHandler("setCountdown", this.onSetCountdown, this);
         registerMessageHandler("resetRun", this.onResetRun, this);
         registerMessageHandler("runEnd", this.onRunEnd, this);
+        registerMessageHandler("collectCoin", this.onCollectCoin, this);
     }
 
     _getLobbyData (playerId) {
@@ -103,6 +104,7 @@ class _GameHandler {
         }
 
         lobby.data.run = {};
+        lobby.data.items = {};
         publish(lobby.topic, "resetRun", {});
     }
 
@@ -124,6 +126,21 @@ class _GameHandler {
         } else {
             publish(lobby.topic, "runProgress", lobby.data);
         }
+    }
+
+    onCollectCoin (ws, data, playerId) {
+        const lobby = this._getLobbyData(playerId);
+        if (!lobby || !lobby.data.items || !data.coinId) {
+            return;
+        }
+
+        if (lobby.data.items[data.coinId]) {
+            // coin was already collected and should be hidden by now
+            return;
+        }
+
+        lobby.data.items[data.coinId] = playerId;
+        publish(lobby.topic, "hideCoin", data);
     }
 
     // ================= not bound to events ==================================================
