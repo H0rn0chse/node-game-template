@@ -28,7 +28,7 @@ class _LobbyManager {
 
         this.isHost = false;
         this.usernameInput.value = getName();
-        this.list = [];
+        this.playerList = {};
 
         // initial state
         ready().then(() => {
@@ -63,16 +63,21 @@ class _LobbyManager {
 
     resetLobby () {
         this.title.innerText = "";
+        this.playerList = {};
         this.listNode.innerHTML = "";
     }
 
     onPlayerAdded (playerData, isHost = false) {
         const playerId = playerData.id;
 
+        if (this.playerList[playerId]) {
+            return;
+        }
+
         const entry = new LobbyEntry(playerId, isHost, playerId === getId());
         entry.update(playerData.name);
 
-        this.list.push(entry);
+        this.playerList[playerId] = entry;
         this.listNode.appendChild(entry.row);
     }
 
@@ -84,20 +89,15 @@ class _LobbyManager {
             ViewManager.showOverview();
         }
 
-        const entryIndex = this.list.findIndex((entry) => {
-            return entry.id === playerId;
-        });
-        if (entryIndex > -1) {
-            const entry = this.list[entryIndex];
+        const entry = this.playerList[playerId];
+        if (entry) {
             entry.row.remove();
-            this.list.splice(entryIndex, 1);
+            delete this.playerList[playerId];
         }
     }
 
     onPlayerUpdated (playerData) {
-        const entry = this.list.find((entry) => {
-            return entry.id === playerData.id;
-        });
+        const entry = this.playerList[playerData.id];
         if (entry) {
             entry.update(playerData.name);
         }
