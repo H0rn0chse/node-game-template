@@ -34,7 +34,7 @@ module.exports = {
         "consistent-return": "off",
         "prefer-arrow-callback": "off",
         "prefer-destructuring": ["warn", { object: true, array: false }],
-        "import/no-cycle": "warn",
+        "import/no-cycle": "off",
         "comma-dangle": "warn",
         "arrow-body-style": ["warn", "always"],
         "no-warning-comments": "error",

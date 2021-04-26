@@ -50,7 +50,7 @@ class _OverviewManager {
     onLobbyAdded (lobby) {
         const row = document.createElement("div");
         row.classList.add("flexRow", "overviewRow");
-        row.setAttribute("data-name", lobby.name);
+        row.setAttribute("data-id", lobby.id);
 
         const name = document.createElement("div");
         name.innerText = lobby.name;
@@ -59,7 +59,7 @@ class _OverviewManager {
         const button = document.createElement("button");
         button.innerText = "Join Game";
         button.addEventListener("click", (evt) => {
-            send("joinLobby", { name: lobby.name });
+            send("joinLobby", { id: lobby.id });
         });
         row.appendChild(button);
 
@@ -67,7 +67,7 @@ class _OverviewManager {
     }
 
     onLobbyRemoved (lobby) {
-        const row = this.list.querySelector(`div[data-name=${lobby.name}]`);
+        const row = this.list.querySelector(`div[data-id='${lobby.id}']`);
         if (row) {
             row.remove();
         }
@@ -76,7 +76,7 @@ class _OverviewManager {
     onLobbyList (data) {
         if (Array.isArray(data)) {
             data.forEach((entry) => {
-                this.onLobbyAdded({ name: entry });
+                this.onLobbyAdded(entry);
             });
         }
         removeEventListener("lobbyList", this.onLobbyList);

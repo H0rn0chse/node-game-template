@@ -26,12 +26,12 @@ class _LobbyHandler {
             OverviewHandler.onLobbyAdded(lobbyData);
         }
 
-        this.onJoinLobby(ws, data, playerId);
+        this.onJoinLobby(ws, lobbyData, playerId);
     }
 
     onJoinLobby (ws, data, playerId) {
-        const lobbyName = data.name;
-        const lobbyData = LobbyManager.getLobbyData(lobbyName);
+        const lobbyId = data.id;
+        const lobbyData = LobbyManager.getLobbyData(lobbyId);
 
         if (!lobbyData) {
             return;
@@ -45,18 +45,18 @@ class _LobbyHandler {
         lobbyData.player[playerId] = playerData;
 
         // save lobby to player
-        PlayerManager.setProperty(playerId, "lobby", lobbyName);
+        PlayerManager.setProperty(playerId, "lobby", lobbyId);
 
         // subscribe and update
-        const topic = `lobby-${lobbyName}`;
+        const topic = `lobby-${lobbyId}`;
         publish(topic, "playerAdded", playerData);
         subscribe(ws, topic);
         send(ws, "joinLobby", lobbyData);
     }
 
     onLeaveLobby (ws, data, playerId) {
-        const lobbyName = PlayerManager.getProperty(playerId, "lobby");
-        const lobbyData = LobbyManager.getLobbyData(lobbyName);
+        const lobbyId = PlayerManager.getProperty(playerId, "lobby");
+        const lobbyData = LobbyManager.getLobbyData(lobbyId);
 
         // lobby was already destroyed
         if (!lobbyData) {
@@ -73,21 +73,21 @@ class _LobbyHandler {
         delete lobbyData.player[playerId];
 
         // unsubscribe from lobby
-        const topic = `lobby-${lobbyName}`;
+        const topic = `lobby-${lobbyId}`;
         unsubscribe(ws, topic);
 
         if (lobbyData.host !== playerId) {
             publish(topic, "playerRemoved", { id: playerId });
         } else {
-            publish(topic, "closeLobby", { name: lobbyName });
-            LobbyManager.removeLobby(lobbyName);
+            publish(topic, "closeLobby", { id: lobbyId });
+            LobbyManager.removeLobby(lobbyId);
         }
         OverviewHandler.onLobbyRemove(lobbyData);
     }
 
     onStartLobby (ws, data, playerId) {
-        const lobbyName = PlayerManager.getProperty(playerId, "lobby");
-        const lobbyData = LobbyManager.getLobbyData(lobbyName);
+        const lobbyId = PlayerManager.getProperty(playerId, "lobby");
+        const lobbyData = LobbyManager.getLobbyData(lobbyId);
 
         if (lobbyData.host !== playerId) {
             return;
@@ -98,8 +98,8 @@ class _LobbyHandler {
     }
 
     onUserNameUpdate (ws, data, playerId) {
-        const lobbyName = PlayerManager.getProperty(playerId, "lobby");
-        const lobbyData = LobbyManager.getLobbyData(lobbyName);
+        const lobbyId = PlayerManager.getProperty(playerId, "lobby");
+        const lobbyData = LobbyManager.getLobbyData(lobbyId);
 
         // lobby was already destroyed
         if (!lobbyData) {
@@ -118,7 +118,7 @@ class _LobbyHandler {
             id: playerId,
             name: data.name,
         };
-        const topic = `lobby-${lobbyName}`;
+        const topic = `lobby-${lobbyId}`;
         publish(topic, "playerUpdated", playerData);
     }
 }
