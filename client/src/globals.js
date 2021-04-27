@@ -26,6 +26,19 @@ export const PHASE_TEXTS = {
     Results: "Results",
 };
 
+export const LEVELS = {
+    0: {
+        id: 0,
+        name: "The first Level",
+        preview: "./assets/preview/level_0.png",
+    },
+    1: {
+        id: 1,
+        name: "The second Level",
+        preview: "./assets/preview/level_1.png",
+    },
+};
+
 export const PLAYER_SKINS = {
     bear: { id: "bear", name: "Bear" },
     buffalo: { id: "buffalo", name: "Buffalo" },

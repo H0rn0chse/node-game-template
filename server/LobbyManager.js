@@ -14,6 +14,7 @@ class _LobbyManager {
             player: {},
             run: {},
             items: {},
+            levelId: 0,
             name,
         };
 

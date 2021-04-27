@@ -13,7 +13,7 @@ export class Saw extends Phaser.GameObjects.PathFollower {
             repeat: -1,
             rotateToPath: false,
             verticalAdjust: true,
-        });
+        }, Math.random());
 
         const { world } = scene.physics;
         world.enable([this], 0);

@@ -16,6 +16,7 @@ class _LobbyHandler {
         // leave by disconnect
         registerMessageHandler("close", this.onLeaveLobby, this);
 
+        registerMessageHandler("selectLevel", this.onSelectLevel, this);
         registerMessageHandler("usernameUpdate", this.onUsernameUpdate, this);
         registerMessageHandler("avatarUpdate", this.onAvatarUpdate, this);
     }
@@ -197,6 +198,26 @@ class _LobbyHandler {
         };
         const topic = `lobby-${lobbyId}`;
         publish(topic, "playerUpdated", playerData);
+    }
+
+    onSelectLevel (ws, data, playerId) {
+        const lobbyId = PlayerManager.getProperty(playerId, "lobby");
+        const lobbyData = LobbyManager.getLobbyData(lobbyId);
+
+        // lobby was already destroyed
+        if (!lobbyData) {
+            return;
+        }
+
+        // only handle open lobbies
+        if (lobbyData.running) {
+            return;
+        }
+
+        lobbyData.levelId = data.levelId;
+
+        const topic = `lobby-${lobbyId}`;
+        publish(topic, "levelUpdated", data);
     }
 }
 

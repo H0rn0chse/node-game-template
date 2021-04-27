@@ -3,6 +3,7 @@ import { ViewManager } from "../ViewManager.js";
 import { AvatarSelect } from "../domElements/AvatarSelect.js";
 import { LobbyEntry } from "../domElements/LobbyEntry.js";
 import { LobbyBus } from "../EventBus.js";
+import { LEVELS } from "../globals.js";
 
 class _LobbyManager {
     constructor () {
@@ -28,6 +29,18 @@ class _LobbyManager {
             }
         });
 
+        this.levelPreview = document.querySelector("#levelPreview");
+        this.levelSelect = document.querySelector("#levelSelect");
+        Object.values(LEVELS).forEach((levelData) => {
+            const option = document.createElement("option");
+            option.innerText = levelData.name;
+            option.setAttribute("value", levelData.id);
+            this.levelSelect.appendChild(option);
+        });
+        this.levelSelect.addEventListener("change", (evt) => {
+            this.selectLevel(this.levelSelect.value);
+        });
+
         this.isHost = false;
         this.usernameInput.value = getName();
         this.playerList = {};
@@ -35,6 +48,14 @@ class _LobbyManager {
         const avatarSelectNode = document.querySelector("#avatarSelect");
         this.avatarSelect = new AvatarSelect(avatarSelectNode);
         LobbyBus.on("selectAvatar", this.selectAvatar, this);
+
+        this.gameHandler = [
+            { channel: "playerUpdated", handler: this.onPlayerUpdated },
+            { channel: "playerAdded", handler: this.onPlayerAdded },
+            { channel: "playerRemoved", handler: this.onPlayerRemoved },
+            { channel: "closeLobby", handler: this.onCloseLobby },
+            { channel: "levelUpdated", handler: this.onLevelUpdated },
+        ];
 
         // initial state
         ready().then(() => {
@@ -70,6 +91,11 @@ class _LobbyManager {
     selectAvatar (avatarId) {
         this.avatarSelect.select(avatarId);
         send("avatarUpdate", { avatarId });
+    }
+
+    selectLevel (levelId) {
+        console.log("selecting a level", levelId);
+        send("selectLevel", { levelId });
     }
 
     resetLobby () {
@@ -115,6 +141,11 @@ class _LobbyManager {
         }
     }
 
+    onLevelUpdated (data) {
+        this.levelSelect.value = data.levelId;
+        this.levelPreview.src = LEVELS[data.levelId].preview;
+    }
+
     onCloseLobby () {
         ViewManager.showOverview();
     }
@@ -123,6 +154,10 @@ class _LobbyManager {
         this.isHost = getId() === data.host;
         this.title.innerText = data.name;
         this.startBtn.disabled = !this.isHost;
+        this.levelSelect.disabled = !this.isHost;
+
+        this.levelSelect.value = data.levelId;
+        this.levelPreview.src = LEVELS[data.levelId].preview;
 
         Object.values(data.player).forEach((playerData) => {
             const isHost = playerData.id === data.host;
@@ -134,18 +169,17 @@ class _LobbyManager {
     stopListen () {
         addEventListener("joinLobby", this.onJoinLobby, this);
 
-        removeEventListener("playerAdded", this.onPlayerAdded, this);
-        removeEventListener("playerRemoved", this.onPlayerRemoved, this);
-        removeEventListener("closeLobby", this.onCloseLobby, this);
+        this.gameHandler.forEach((data) => {
+            removeEventListener(data.channel, data.handler, this);
+        });
     }
 
     startListen () {
         removeEventListener("joinLobby", this.onJoinLobby, this);
 
-        addEventListener("playerUpdated", this.onPlayerUpdated, this);
-        addEventListener("playerAdded", this.onPlayerAdded, this);
-        addEventListener("playerRemoved", this.onPlayerRemoved, this);
-        addEventListener("closeLobby", this.onCloseLobby, this);
+        this.gameHandler.forEach((data) => {
+            addEventListener(data.channel, data.handler, this);
+        });
     }
 }
 

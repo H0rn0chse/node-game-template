@@ -78,7 +78,7 @@ class _GameManager {
 
         return {
             skinId: playerData.avatarId || AvatarManager.getDefault(),
-            levelId: 0,
+            levelId: this.lobbyData.levelId,
         };
     }
 

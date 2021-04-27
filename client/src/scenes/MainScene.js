@@ -21,7 +21,10 @@ export class MainScene extends Phaser.Scene {
 
         this.load.image("cake", "/assets/tileset/cake.png");
         this.load.image("spikes", "/assets/tileset/spikes.png");
+
+        /* Levels */
         this.load.tilemapTiledJSON("level_0", "assets/tilemap/level_0.json");
+        this.load.tilemapTiledJSON("level_1", "assets/tilemap/level_1.json");
     }
 
     create () {
