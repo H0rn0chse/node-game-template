@@ -1,3 +1,4 @@
+import { AvatarManager } from "../AvatarManager.js";
 import { LobbyManager } from "../views/LobbyManager.js";
 
 export class LobbyEntry {
@@ -12,6 +13,10 @@ export class LobbyEntry {
     _createNodes () {
         this.row = document.createElement("div");
         this.row.classList.add("flexRow", "lobbyRow");
+
+        this.avatar = document.createElement("div");
+        this.avatar.classList.add("lobbyAvatar");
+        this.row.appendChild(this.avatar);
 
         this.name = document.createElement("div");
         this.name.innerText = "-";
@@ -39,7 +44,18 @@ export class LobbyEntry {
         }
     }
 
-    update (name) {
+    update (name, avatarId) {
         this.name.innerText = name;
+
+        const avatarNode = AvatarManager.getAvatarImage(avatarId || AvatarManager.getDefault());
+        this._setAvatar(avatarNode);
+    }
+
+    _setAvatar (domNode) {
+        if (!domNode) {
+            return;
+        }
+        this.avatar.innerHTML = "";
+        this.avatar.appendChild(domNode);
     }
 }

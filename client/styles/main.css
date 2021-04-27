@@ -9,6 +9,9 @@
 @import "game.css";
 @import "logoff.css";
 
+/*elements*/
+@import "avatar.css";
+
 body {
     margin: 0;
     padding: 0;

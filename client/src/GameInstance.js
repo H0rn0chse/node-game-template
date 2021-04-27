@@ -8,7 +8,7 @@ export class GameInstance {
 
         this.controller = controller;
 
-        const config = {
+        const phaserConfig = {
             type: globalThis.Phaser.AUTO,
             width: SCENE_WIDTH,
             height: SCENE_HEIGHT,
@@ -28,7 +28,8 @@ export class GameInstance {
             scene: MainScene,
         };
 
-        this.game = new Phaser.Game(config);
+        this.game = new Phaser.Game(phaserConfig);
+        this.game.instanceConfig = controller.getGameInstanceConfig();
     }
 
     resetMainScene () {

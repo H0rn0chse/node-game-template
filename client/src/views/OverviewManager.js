@@ -17,7 +17,7 @@ class _OverviewManager {
         this.usernameInput.addEventListener("change", (evt) => {
             if (this.usernameInput.value) {
                 setName(this.usernameInput.value);
-                send("userNameUpdate", { name: this.usernameInput.value });
+                send("usernameUpdate", { name: this.usernameInput.value });
             }
         });
 

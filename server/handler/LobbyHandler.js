@@ -16,7 +16,8 @@ class _LobbyHandler {
         // leave by disconnect
         registerMessageHandler("close", this.onLeaveLobby, this);
 
-        registerMessageHandler("userNameUpdate", this.onUserNameUpdate, this);
+        registerMessageHandler("usernameUpdate", this.onUsernameUpdate, this);
+        registerMessageHandler("avatarUpdate", this.onAvatarUpdate, this);
     }
 
     onCreateLobby (ws, data, playerId) {
@@ -146,7 +147,7 @@ class _LobbyHandler {
         GameHandler.onJoinGame(ws, data, playerId);
     }
 
-    onUserNameUpdate (ws, data, playerId) {
+    onUsernameUpdate (ws, data, playerId) {
         const lobbyId = PlayerManager.getProperty(playerId, "lobby");
         const lobbyData = LobbyManager.getLobbyData(lobbyId);
 
@@ -166,6 +167,33 @@ class _LobbyHandler {
         const playerData = {
             id: playerId,
             name: data.name,
+            avatarId: lobbyData.player[playerId].avatarId,
+        };
+        const topic = `lobby-${lobbyId}`;
+        publish(topic, "playerUpdated", playerData);
+    }
+
+    onAvatarUpdate (ws, data, playerId) {
+        const lobbyId = PlayerManager.getProperty(playerId, "lobby");
+        const lobbyData = LobbyManager.getLobbyData(lobbyId);
+
+        // lobby was already destroyed
+        if (!lobbyData) {
+            return;
+        }
+
+        // only handle open lobbies
+        if (lobbyData.running) {
+            return;
+        }
+
+        // update lobbyData
+        lobbyData.player[playerId].avatarId = data.avatarId;
+
+        const playerData = {
+            id: playerId,
+            name: lobbyData.player[playerId].name,
+            avatarId: data.avatarId,
         };
         const topic = `lobby-${lobbyId}`;
         publish(topic, "playerUpdated", playerData);

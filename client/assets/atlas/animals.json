@@ -1,0 +1,645 @@
+{
+    "textures": [
+        {
+            "image": "animals.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 871,
+				"h": 859
+			},
+			"scale": 1,
+			"frames": [
+                {
+                    "filename": "bear",
+                    "frame": {
+                        "x": "184",
+                        "y": "162",
+                        "w": "154",
+                        "h": "132"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "154",
+                        "h": "132"
+                    },
+                    "sourceSize": {
+                        "w": "154",
+                        "h": "132"
+                    }
+                },
+                {
+                    "filename": "buffalo",
+                    "frame": {
+                        "x": "0",
+                        "y": "487",
+                        "w": "183",
+                        "h": "152"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "183",
+                        "h": "152"
+                    },
+                    "sourceSize": {
+                        "w": "183",
+                        "h": "152"
+                    }
+                },
+                {
+                    "filename": "chick",
+                    "frame": {
+                        "x": "615",
+                        "y": "304",
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "129",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "chicken",
+                    "frame": {
+                        "x": "740",
+                        "y": "141",
+                        "w": "128",
+                        "h": "145"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "128",
+                        "h": "145"
+                    },
+                    "sourceSize": {
+                        "w": "128",
+                        "h": "145"
+                    }
+                },
+                {
+                    "filename": "cow",
+                    "frame": {
+                        "x": "337",
+                        "y": "294",
+                        "w": "145",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "145",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "145",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "crocodile",
+                    "frame": {
+                        "x": "486",
+                        "y": "698",
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "129",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "dog",
+                    "frame": {
+                        "x": "482",
+                        "y": "272",
+                        "w": "129",
+                        "h": "157"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "129",
+                        "h": "157"
+                    },
+                    "sourceSize": {
+                        "w": "129",
+                        "h": "157"
+                    }
+                },
+                {
+                    "filename": "duck",
+                    "frame": {
+                        "x": "615",
+                        "y": "432",
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "129",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "elephant",
+                    "frame": {
+                        "x": "0",
+                        "y": "333",
+                        "w": "183",
+                        "h": "154"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "183",
+                        "h": "154"
+                    },
+                    "sourceSize": {
+                        "w": "183",
+                        "h": "154"
+                    }
+                },
+                {
+                    "filename": "frog",
+                    "frame": {
+                        "x": "478",
+                        "y": "0",
+                        "w": "130",
+                        "h": "144"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "130",
+                        "h": "144"
+                    },
+                    "sourceSize": {
+                        "w": "130",
+                        "h": "144"
+                    }
+                },
+                {
+                    "filename": "giraffe",
+                    "frame": {
+                        "x": "183",
+                        "y": "333",
+                        "w": "154",
+                        "h": "162"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "154",
+                        "h": "162"
+                    },
+                    "sourceSize": {
+                        "w": "154",
+                        "h": "162"
+                    }
+                },
+                {
+                    "filename": "goat",
+                    "frame": {
+                        "x": "0",
+                        "y": "162",
+                        "w": "184",
+                        "h": "171"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "184",
+                        "h": "171"
+                    },
+                    "sourceSize": {
+                        "w": "184",
+                        "h": "171"
+                    }
+                },
+                {
+                    "filename": "gorilla",
+                    "frame": {
+                        "x": "611",
+                        "y": "176",
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "129",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "hippo",
+                    "frame": {
+                        "x": "183",
+                        "y": "495",
+                        "w": "154",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "154",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "154",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "horse",
+                    "frame": {
+                        "x": "486",
+                        "y": "429",
+                        "w": "129",
+                        "h": "141"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "129",
+                        "h": "141"
+                    },
+                    "sourceSize": {
+                        "w": "129",
+                        "h": "141"
+                    }
+                },
+                {
+                    "filename": "monkey",
+                    "frame": {
+                        "x": "174",
+                        "y": "639",
+                        "w": "174",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "174",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "174",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "moose",
+                    "frame": {
+                        "x": "0",
+                        "y": "0",
+                        "w": "269",
+                        "h": "162"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "269",
+                        "h": "162"
+                    },
+                    "sourceSize": {
+                        "w": "269",
+                        "h": "162"
+                    }
+                },
+                {
+                    "filename": "narwhal",
+                    "frame": {
+                        "x": "348",
+                        "y": "550",
+                        "w": "138",
+                        "h": "155"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "138",
+                        "h": "155"
+                    },
+                    "sourceSize": {
+                        "w": "138",
+                        "h": "155"
+                    }
+                },
+                {
+                    "filename": "owl",
+                    "frame": {
+                        "x": "743",
+                        "y": "560",
+                        "w": "128",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "128",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "128",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "panda",
+                    "frame": {
+                        "x": "0",
+                        "y": "639",
+                        "w": "174",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "174",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "174",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "parrot",
+                    "frame": {
+                        "x": "478",
+                        "y": "144",
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "129",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "penguin",
+                    "frame": {
+                        "x": "338",
+                        "y": "128",
+                        "w": "140",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "140",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "140",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "pig",
+                    "frame": {
+                        "x": "337",
+                        "y": "422",
+                        "w": "144",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "144",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "144",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "rabbit",
+                    "frame": {
+                        "x": "608",
+                        "y": "0",
+                        "w": "129",
+                        "h": "176"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "129",
+                        "h": "176"
+                    },
+                    "sourceSize": {
+                        "w": "129",
+                        "h": "176"
+                    }
+                },
+                {
+                    "filename": "rhino",
+                    "frame": {
+                        "x": "269",
+                        "y": "0",
+                        "w": "154",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "154",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "154",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "sloth",
+                    "frame": {
+                        "x": "486",
+                        "y": "570",
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "129",
+                        "h": "128"
+                    },
+                    "sourceSize": {
+                        "w": "129",
+                        "h": "128"
+                    }
+                },
+                {
+                    "filename": "snake",
+                    "frame": {
+                        "x": "615",
+                        "y": "698",
+                        "w": "128",
+                        "h": "142"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "128",
+                        "h": "142"
+                    },
+                    "sourceSize": {
+                        "w": "128",
+                        "h": "142"
+                    }
+                },
+                {
+                    "filename": "walrus",
+                    "frame": {
+                        "x": "615",
+                        "y": "560",
+                        "w": "128",
+                        "h": "138"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "128",
+                        "h": "138"
+                    },
+                    "sourceSize": {
+                        "w": "128",
+                        "h": "138"
+                    }
+                },
+                {
+                    "filename": "whale",
+                    "frame": {
+                        "x": "348",
+                        "y": "705",
+                        "w": "138",
+                        "h": "154"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "138",
+                        "h": "154"
+                    },
+                    "sourceSize": {
+                        "w": "138",
+                        "h": "154"
+                    }
+                },
+                {
+                    "filename": "zebra",
+                    "frame": {
+                        "x": "737",
+                        "y": "0",
+                        "w": "128",
+                        "h": "141"
+                    },
+                    "rotated": false,
+                    "trimmed": false,
+                    "spriteSourceSize": {
+                        "x": 0,
+                        "y": 0,
+                        "w": "128",
+                        "h": "141"
+                    },
+                    "sourceSize": {
+                        "w": "128",
+                        "h": "141"
+                    }
+                }
+            ]
+        }
+    ]
+}

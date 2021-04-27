@@ -14,7 +14,7 @@ export class PuppetGroup extends Phaser.GameObjects.Group {
         let puppet = this.getMatching("playerId", playerId)[0];
 
         if (!puppet) {
-            puppet = new Puppet(this.scene, "bear", playerId);
+            puppet = new Puppet(this.scene, data.avatarId, playerId);
             this.add(puppet, true);
         }
 

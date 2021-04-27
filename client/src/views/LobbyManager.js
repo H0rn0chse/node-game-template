@@ -1,6 +1,8 @@
-import { LobbyEntry } from "../domElements/LobbyEntry.js";
 import { addEventListener, removeEventListener, ready, send, getId, getName, setName } from "../socket.js";
 import { ViewManager } from "../ViewManager.js";
+import { AvatarSelect } from "../domElements/AvatarSelect.js";
+import { LobbyEntry } from "../domElements/LobbyEntry.js";
+import { LobbyBus } from "../EventBus.js";
 
 class _LobbyManager {
     constructor () {
@@ -22,13 +24,17 @@ class _LobbyManager {
         this.usernameInput.addEventListener("change", (evt) => {
             if (this.usernameInput.value) {
                 setName(this.usernameInput.value);
-                send("userNameUpdate", { name: this.usernameInput.value });
+                send("usernameUpdate", { name: this.usernameInput.value });
             }
         });
 
         this.isHost = false;
         this.usernameInput.value = getName();
         this.playerList = {};
+
+        const avatarSelectNode = document.querySelector("#avatarSelect");
+        this.avatarSelect = new AvatarSelect(avatarSelectNode);
+        LobbyBus.on("selectAvatar", this.selectAvatar, this);
 
         // initial state
         ready().then(() => {
@@ -61,10 +67,16 @@ class _LobbyManager {
         ViewManager.showOverview();
     }
 
+    selectAvatar (avatarId) {
+        this.avatarSelect.select(avatarId);
+        send("avatarUpdate", { avatarId });
+    }
+
     resetLobby () {
         this.title.innerText = "";
         this.playerList = {};
         this.listNode.innerHTML = "";
+        this.avatarSelect.reset();
     }
 
     onPlayerAdded (playerData, isHost = false) {
@@ -75,7 +87,7 @@ class _LobbyManager {
         }
 
         const entry = new LobbyEntry(playerId, isHost, playerId === getId());
-        entry.update(playerData.name);
+        entry.update(playerData.name, playerData.avatarId);
 
         this.playerList[playerId] = entry;
         this.listNode.appendChild(entry.row);
@@ -99,7 +111,7 @@ class _LobbyManager {
     onPlayerUpdated (playerData) {
         const entry = this.playerList[playerData.id];
         if (entry) {
-            entry.update(playerData.name);
+            entry.update(playerData.name, playerData.avatarId);
         }
     }
 

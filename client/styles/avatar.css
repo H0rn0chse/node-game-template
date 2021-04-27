@@ -1,0 +1,41 @@
+#avatarSelect {
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding-top: 3em;
+    padding-left: 4em;
+    padding-right: 4em;
+}
+
+.lobbyAvatar {
+    width: 55px;
+    height: 55px;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    margin: 0.2em;
+    position: relative;
+}
+
+.avatarImage {
+    background-image: url("../assets/atlas/animals_round.png");
+    transform-origin: left top;
+    transform: scale(0.4);
+
+    cursor: pointer;
+}
+
+.avatar .selected {
+    width: 56px;
+    height: 56px;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 50%;
+    border-color: var(--avatar-selected);
+    position: relative;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}

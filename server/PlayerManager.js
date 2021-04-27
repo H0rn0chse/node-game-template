@@ -7,10 +7,10 @@ class _PlayerManager {
     }
 
     init () {
-        registerMessageHandler("userNameUpdate", this.onUserNameUpdate, this);
+        registerMessageHandler("usernameUpdate", this.onUsernameUpdate, this);
     }
 
-    onUserNameUpdate (ws, data, playerId) {
+    onUsernameUpdate (ws, data, playerId) {
         this.setProperty(playerId, "name", data.name);
     }
 

@@ -2,7 +2,7 @@ import { CoinGroup } from "../gameObjects/CoinGroup.js";
 import { PuppetGroup } from "../gameObjects/PuppetGroup.js";
 import { SawGroup } from "../gameObjects/SawGroup.js";
 import { TileMaps } from "../gameObjects/TileMaps.js";
-import { Phaser, PLAYER_SKINS, SCENE_HEIGHT, SCENE_WIDTH } from "../globals.js";
+import { Phaser, SCENE_HEIGHT, SCENE_WIDTH } from "../globals.js";
 
 export class MainScene extends Phaser.Scene {
     constructor () {
@@ -25,7 +25,9 @@ export class MainScene extends Phaser.Scene {
     }
 
     create () {
-        const levelId = 0;
+        const { instanceConfig } = this.game;
+        const { levelId, skinId } = instanceConfig;
+
         const background = this.add.image(SCENE_WIDTH, SCENE_HEIGHT, "background");
         background.x = SCENE_WIDTH / 2;
         background.y = SCENE_HEIGHT / 2;
@@ -36,9 +38,8 @@ export class MainScene extends Phaser.Scene {
         this.coinGroup = this.add.existing(new CoinGroup(this, TileMaps.coins));
         const sawGroup = this.add.existing(new SawGroup(this, TileMaps.saws));
 
-        const skinList = Object.values(PLAYER_SKINS);
-        const skinIndex = Math.floor(Math.random() * skinList.length);
-        this.player = this.add.player(skinList[skinIndex].id, TileMaps.spawnPoint.x, TileMaps.spawnPoint.y);
+        this.player = this.add.player(skinId, TileMaps.spawnPoint.x, TileMaps.spawnPoint.y);
+        this.player.setDepth(1);
 
         const goal = this.add.goal(TileMaps.endPoint.x, TileMaps.endPoint.y);
 

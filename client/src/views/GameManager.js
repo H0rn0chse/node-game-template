@@ -1,5 +1,6 @@
 import { GameInstance } from "../GameInstance.js";
 import { ViewManager } from "../ViewManager.js";
+import { AvatarManager } from "../AvatarManager.js";
 import { getId, send, addEventListener, removeEventListener, ready } from "../socket.js";
 import { GameBus, PhaseBus } from "../EventBus.js";
 import { PHASES } from "../globals.js";
@@ -68,6 +69,19 @@ class _GameManager {
         send("collectCoin", { coinId });
     }
 
+    getGameInstanceConfig () {
+        if (!this.lobbyData) {
+            return;
+        }
+
+        const playerData = this.lobbyData.player[getId()];
+
+        return {
+            skinId: playerData.avatarId || AvatarManager.getDefault(),
+            levelId: 0,
+        };
+    }
+
     // ========================================== Phase handler =============================================
 
     onResults (data) {
@@ -95,6 +109,7 @@ class _GameManager {
 
     onJoinGame (data) {
         this.lobbyName = data.name;
+        this.lobbyData = data;
         this.ingame = true;
         ViewManager.showGame();
 
