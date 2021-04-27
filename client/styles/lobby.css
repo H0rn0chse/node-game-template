@@ -55,7 +55,12 @@
     align-items: center;
 }
 
+#levelSelect {
+    max-width: 19em;
+}
+
 #levelPreview {
+    margin-top: 0.8em;
     width: 400px;
     height: 256px;
 
