@@ -2,7 +2,7 @@ import { GameInstance } from "../GameInstance.js";
 import { ViewManager } from "../ViewManager.js";
 import { AvatarManager } from "../AvatarManager.js";
 import { getId, send, addEventListener, removeEventListener, ready } from "../socket.js";
-import { GameBus, PhaseBus } from "../EventBus.js";
+import { DebugBus, GameBus, PhaseBus } from "../EventBus.js";
 import { PHASES } from "../globals.js";
 
 class _GameManager {
@@ -12,6 +12,11 @@ class _GameManager {
 
         this.container = document.querySelector("#game");
         this.points = document.querySelector("#gamePoints");
+
+        this.debugCbx = document.querySelector("#debugCbx");
+        this.debugCbx.addEventListener("change", (evt) => {
+            DebugBus.emit("setDebug", this.debugCbx.checked);
+        });
 
         this.instance = null;
 

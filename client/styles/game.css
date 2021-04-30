@@ -19,7 +19,9 @@
 #gameStats {
     position: absolute;
     top: 0;
-    right: -5em;
+    right: 15em;
+    height: 100%;
+    justify-content: center;
 }
 
 #gameStats h1, #gameStats h2, #gameStats h3 {

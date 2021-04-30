@@ -7,13 +7,6 @@ export class DebugHelper {
         this.layers = new Map();
 
         DebugBus.on("setDebug", this.onSetDebug, this);
-
-        setTimeout(() => {
-            DebugBus.emit("setDebug", true);
-            setTimeout(() => {
-                //DebugBus.emit("setDebug", false);
-            }, 3000);
-        }, 2000);
     }
 
     addLayer (layerId, layer) {
