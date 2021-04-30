@@ -1,5 +1,4 @@
-import { addEventListener, removeEventListener, send, ready, getName, setName } from "../socket.js";
-import { HighscoreManager } from "../HighscoreManager.js";
+import { addEventListener, removeEventListener, send, getName, setName } from "../socket.js";
 import { OverviewEntry } from "../domElements/OverviewEntry.js";
 
 class _OverviewManager {

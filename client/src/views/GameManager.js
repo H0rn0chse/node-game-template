@@ -13,15 +13,6 @@ class _GameManager {
         this.container = document.querySelector("#game");
         this.points = document.querySelector("#gamePoints");
 
-        // Results
-        this.results = document.querySelector("#gameResults");
-        this.resultsList = document.querySelector("#gameResultsList");
-        this.resultsNextButton = document.querySelector("#gameResultsNext");
-        this.results.style.display = "none";
-        this.resultsNextButton.addEventListener("click", (evt) => {
-            this.nextGame();
-        });
-
         this.instance = null;
 
         this.gameHandler = [
@@ -33,7 +24,6 @@ class _GameManager {
         ];
 
         this.runEnded = true;
-        PhaseBus.on(PHASES.Results, this.onResults, this);
         PhaseBus.on(PHASES.PreRun, this.onPreRun, this);
 
         // initial state
@@ -84,16 +74,7 @@ class _GameManager {
 
     // ========================================== Phase handler =============================================
 
-    onResults (data) {
-        this.resultsList.innerHTML = `<span>${JSON.stringify(data, null, 4)}</span>`;
-
-        this.results.style.display = "";
-
-        this.resultsNextButton.disabled = data.host !== getId();
-    }
-
     onPreRun (data) {
-        this.results.style.display = "none";
         this.instance.resetMainScene();
     }
 

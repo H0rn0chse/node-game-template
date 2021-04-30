@@ -36,6 +36,7 @@ export class MainScene extends Phaser.Scene {
         const terrain = this.addGroup.layer(terrainLayer);
         const spikes = this.tileMaps.createLayer("Spikes");
 
+        this.debug.addLayer("Spikes", spikes);
 
         this.addGroup.puppet();
 

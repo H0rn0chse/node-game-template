@@ -93,3 +93,5 @@ export const LobbyBus = new EventBus("LobbyBus");
 export const GameBus = new EventBus("GameBus");
 
 export const PhaseBus = new EventBus("PhaseBus");
+
+export const DebugBus = new EventBus("DebugBus");

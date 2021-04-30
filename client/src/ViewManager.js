@@ -1,7 +1,8 @@
 import { OverviewManager } from "./views/OverviewManager.js";
 import { GameManager } from "./views/GameManager.js";
 import { LobbyManager } from "./views/LobbyManager.js";
-import { HighscoreManager } from "./HighscoreManager.js";
+import { ResultsManager } from "./views/ResultsManager.js";
+import { HighscoreManager } from "./views/HighscoreManager.js";
 
 class _ViewManager {
     constructor () {
