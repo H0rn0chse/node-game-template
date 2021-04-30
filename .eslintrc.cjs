@@ -38,5 +38,6 @@ module.exports = {
         "comma-dangle": "warn",
         "arrow-body-style": ["warn", "always"],
         "no-warning-comments": "error",
+        "no-restricted-syntax": "off",
     },
 };

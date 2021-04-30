@@ -1,20 +1,16 @@
-export class _TileMaps {
-    constructor () {
-        this.map = null;
-        this.terrain = null;
+export class TileMaps {
+    constructor (scene) {
+        this.scene = scene;
     }
 
-    init (scene, levelId) {
-        this.map = scene.make.tilemap({ key: `level_${levelId}` });
+    init (levelId) {
+        this.debug = this.scene.add.graphics();
+        this.debug.setDepth(10);
+
+        this.map = this.scene.make.tilemap({ key: `level_${levelId}` });
 
         this.cakeTileset = this.map.addTilesetImage("cake");
         this.spikeTileset = this.map.addTilesetImage("spikes");
-
-        this.terrain = this.map.createLayer("Terrain", this.cakeTileset, 0, 0);
-        this.terrain.setCollisionByExclusion([-1], true);
-
-        this.spikes = this.map.createLayer("Spikes", this.spikeTileset, 0, 0);
-        this.spikes.setCollisionByExclusion([-1], true);
 
         this.saws = this.map.getObjectLayer("Saws").objects.map((saw) => {
             return {
@@ -44,6 +40,29 @@ export class _TileMaps {
             return point.name === "End";
         });
     }
-}
 
-export const TileMaps = new _TileMaps();
+    createLayer (layerId) {
+        let tileset;
+
+        switch (layerId) {
+            case "Terrain":
+                tileset = this.cakeTileset;
+                break;
+            case "Spikes":
+                tileset = this.spikeTileset;
+                break;
+            default:
+        }
+
+        const layer = this.map.createLayer(layerId, tileset, 0, 0);
+
+        switch (layerId) {
+            case "Terrain":
+                break;
+            default:
+                layer.setCollisionByExclusion([-1], true);
+        }
+
+        return layer;
+    }
+}

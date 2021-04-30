@@ -1,4 +1,4 @@
-import { Phaser } from "../globals.js";
+import { Phaser, STATIC } from "../globals.js";
 
 export class Coin extends Phaser.Physics.Arcade.Sprite {
     constructor (scene, x, y, coinId) {
@@ -7,7 +7,7 @@ export class Coin extends Phaser.Physics.Arcade.Sprite {
         this.coinId = coinId;
 
         const { world } = scene.physics;
-        world.enable([this], 1);
+        world.enable([this], STATIC);
 
         scene.anims.create({
             key: "coinRotate",

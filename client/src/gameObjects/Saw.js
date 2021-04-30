@@ -1,4 +1,4 @@
-import { Phaser } from "../globals.js";
+import { DYNAMIC, Phaser } from "../globals.js";
 
 export class Saw extends Phaser.GameObjects.PathFollower {
     constructor (scene, startPos, endPos) {
@@ -16,7 +16,7 @@ export class Saw extends Phaser.GameObjects.PathFollower {
         }, Math.random());
 
         const { world } = scene.physics;
-        world.enable([this], 0);
+        world.enable([this], DYNAMIC);
 
         // Will be overwritten by SawGroup
         this.body.setAllowGravity(false);

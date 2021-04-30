@@ -1,7 +1,3 @@
-import { CoinGroup } from "../gameObjects/CoinGroup.js";
-import { PuppetGroup } from "../gameObjects/PuppetGroup.js";
-import { SawGroup } from "../gameObjects/SawGroup.js";
-import { TileMaps } from "../gameObjects/TileMaps.js";
 import { Phaser, SCENE_HEIGHT, SCENE_WIDTH } from "../globals.js";
 
 export class MainScene extends Phaser.Scene {
@@ -35,21 +31,26 @@ export class MainScene extends Phaser.Scene {
         background.x = SCENE_WIDTH / 2;
         background.y = SCENE_HEIGHT / 2;
 
-        TileMaps.init(this, levelId);
-        this.add.existing(new PuppetGroup(this));
+        this.tileMaps.init(levelId);
+        const terrainLayer = this.tileMaps.createLayer("Terrain");
+        const terrain = this.addGroup.layer(terrainLayer);
+        const spikes = this.tileMaps.createLayer("Spikes");
 
-        this.coinGroup = this.add.existing(new CoinGroup(this, TileMaps.coins));
-        const sawGroup = this.add.existing(new SawGroup(this, TileMaps.saws));
 
-        this.player = this.add.player(skinId, TileMaps.spawnPoint.x, TileMaps.spawnPoint.y);
+        this.addGroup.puppet();
+
+        this.coinGroup = this.addGroup.coin(this.tileMaps.coins);
+        const sawGroup = this.addGroup.saw(this.tileMaps.saws);
+
+        this.player = this.add.player(skinId, this.tileMaps.spawnPoint.x, this.tileMaps.spawnPoint.y);
         this.player.setDepth(1);
 
-        const goal = this.add.goal(TileMaps.endPoint.x, TileMaps.endPoint.y);
+        const goal = this.add.goal(this.tileMaps.endPoint.x, this.tileMaps.endPoint.y);
 
         // ================== collision / overlap ==================
-        this.physics.add.collider(this.player, TileMaps.terrain);
-        this.physics.add.collider(goal, TileMaps.terrain);
-        this.physics.add.overlap(this.player, TileMaps.spikes, (player, tile) => {
+        this.physics.add.collider(this.player, terrain);
+        this.physics.add.collider(goal, terrain);
+        this.physics.add.overlap(this.player, spikes, (player, tile) => {
             if (tile.collides) {
                 player.die();
             }
@@ -60,7 +61,7 @@ export class MainScene extends Phaser.Scene {
     }
 
     resetScene () {
-        this.player.resetPlayer(TileMaps.spawnPoint);
+        this.player.resetPlayer(this.tileMaps.spawnPoint);
         this.coinGroup.resetCoins();
     }
 

@@ -1,13 +1,13 @@
 import { GameManager } from "../views/GameManager.js";
 import { PhaseManager } from "../PhaseManager.js";
-import { Phaser, PHASES, PLAYER_STATUS } from "../globals.js";
+import { DYNAMIC, Phaser, PHASES, PLAYER_STATUS } from "../globals.js";
 
 export class Player extends Phaser.Physics.Arcade.Image {
     constructor (scene, name, x, y) {
         const { world } = scene.physics;
         super(scene, x, y, "animals", name);
 
-        world.enable([this], 0);
+        world.enable([this], DYNAMIC);
 
         this.setBounce(0.2);
         this.setCollideWorldBounds(true);

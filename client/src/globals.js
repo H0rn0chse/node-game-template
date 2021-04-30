@@ -7,6 +7,9 @@ export const BLOCKS_Y = 16;
 export const SCENE_WIDTH = 800;
 export const SCENE_HEIGHT = 512;
 
+export const STATIC = 1;
+export const DYNAMIC = 0;
+
 export const PLAYER_STATUS = {
     Alive: "Alive",
     Dead: "Dead",

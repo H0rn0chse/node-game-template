@@ -1,4 +1,4 @@
-import { Phaser, PLAYER_STATUS } from "../globals.js";
+import { DYNAMIC, Phaser, PLAYER_STATUS } from "../globals.js";
 import { GameManager } from "../views/GameManager.js";
 
 export class Goal extends Phaser.Physics.Arcade.Image {
@@ -9,7 +9,7 @@ export class Goal extends Phaser.Physics.Arcade.Image {
         this.setScale(0.5);
         this.setOrigin(0, 1);
 
-        world.enable([this], 0);
+        world.enable([this], DYNAMIC);
 
         this.setBounceY(2);
         this.setMaxVelocity(0, 100);
