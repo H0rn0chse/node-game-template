@@ -2,7 +2,7 @@ import { getId, send, addEventListener } from "./socket.js";
 import { GameManager } from "./views/GameManager.js";
 import { Timer } from "./Timer.js";
 import { PRERUN_COUNTDOWN, PHASES, PHASE_TEXTS, RESULTS_COUNTDOWN } from "./globals.js";
-import { PhaseBus } from "./EventBus.js";
+import { GameBus, PhaseBus } from "./EventBus.js";
 
 class _PhaseManager {
     constructor () {
@@ -101,6 +101,7 @@ class _PhaseManager {
     onSetCountdown (data) {
         const seconds = data.seconds ? `&nbsp;&nbsp;${data.seconds}` : "";
         this.countdown.innerHTML = seconds;
+        GameBus.emit("countdown", data.seconds);
     }
 }
 

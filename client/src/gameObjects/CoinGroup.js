@@ -14,7 +14,11 @@ export class CoinGroup extends Phaser.Physics.Arcade.StaticGroup {
             coin.setVisible(true);
         });
 
+        this.sound = scene.sound.add("coin_collect");
+        scene.volume.addSound(this.sound);
+
         GameBus.on("hideCoin", this.onHideCoin, this);
+        GameBus.on("coinCollected", this.onCoinCollected, this);
     }
 
     collectCoin (player, coin) {
@@ -27,6 +31,10 @@ export class CoinGroup extends Phaser.Physics.Arcade.StaticGroup {
         if (coin) {
             coin.hide();
         }
+    }
+
+    onCoinCollected () {
+        this.sound.play();
     }
 
     resetCoins () {

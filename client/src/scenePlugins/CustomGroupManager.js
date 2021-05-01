@@ -2,10 +2,11 @@ import { CoinGroup } from "../gameObjects/CoinGroup.js";
 import { LayerGroup } from "../gameObjects/LayerGroup.js";
 import { PuppetGroup } from "../gameObjects/PuppetGroup.js";
 import { SawGroup } from "../gameObjects/SawGroup.js";
+import { BaseScenePlugin } from "./BaseScenePlugin.js";
 
-export class CustomGroupManager {
+export class CustomGroupManager extends BaseScenePlugin {
     constructor (scene) {
-        this.scene = scene;
+        super(scene);
     }
 
     puppet (...args) {

@@ -20,12 +20,15 @@ export class GameInstance {
                     gravity: { y: 600 },
                 },
             },
+            audio: {
+                disableWebAudio: false,
+            },
+            scene: MainScene,
             plugins: {
                 global: [
                     { key: "MainPlugin", plugin: MainPlugin, start: true },
                 ],
             },
-            scene: MainScene,
         };
 
         this.game = new Phaser.Game(phaserConfig);

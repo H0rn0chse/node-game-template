@@ -1,6 +1,8 @@
-export class TileMaps {
+import { BaseScenePlugin } from "./BaseScenePlugin.js";
+
+export class TileMaps extends BaseScenePlugin {
     constructor (scene) {
-        this.scene = scene;
+        super(scene);
     }
 
     init (levelId) {

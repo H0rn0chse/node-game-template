@@ -1,8 +1,10 @@
 import { DebugBus } from "../EventBus.js";
+import { BaseScenePlugin } from "./BaseScenePlugin.js";
 
-export class DebugHelper {
+export class DebugHelper extends BaseScenePlugin {
     constructor (scene) {
-        this.scene = scene;
+        super(scene);
+
         this.graphics = [];
         this.layers = new Map();
 
@@ -36,5 +38,9 @@ export class DebugHelper {
                 graphic.destroy();
             });
         }
+    }
+
+    destroy () {
+        DebugBus.off("setDebug", this.onSetDebug, this);
     }
 }

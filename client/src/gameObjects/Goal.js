@@ -13,9 +13,17 @@ export class Goal extends Phaser.Physics.Arcade.Image {
 
         this.setBounceY(2);
         this.setMaxVelocity(0, 100);
+
+        this.sound = scene.sound.add("win");
+        scene.volume.addSound(this.sound);
     }
 
     onPlayerOverlap () {
+        if (GameManager.runEnded) {
+            return;
+        }
+
+        this.sound.play();
         GameManager.endRun(PLAYER_STATUS.Alive);
     }
 }

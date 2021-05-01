@@ -14,7 +14,26 @@ export class Player extends Phaser.Physics.Arcade.Image {
 
         this.setScale(0.25);
 
+        this.sounds = {
+            die: scene.sound.add("loose"),
+            jump: scene.sound.add("jump"),
+            walk0: scene.sound.add("walk_0"),
+            walk1: scene.sound.add("walk_1"),
+            walk2: scene.sound.add("walk_2"),
+            walk3: scene.sound.add("walk_3"),
+        };
+        Object.values((sound) => {
+            scene.volume.addSound(sound);
+        });
+        this.walkSound = null;
+
         this.isDead = false;
+        this.isJumping = false;
+    }
+
+    _getRandomWalkSound () {
+        const index = Math.floor(Math.random() * 4);
+        return this.sounds[`walk${index}`];
     }
 
     update (time, delta) {
@@ -43,12 +62,31 @@ export class Player extends Phaser.Physics.Arcade.Image {
         }
 
         if (cursor.up.isDown && this.body.onFloor()) {
+            this.sounds.jump.play();
             this.body.setVelocityY(-500);
+        }
+
+        if (this.isJumping && this.body.onFloor()) {
+            this.isJumping = false;
+            this.walkSound = this._getRandomWalkSound();
+            this.walkSound.play();
+        } else if (this.body.onFloor() && this.body.velocity.x !== 0 && (this.walkSound === null || !this.walkSound.isPlaying)) {
+            this.walkSound = this._getRandomWalkSound();
+            this.walkSound.play();
+        }
+
+        if (!this.body.onFloor()) {
+            this.isJumping = true;
         }
     }
 
     die () {
+        if (this.isDead) {
+            return;
+        }
+
         this.isDead = true;
+        this.sounds.die.play();
         GameManager.endRun(PLAYER_STATUS.Dead);
     }
 
