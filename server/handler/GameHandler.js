@@ -3,6 +3,7 @@ import { PlayerManager } from "../PlayerManager.js";
 import { publish, registerMessageHandler, send, unsubscribe } from "../socket.js";
 import { SCORE_FIRST, PLAYER_STATUS } from "../../client/src/globals.js";
 import { OverviewHandler } from "./OverviewHandler.js";
+import { HighscoreManager } from "../HighscoreManager.js";
 
 class _GameHandler {
     init () {
@@ -148,6 +149,16 @@ class _GameHandler {
         };
 
         if (Object.keys(lobby.data.player).length === count) {
+            // Save scores
+            const entries = Object.values(lobby.data.run).map((entry) => {
+                const playerData = lobby.data.player[entry.playerId];
+                return {
+                    name: playerData.name,
+                    score: entry.score,
+                };
+            });
+            HighscoreManager.onGameScore(entries);
+
             publish(lobby.topic, "runEnd", lobby.data);
         } else {
             publish(lobby.topic, "runProgress", lobby.data);

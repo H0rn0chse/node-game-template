@@ -1,5 +1,5 @@
 export class HighscoreEntry {
-    constructor (placement, name, points) {
+    constructor (placement, name, score) {
         this.container = document.createElement("div");
         this.container.classList.add("flexRow", "highscoreEntry");
 
@@ -13,10 +13,10 @@ export class HighscoreEntry {
         this.container.appendChild(this.name);
         this.setName(name);
 
-        this.points = document.createElement("div");
-        this.points.classList.add("highscorePoints");
-        this.container.appendChild(this.points);
-        this.setPoints(points);
+        this.score = document.createElement("div");
+        this.score.classList.add("highscorePoints");
+        this.container.appendChild(this.score);
+        this.setScore(score);
 
         this.setVisible(false);
     }
@@ -29,8 +29,8 @@ export class HighscoreEntry {
         this.name.innerText = name;
     }
 
-    setPoints (points) {
-        this.points.innerText = points;
+    setScore (score) {
+        this.score.innerText = score;
     }
 
     setVisible (isVisible) {

@@ -18,7 +18,7 @@ class _HighscoreManager {
     onHighscoreUpdate (list) {
         list.forEach((entry, index) => {
             this.entries[index].setName(entry.name);
-            this.entries[index].setPoints(entry.points);
+            this.entries[index].setScore(entry.score);
             this.entries[index].setVisible(true);
         });
     }

@@ -31,7 +31,7 @@ class _DatabaseManager {
         const Highscore = new Schema({
             placement: Number,
             name: String,
-            points: Number,
+            score: Number,
             date: Number,
         });
         this.highscore = mongoose.model("Highscore", Highscore);
