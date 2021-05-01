@@ -2,6 +2,7 @@ import { OverviewManager } from "./views/OverviewManager.js";
 import { GameManager } from "./views/GameManager.js";
 import { LobbyManager } from "./views/LobbyManager.js";
 import { ResultsManager } from "./views/ResultsManager.js";
+import { ScoreManager } from "./views/ScoreManager.js";
 import { HighscoreManager } from "./views/HighscoreManager.js";
 
 class _ViewManager {

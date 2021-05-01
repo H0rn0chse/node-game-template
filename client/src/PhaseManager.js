@@ -1,7 +1,7 @@
 import { getId, send, addEventListener } from "./socket.js";
 import { GameManager } from "./views/GameManager.js";
 import { Timer } from "./Timer.js";
-import { PHASES, PHASE_TEXTS } from "./globals.js";
+import { COUNTDOWN, PHASES, PHASE_TEXTS } from "./globals.js";
 import { PhaseBus } from "./EventBus.js";
 
 class _PhaseManager {
@@ -47,30 +47,12 @@ class _PhaseManager {
         send("setCountdown", { seconds: this.remainingSeconds + 1 });
     }
 
-    onColors () {
-        if (!this.isHost) {
-            return;
-        }
-
-        setTimeout(() => {
-            send("setPhase", { phase: PHASES.Build });
-        }, 1000);
-    }
-
-    onBuild () {
-        if (!this.isHost) {
-            return;
-        }
-
-        this._startPhaseCountdown(10, PHASES.PreRun);
-    }
-
     onPreRun () {
         if (!this.isHost) {
             return;
         }
 
-        this._startPhaseCountdown(3, PHASES.Run);
+        this._startPhaseCountdown(COUNTDOWN - 1, PHASES.Run);
     }
 
     onRun () {

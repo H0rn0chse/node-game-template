@@ -1,6 +1,7 @@
 import { LobbyManager } from "../LobbyManager.js";
 import { PlayerManager } from "../PlayerManager.js";
 import { publish, registerMessageHandler, send, unsubscribe } from "../socket.js";
+import { SCORE_FIRST, PLAYER_STATUS } from "../../client/src/globals.js";
 
 class _GameHandler {
     init () {
@@ -116,8 +117,19 @@ class _GameHandler {
         }
 
         const count = Object.keys(lobby.data.run).length + 1;
+
+        const alivePlayer = Object.values(lobby.data.run).map((player) => {
+            return player.status !== PLAYER_STATUS.Dead;
+        }).length;
+
+        if (alivePlayer === 0 && data.status !== PLAYER_STATUS.Dead) {
+            data.score += SCORE_FIRST;
+            send(ws, "updateScore", { score: data.score });
+        }
+
         lobby.data.run[playerId] = {
             status: data.status,
+            score: data.score,
             count,
         };
 
@@ -139,7 +151,10 @@ class _GameHandler {
             return;
         }
 
+        // this is the first plyer to collect the coin
         lobby.data.items[data.coinId] = playerId;
+        send(ws, "coinCollected", {});
+
         publish(lobby.topic, "hideCoin", data);
     }
 

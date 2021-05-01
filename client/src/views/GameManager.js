@@ -1,9 +1,10 @@
 import { GameInstance } from "../GameInstance.js";
 import { ViewManager } from "../ViewManager.js";
 import { AvatarManager } from "../AvatarManager.js";
+import { ScoreManager } from "./ScoreManager.js";
 import { getId, send, addEventListener, removeEventListener, ready } from "../socket.js";
 import { DebugBus, GameBus, PhaseBus } from "../EventBus.js";
-import { PHASES } from "../globals.js";
+import { PHASES, PLAYER_STATUS } from "../globals.js";
 
 class _GameManager {
     constructor () {
@@ -11,7 +12,6 @@ class _GameManager {
         this.ingame = false;
 
         this.container = document.querySelector("#game");
-        this.points = document.querySelector("#gamePoints");
 
         this.debugCbx = document.querySelector("#debugCbx");
         this.debugCbx.addEventListener("change", (evt) => {
@@ -40,9 +40,16 @@ class _GameManager {
     // ========================================== Game logic & handler =============================================
 
     endRun (status) {
+        ScoreManager.stopTimer();
+
         if (!this.runEnded) {
+            if (status === PLAYER_STATUS.Dead) {
+                ScoreManager.clearScore();
+            }
+
             const data = {
                 status,
+                score: ScoreManager.getScore(),
             };
             send("runEnd", data);
             this.runEnded = true;
