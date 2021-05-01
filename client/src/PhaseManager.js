@@ -15,7 +15,7 @@ class _PhaseManager {
         this.currentPhase = PHASES.Initial;
 
         this.title = document.querySelector("#phaseTitle");
-        this.title.innerText = this.currentPhase;
+        this.setTitle(PHASE_TEXTS[this.currentPhase]);
 
         this.countdown = document.querySelector("#phaseCountdown");
 
@@ -93,9 +93,13 @@ class _PhaseManager {
         }
 
         this.currentPhase = data.phase;
-        this.title.innerText = PHASE_TEXTS[this.currentPhase];
+        this.setTitle(PHASE_TEXTS[this.currentPhase]);
 
         PhaseBus.emit(data.phase, data);
+    }
+
+    setTitle (title) {
+        this.title.innerText = title;
     }
 
     onSetCountdown (data) {

@@ -2,6 +2,7 @@ import { GameInstance } from "../GameInstance.js";
 import { ViewManager } from "../ViewManager.js";
 import { AvatarManager } from "../AvatarManager.js";
 import { ScoreManager } from "./ScoreManager.js";
+import { PhaseManager } from "../PhaseManager.js";
 import { getId, send, addEventListener, removeEventListener, ready } from "../socket.js";
 import { DebugBus, GameBus, PhaseBus } from "../EventBus.js";
 import { PHASES, PLAYER_STATUS } from "../globals.js";
@@ -41,6 +42,7 @@ class _GameManager {
 
     endRun (status) {
         ScoreManager.stopTimer();
+        PhaseManager.setTitle("Waiting for others...");
 
         if (!this.runEnded) {
             if (status === PLAYER_STATUS.Dead) {
