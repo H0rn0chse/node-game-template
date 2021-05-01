@@ -1,7 +1,7 @@
 import { getId, send, addEventListener } from "./socket.js";
 import { GameManager } from "./views/GameManager.js";
 import { Timer } from "./Timer.js";
-import { COUNTDOWN, PHASES, PHASE_TEXTS } from "./globals.js";
+import { PRERUN_COUNTDOWN, PHASES, PHASE_TEXTS } from "./globals.js";
 import { PhaseBus } from "./EventBus.js";
 
 class _PhaseManager {
@@ -52,7 +52,7 @@ class _PhaseManager {
             return;
         }
 
-        this._startPhaseCountdown(COUNTDOWN - 1, PHASES.Run);
+        this._startPhaseCountdown(PRERUN_COUNTDOWN - 1, PHASES.Run);
     }
 
     onRun () {

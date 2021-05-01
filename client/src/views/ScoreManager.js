@@ -1,6 +1,6 @@
 import { addEventListener } from "../socket.js";
 import { PhaseBus } from "../EventBus.js";
-import { PHASES, SCORE_COIN, SCORE_START } from "../globals.js";
+import { PHASES, SCORE_COIN, SCORE_START, SCORE_TICK } from "../globals.js";
 import { Timer } from "../Timer.js";
 
 class _ScoreManager {
@@ -10,7 +10,7 @@ class _ScoreManager {
 
         this.currentScore = 0;
         this.running = false;
-        this.timer = new Timer(1, this.onTick.bind(this));
+        this.timer = new Timer(SCORE_TICK, this.onTick.bind(this));
 
         addEventListener("coinCollected", this.onCoinCollected, this);
         addEventListener("updateScore", this.onUpdateScore, this);

@@ -10,16 +10,17 @@ export const SCENE_HEIGHT = 512;
 export const STATIC = 1;
 export const DYNAMIC = 0;
 
+export const SCORE_TICK = 0.2;
 export const SCORE_START = 500;
 export const SCORE_COIN = 200;
 export const SCORE_FIRST = 100;
-
-export const COUNTDOWN = 5;
 
 export const PLAYER_STATUS = {
     Alive: "Alive",
     Dead: "Dead",
 };
+
+export const PRERUN_COUNTDOWN = 5;
 
 export const PHASES = {
     Initial: "Intial",
