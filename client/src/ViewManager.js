@@ -7,6 +7,7 @@ import { HighscoreManager } from "./views/HighscoreManager.js";
 import { ResultsManager } from "./views/ResultsManager.js";
 import { ScoreManager } from "./views/ScoreManager.js";
 import { SoundManager } from "./views/SoundManager.js";
+import { CommonBus } from "./EventBus.js";
 
 class _ViewManager {
     constructor () {
@@ -16,6 +17,10 @@ class _ViewManager {
             GameManager: true,
             LobbyManager: true,
         };
+
+        CommonBus.on("logoff", () => {
+            this.showOverview();
+        });
     }
 
     showOverview () {

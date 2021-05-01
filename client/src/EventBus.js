@@ -94,4 +94,6 @@ export const GameBus = new EventBus("GameBus");
 
 export const PhaseBus = new EventBus("PhaseBus");
 
+export const CommonBus = new EventBus("CommonBus");
+
 export const DebugBus = new EventBus("DebugBus");

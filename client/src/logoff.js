@@ -1,5 +1,6 @@
 import { ping } from "./socket.js";
 import { Timer } from "./Timer.js";
+import { CommonBus } from "./EventBus.js";
 
 const LOGOFF_TIMEOUT = 60 * 5; // keep websockets atleast 5 mins alive
 let shouldLogoff = false;
@@ -34,6 +35,7 @@ function doTimeout (wasReset) {
 
 export function logoff () {
     logoffDone = true;
+    CommonBus.emit("logoff", {});
     const element = document.querySelector("#logoff");
     element.style.display = "flex";
 }
