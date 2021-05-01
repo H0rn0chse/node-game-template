@@ -1,7 +1,7 @@
 import { getId, send, addEventListener } from "./socket.js";
 import { GameManager } from "./views/GameManager.js";
 import { Timer } from "./Timer.js";
-import { PRERUN_COUNTDOWN, PHASES, PHASE_TEXTS } from "./globals.js";
+import { PRERUN_COUNTDOWN, PHASES, PHASE_TEXTS, RESULTS_COUNTDOWN } from "./globals.js";
 import { PhaseBus } from "./EventBus.js";
 
 class _PhaseManager {
@@ -72,9 +72,10 @@ class _PhaseManager {
             return;
         }
 
-        data.phase = PHASES.Results;
-
-        send("setPhase", data);
+        setTimeout(() => {
+            data.phase = PHASES.Results;
+            send("setPhase", data);
+        }, RESULTS_COUNTDOWN * 1000);
     }
 
     onJoinGame (data) {

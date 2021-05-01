@@ -28,24 +28,3 @@
     padding: 0;
     margin: 0;
 }
-
-#gameResults {
-    position: absolute;
-    width: 25em;
-    height: 30em;
-    background: white;
-    justify-content: flex-start;
-    align-items: center;
-    z-index: 1;
-}
-
-#gameResultsList {
-    width: 100%;
-    height: 100%;
-    align-items: center;
-}
-
-
-.resultRow > div {
-    margin-right: 1em;
-}

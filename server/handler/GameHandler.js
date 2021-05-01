@@ -130,6 +130,7 @@ class _GameHandler {
         lobby.data.run[playerId] = {
             status: data.status,
             score: data.score,
+            playerId,
             count,
         };
 

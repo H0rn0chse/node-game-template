@@ -11,6 +11,7 @@
 
 /*elements*/
 @import "avatar.css";
+@import "results.css";
 
 body {
     margin: 0;

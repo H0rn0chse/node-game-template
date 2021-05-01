@@ -21,6 +21,7 @@ export const PLAYER_STATUS = {
 };
 
 export const PRERUN_COUNTDOWN = 5;
+export const RESULTS_COUNTDOWN = 1;
 
 export const PHASES = {
     Initial: "Intial",
