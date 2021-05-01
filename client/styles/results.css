@@ -23,6 +23,16 @@
     margin-left: 5em;
 }
 
-.resultRow > span {
+#gameResults > .buttonRow {
+    width: 100%;
+    justify-content: flex-end;
+}
+
+#gameResults > .buttonRow > * {
+    margin-left: 1em;
+    margin-bottom: 1em;
+}
+
+#gameResults > .buttonRow > *:last-child {
     margin-right: 1em;
 }

@@ -2,11 +2,16 @@ import { LobbyManager } from "../LobbyManager.js";
 import { PlayerManager } from "../PlayerManager.js";
 import { publish, registerMessageHandler, send, unsubscribe } from "../socket.js";
 import { SCORE_FIRST, PLAYER_STATUS } from "../../client/src/globals.js";
+import { OverviewHandler } from "./OverviewHandler.js";
 
 class _GameHandler {
     init () {
+        // leave by intention
+        registerMessageHandler("leaveGame", this.onLeaveGame, this);
+        // leave by disconnect
         registerMessageHandler("close", this.onLeaveGame, this);
         registerMessageHandler("playerUpdate", this.onPlayerUpdate, this);
+        registerMessageHandler("stopGame", this.onStopGame, this);
         /*
             Here comes game logic listener...
         */
@@ -71,6 +76,14 @@ class _GameHandler {
         playerData.pos = data.pos;
 
         publish(lobby.topic, "playerUpdate", playerData);
+    }
+
+    onStopGame (ws, data, playerId) {
+        const lobby = this._getLobbyData(playerId);
+        lobby.data.running = false;
+
+        publish(lobby.topic, "joinLobby", lobby.data);
+        OverviewHandler.onLobbyAdded(lobby.data);
     }
 
     /*
@@ -162,19 +175,17 @@ class _GameHandler {
     // ================= not bound to events ==================================================
 
     onJoinGame (ws, data, playerId) {
-        const lobbyName = PlayerManager.getProperty(playerId, "lobby");
-        const lobbyData = LobbyManager.getLobbyData(lobbyName);
+        const lobby = this._getLobbyData(playerId);
 
         // intialize position
-        Object.values(lobbyData.player).forEach((playerData) => {
+        Object.values(lobby.data.player).forEach((playerData) => {
             playerData.pos = {
                 x: 0,
                 y: 0,
             };
         });
 
-        const topic = `lobby-${lobbyName}`;
-        publish(topic, "joinGame", lobbyData);
+        publish(lobby.topic, "joinGame", lobby.data);
     }
 }
 

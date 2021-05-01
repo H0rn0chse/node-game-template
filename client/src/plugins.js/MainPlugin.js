@@ -23,4 +23,12 @@ export class MainPlugin extends Phaser.Plugins.BasePlugin {
 
         pluginManager.installScenePlugin("debug", DebugHelper, "debug");
     }
+
+    destroy () {
+        this.pluginManager.removeScenePlugin("tileMaps");
+        this.pluginManager.removeScenePlugin("addGroup");
+        this.pluginManager.removeScenePlugin("debug");
+
+        super.destroy();
+    }
 }

@@ -7,10 +7,21 @@ class _ResultsManager {
     constructor () {
         this.results = document.querySelector("#gameResults");
         this.resultsList = document.querySelector("#gameResultsList");
-        this.resultsNextButton = document.querySelector("#gameResultsNext");
+        this.backBtn = document.querySelector("#gameBack");
+        this.nextBtn = document.querySelector("#gameNext");
+        this.quitBtn = document.querySelector("#gameQuit");
         this.results.style.display = "none";
-        this.resultsNextButton.addEventListener("click", (evt) => {
+
+        this.backBtn.addEventListener("click", (evt) => {
+            GameManager.stopGame();
+        });
+
+        this.nextBtn.addEventListener("click", (evt) => {
             GameManager.nextGame();
+        });
+
+        this.quitBtn.addEventListener("click", (evt) => {
+            GameManager.leaveGame();
         });
 
         PhaseBus.on(PHASES.Results, this.onResults, this);
@@ -61,7 +72,10 @@ class _ResultsManager {
 
         this.results.style.display = "";
 
-        this.resultsNextButton.disabled = data.host !== getId();
+        const isHost = data.host === getId();
+
+        this.nextBtn.disabled = !isHost;
+        this.backBtn.disabled = !isHost;
     }
 
     onPreRun () {

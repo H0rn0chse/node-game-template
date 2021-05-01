@@ -67,6 +67,15 @@ class _GameManager {
         send("setPhase", { phase: PHASES.PreRun });
     }
 
+    leaveGame () {
+        send("leaveGame", {});
+        ViewManager.showOverview();
+    }
+
+    stopGame () {
+        send("stopGame", {});
+    }
+
     collectCoin (coinId) {
         send("collectCoin", { coinId });
     }
