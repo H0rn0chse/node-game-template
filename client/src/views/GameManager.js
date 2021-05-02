@@ -13,6 +13,7 @@ class _GameManager {
         this.ingame = false;
 
         this.container = document.querySelector("#game");
+        this.instanceContainer = document.querySelector("#gameArea");
 
         this.debugCbx = document.querySelector("#debugCbx");
         this.debugCbx.addEventListener("change", (evt) => {
@@ -148,7 +149,7 @@ class _GameManager {
     show () {
         this.startListen();
         this.container.style.display = "";
-        this.instance = new GameInstance(this.container, this);
+        this.instance = new GameInstance(this.instanceContainer, this);
     }
 
     hide () {

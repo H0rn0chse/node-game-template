@@ -60,6 +60,20 @@
                 <h2 id=phaseTitle></h2>
                 <h2 id=phaseCountdown></h2>
             </div>
+            <div id="gameArea">
+                <div id="gameStats" class="flexColumn">
+                    <h1>Points</h1>
+                    <h3 id="score">0</h3>
+                    <label class="flexRow">
+                        <input id="debugCbx" type="checkbox">
+                        <span class="checkable">Debug</span>
+                    </label>
+                    <span>Music Volume</span>
+                    <input id="musicVolume" type="range" min="0" max="100" value="20">
+                    <span>Sound Volume</span>
+                    <input id="soundVolume" type="range" min="0" max="100" value="70">
+                </div>
+            </div>
             <div id="gameResults" class="flexColumn">
                 <h2>Results</h2>
                 <div id="gameResultsList"></div>
@@ -68,18 +82,6 @@
                     <button id="gameNext">Next Game</button>
                     <button id="gameQuit">Quit</button>
                 </div>
-            </div>
-            <div id="gameStats" class="flexColumn">
-                <h1>Points</h1>
-                <h3 id="score">0</h3>
-                <label class="flexRow">
-                    <input id="debugCbx" type="checkbox">
-                    <span class="checkable">Debug</span>
-                </label>
-                <span>Music Volume</span>
-                <input id="musicVolume" type="range" min="0" max="100" value="20">
-                <span>Sound Volume</span>
-                <input id="soundVolume" type="range" min="0" max="100" value="70">
             </div>
         </div>
     </div>

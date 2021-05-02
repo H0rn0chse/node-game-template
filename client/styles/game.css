@@ -10,18 +10,18 @@
 }
 
 #gameArea {
-    width: 520px;
-    height: 520px;
-    position: relative;
-    background-color: var(--game-area-bg);
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 #gameStats {
-    position: absolute;
-    top: 0;
-    right: 11em;
-    height: 100%;
+    width: 7em;
+    margin-left: 2em;
     justify-content: center;
+}
+
+#gameStats input[type=range] {
+    width: 100%
 }
 
 #gameStats h1, #gameStats h2, #gameStats h3 {
