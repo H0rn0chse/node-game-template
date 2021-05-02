@@ -1,3 +1,5 @@
+import { MAXIMUM_LOBBY_SIZE } from "./globals.js";
+
 class _LobbyManager {
     constructor () {
         this.lobbies = new Map();
@@ -9,8 +11,7 @@ class _LobbyManager {
         const lobbyData = {
             id: this.count,
             running: false,
-            // null for infinite
-            maxSize: null,
+            maxSize: MAXIMUM_LOBBY_SIZE,
             player: {},
             run: {},
             items: {},
