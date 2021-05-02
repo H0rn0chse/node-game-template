@@ -43,7 +43,7 @@ Because of the websocket library used this project uses `yarn` and needs additio
 The setup steps for deployment are documented in the [wiki](https://github.com/H0rn0chse/node-game-template/wiki).
 ## Assets and Licenses
 * The **code** of this repository is licensed under [MIT](https://opensource.org/licenses/MIT)
-* Sprites from [Kenney](www.kenney.nl) licensed under [CC0](http://creativecommons.org/publicdomain/zero/1.0/)
+* Sprites from [Kenney](www.kenney.nl) licensed under [CC0](http://creativecommons.org/publicdomain/zero/1.0/):
     * Avatars: [Link](https://www.kenney.nl/assets/animal-pack-redux)
     * Background: [Link](https://www.kenney.nl/assets/background-elements)
     * Coin: [Link](https://www.kenney.nl/assets/jumper-pack)
@@ -51,7 +51,7 @@ The setup steps for deployment are documented in the [wiki](https://github.com/H
     * Tiles: [Link](https://www.kenney.nl/assets/platformer-art-extended-tileset)
 
 * Font: [Olive's Font](https://www.1001freefonts.com/olive-s-font.font)
-* Please checkout the [Sounds Licenses](./client/assets/sound/License.md) for further details.
+* Please checkout the [Sound Licenses](./client/assets/sound/License.md) for further details.
 
 ## Libraries
  * CSS: [github.com/franciscop/picnic](https://github.com/franciscop/picnic)

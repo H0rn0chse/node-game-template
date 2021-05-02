@@ -1,4 +1,4 @@
-# Asset Licenses
+# Sound Licenses
 
 ## toplevel
 All files in the toplevel are unfortunately not available for further reuse! Please replace them in your project with your own sounds!
